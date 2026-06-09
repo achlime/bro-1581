@@ -1377,3 +1377,65 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   .brand .brand-name { font-size: 1.04rem; letter-spacing: .1em; }
   .brand .brand-sub { letter-spacing: .18em; }
 }
+
+/* ==========================================================================
+   MOBILE LAYOUT POLISH — tighter rhythm, no overflow, comfier cards
+   ========================================================================== */
+
+/* formation tiles stay three-across at every width (no 2 + 1 wrap) */
+.formation-tiles { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 768px) {
+  .subnav { top: 70px; }   /* sit flush under the 70px nav, no overlap */
+}
+
+@media (max-width: 600px) {
+  .wrap, .nav-inner { padding-left: 16px; padding-right: 16px; }
+
+  /* section rhythm */
+  .guide-section { padding: 44px 0; }
+  .guide-section:first-of-type { padding-top: 18px; }
+  .guide-section > h2 { font-size: clamp(1.55rem, 7.5vw, 2rem); margin-bottom: 12px; }
+  .guide-section > .lede { font-size: 1rem; margin-bottom: 22px; }
+  .guide-section > h3 { font-size: 1.18rem; margin: 26px 0 12px; }
+  .snum { font-size: .62rem; padding: 2px 6px; margin-right: 7px; }
+
+  /* hero banner sizing */
+  .page-header--bear h1 { font-size: clamp(2rem, 8.5vw, 2.6rem); }
+  .page-header--bear .crest-lg { width: 64px; height: 70px; margin-bottom: 18px; }
+
+  /* formation tiles compact */
+  .formation-tiles { gap: 8px; }
+  .formation-tiles .stat { padding: 14px 6px; }
+  .formation-tiles .num { font-size: 1.5rem; }
+  .formation-tiles .lbl { font-size: .6rem; letter-spacing: .06em; }
+
+  /* formulas scroll instead of breaking mid-expression */
+  .formula { overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: .76rem; line-height: 1.9; }
+
+  /* compact tables */
+  table { font-size: .82rem; }
+  th, td { padding: 9px 10px; }
+
+  /* cards breathe a little less side-to-side */
+  .card { padding: 20px 17px; }
+  .feature { padding: 18px 16px; }
+  .role { padding: 22px 18px; }
+  .glance { padding: 16px; }
+  .callout { padding: 13px 15px; }
+  .deep-body { padding-left: 15px; padding-right: 15px; }
+  .split .mini { padding: 14px 15px; }
+  .spotlight { padding: 18px 15px; }   /* after .card so it wins for spotlights */
+
+  /* hero / spotlight cards tighter */
+  .hcard .hc-head { gap: 11px; padding: 13px 14px 11px; }
+  .hcard .hc-av { width: 48px; height: 48px; }
+  .hcard .hc-skill { padding: 13px 14px; }
+  .hcard .hc-skill-ic { width: 42px; height: 42px; }
+  .spotlight .sp-head .hc-av { width: 52px; height: 52px; }
+  .spotlight .sp-skill .hc-skill-ic { width: 44px; height: 44px; }
+
+  /* schedule */
+  .tz-box { padding: 18px; }
+  .tz-card { padding: 16px; }
+}
