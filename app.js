@@ -173,15 +173,19 @@ function initCountdown() {
   const CYCLE_DAYS = 2;
   const ANCHOR_DAY = Math.floor(Date.UTC(2026, 5, 9) / DAY_MS);
 
-  // soonest Bear Trap day whose first phase (08:00) is still ahead
-  const nextBTDay = () => {
+  // the next upcoming occurrence of a given phase hour, on a Bear Trap day.
+  // computed per-phase so a countdown is always the genuine next event
+  // (and therefore never more than the 48h cycle away).
+  const nextPhase = (hour) => {
     const now = Date.now();
     let d = Math.floor(now / DAY_MS);
     for (let i = 0; i < 30; i++, d++) {
       const isBT = ((((d - ANCHOR_DAY) % CYCLE_DAYS) + CYCLE_DAYS) % CYCLE_DAYS) === 0;
-      if (isBT && (d * DAY_MS + BT1_H * 3600000) > now) return d;
+      if (!isBT) continue;
+      const t = d * DAY_MS + hour * 3600000;
+      if (t > now) return new Date(t);
     }
-    return d;
+    return new Date(d * DAY_MS + hour * 3600000);
   };
   const fmt = (d, tz) => ({
     time: new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false }).format(d),
@@ -198,9 +202,8 @@ function initCountdown() {
 
   const tick = () => {
     const tz = sel.value;
-    const day = nextBTDay();
-    const b1 = new Date(day * DAY_MS + BT1_H * 3600000);
-    const b2 = new Date(day * DAY_MS + BT2_H * 3600000);
+    const b1 = nextPhase(BT1_H);
+    const b2 = nextPhase(BT2_H);
     const f1 = fmt(b1, tz), f2 = fmt(b2, tz);
     set("bt1Time", f1.time); set("bt1Date", f1.date + " · " + tz);
     set("bt2Time", f2.time); set("bt2Date", f2.date + " · " + tz);
