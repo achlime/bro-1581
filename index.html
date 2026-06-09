@@ -76,7 +76,6 @@
     <a href="#hosting">Hosting</a>
     <a href="#formation">Formation</a>
     <a href="#valora">Valora</a>
-    <a href="#mistakes">Mistakes</a>
     <a href="#mechanics">Mechanics</a>
   </div>
 </nav>
@@ -159,7 +158,7 @@
 
     <div class="callout warn">
       <strong>Bring your best troops</strong>
-      Don't send troops a tier or more below the rally average — low-tier troops water down its damage. And there's no attack cooldown, so the faster your troops get home, the more rallies you run: teleport close to the Pitfall. (Bear Trap uses no stamina.)
+      Don't send troops a tier or more below the rally average — low-tier troops water down its damage. And there's no attack cooldown, so the faster your troops get home, the more rallies you run: teleport close to the Pitfall.
     </div>
   </section>
 
@@ -280,7 +279,7 @@
           <div class="hc-skill-ic"><img src="img/heroes/amadeus-battle-ready.webp" alt="Battle Ready" loading="lazy"></div>
           <div class="hc-skill-body">
             <div class="hc-skill-name"><strong>Battle Ready</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
-            <p class="hc-desc">Same <strong>Lethality</strong> buff again. If your Helga is strong enough to host, this is the hero you send as a joiner.</p>
+            <p class="hc-desc">The same <strong>+25% Squad Lethality</strong> as Chenko and Yeonwoo. All three are interchangeable — send whichever is the highest level on your account.</p>
             <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
           </div>
         </div>
@@ -467,7 +466,7 @@
     </div>
 
     <h3>Why this lineup</h3>
-    <p>The host's whole account counts, so the lineup stacks rally-wide buffs. <strong>Petra and Marlin are the two engines</strong>: between them they cover both big damage multipliers for the entire rally — Petra adds <strong>Squad Attack</strong>, Marlin adds <strong>Squad Lethality</strong>. Your lead hero (Amadeus or Zoe) rounds it out.</p>
+    <p>A host's whole account counts, so the lineup is built to buff the entire rally at once. <strong>Petra</strong> raises everyone's Attack and <strong>Marlin</strong> raises everyone's Lethality — the two stats that drive Bear damage. <strong>Amadeus</strong> (spenders) or <strong>Zoe</strong> (F2P) takes the third slot.</p>
 
     <div class="card spotlight" style="border-top:3px solid var(--gold)">
       <div class="sp-head">
@@ -690,23 +689,25 @@
   <!-- 06 · FORMATION -->
   <section class="guide-section" id="formation">
     <h2><span class="snum">06</span> Formation</h2>
-    <p class="lede">We're on Gen 3, so the split is mostly Archers. Set this, then run your own account through the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a> to confirm.</p>
+    <p class="lede">There's no single best formation. Your ideal split depends on your own Attack and Lethality in each troop type — two players with different gear, research and heroes have different optimums. The only reliable answer is to run your account through the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a>.</p>
 
+    <div class="callout warn">
+      <strong>Why "just go 80% Archers" leaves damage behind</strong>
+      Each troop type's Bear damage scales with the <em>square root</em> of how many of that type you send (the full maths is in <a href="#mechanics">Why it works</a>). Pouring everything into your highest-attack type hits diminishing returns fast — spreading some troops across your other types usually beats going all-in. Where that balance lands is personal, and the calculator works it out for your exact stats.
+    </div>
+
+    <p>If you just need a rough number to test from, most Gen 3 accounts start somewhere near:</p>
     <div class="stat-row" style="max-width:560px">
       <div class="stat"><div class="num">10%</div><div class="lbl">Infantry</div></div>
       <div class="stat"><div class="num">10%</div><div class="lbl">Cavalry</div></div>
       <div class="stat" style="border-color:var(--gold-line)"><div class="num">80%</div><div class="lbl">Archers</div></div>
     </div>
-
-    <div class="callout warn">
-      <strong>Run it through the calculator</strong>
-      These numbers are a starting point, not a rule. Some accounts hit harder at 5/5/90 or a nearby split — plug your hero stats into the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a> and go with whatever it ranks highest.
-    </div>
+    <p class="text-muted" style="font-size:.92rem">Treat that as a guess to check in the calculator, not a rule — your real best split will differ.</p>
 
     <details class="deep">
-      <summary><i class="fa-solid fa-table-cells-large lead-ic"></i> Show formations for every generation <span class="tag-opt">Reference</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <summary><i class="fa-solid fa-table-cells-large lead-ic"></i> Rough starting points by generation <span class="tag-opt">Reference</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
       <div class="deep-body">
-        <p style="margin-top:14px">The mix leans further into Archers as generations go on. Here's the full progression for reference:</p>
+        <p style="margin-top:14px">Common splits people test from — not fixed answers. Higher generations tend to lean further into Archers as hero stats grow, but always confirm yours in the calculator.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Gen</th><th>Infantry</th><th>Cavalry</th><th>Archers</th></tr></thead>
@@ -718,7 +719,6 @@
             </tbody>
           </table>
         </div>
-        <p class="text-muted" style="font-size:.9rem">At Gen 4 and beyond, keep Infantry above roughly 5,000 troops in absolute numbers — if 1% drops below that, nudge the percentage up.</p>
       </div>
     </details>
   </section>
@@ -726,7 +726,7 @@
   <!-- 07 · VALORA -->
   <section class="guide-section" id="valora">
     <h2><span class="snum">07</span> Master Valora <span class="pill sp" style="margin-left:8px">Hosts</span></h2>
-    <p class="lede">The first Master you unlock, built entirely around Bear Hunt. If your alliance lives or dies on Bear damage — and ours does — level her first.</p>
+    <p class="lede">The first Master you unlock, built entirely around Bear Hunt.</p>
 
     <h3>Leveling order for hosts</h3>
     <ol class="steps">
@@ -771,46 +771,51 @@
     <p class="text-muted" style="font-size:.92rem"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Joiners benefit too — her capacity skills raise your march size. The Squad Attack buff only applies to the host. Full build: <a href="https://www.kingshotguide.com/masters/valora" target="_blank" rel="noopener">kingshotguide.com/masters/valora</a></p>
   </section>
 
-  <!-- 08 · MISTAKES -->
-  <section class="guide-section" id="mistakes">
-    <h2><span class="snum">08</span> Top mistakes</h2>
-    <ul class="checklist" style="border:1px solid var(--line);border-radius:var(--radius);overflow:hidden">
-      <li><strong>Wrong hero in joiner slot 1.</strong> Only that first skill counts — an off-meta hero there is a wasted slot. Troops-only beats it.</li>
-      <li><strong>A high-level off-meta hero knocking out an S+ buff.</strong> It can bump a Chenko off the rally. Hosts: kick and re-fill.</li>
-      <li><strong>Sending two lucky-chance heroes.</strong> Two Jabels do the same as one. One per rally.</li>
-      <li><strong>Never checking the calculator.</strong> The formation numbers are a starting point — run yours through the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a>.</li>
-      <li><strong>Skipping the Final Push.</strong> Even a weak rally creates a slot for a strong player's returning troops.</li>
-      <li><strong>Camping far from the Pitfall.</strong> March time is the only real limit — teleport closer.</li>
-    </ul>
-  </section>
-
-  <!-- 09 · MECHANICS (deep dive) -->
+  <!-- 08 · MECHANICS (deep dive) -->
   <section class="guide-section" id="mechanics">
-    <h2><span class="snum">09</span> Why it works</h2>
-    <p class="lede">You don't need any of this to play well. Open it when you're curious why the meta is the way it is, or want to judge a new hero yourself.</p>
+    <h2><span class="snum">08</span> Why it works</h2>
+    <p class="lede">You don't need any of this to play well. But if you want to know exactly how Bear damage is calculated — and why there's no one formation that's best for everyone — here it is.</p>
+
+    <p>The short version: each troop type's damage scales with the <strong>square root</strong> of how many of that type you send. That square root is the whole reason 100% Archers isn't optimal and the best split is personal — concentrating troops into a single type hits diminishing returns, so spreading some into your other types wins out. The full working is below.</p>
+
+    <div class="callout info">
+      <strong>Attack and Lethality matter equally</strong>
+      In the formula, a troop's effective attack is <em>Attack × Lethality</em>, so a 1% buff to either raises damage by the same amount. Because most accounts have far lower Lethality than Attack, a flat % Lethality buff (like Chenko's +25%) is usually the bigger real gain — which is why the top joiners are Lethality heroes.
+    </div>
 
     <details class="deep">
-      <summary><i class="fa-solid fa-flask lead-ic"></i> Damage mechanics — deep dive <span class="tag-opt">Optional</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <summary><i class="fa-solid fa-flask lead-ic"></i> The full damage maths — worked example <span class="tag-opt">Optional</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
       <div class="deep-body">
-        <h4 style="margin-top:16px">Why Lethality beats Attack</h4>
-        <p>Both raise your damage, but most accounts have far less Lethality than Attack — so adding Lethality moves the needle more.</p>
-        <div class="formula">Attack 10,000 · Lethality 2,000<br>+500 Lethality → about +25% damage<br>+500 Attack → about +5% damage</div>
-        <p>Same 500 points, very different result. That's the whole reason Chenko's +25% Lethality is the best joiner skill.</p>
+        <h4>How a Bear battle works</h4>
+        <ul>
+          <li>The bear is <strong>5,000 special Infantry</strong> troops — 10 Defense and 83.33 Health each.</li>
+          <li>A Bear battle lasts exactly <strong>10 turns</strong> (normal battles run until one side is wiped out).</li>
+          <li>Your troops <strong>never die</strong> in a Bear battle, so with no chance-based skills your damage is identical every round.</li>
+          <li>The bear is Infantry, so your <strong>Archers deal +10%</strong> from Ranged Strike.</li>
+          <li>Each Bear Trap (Pitfall) level adds +5% Attack; level 5 = <strong>+25% Attack</strong> to every troop type.</li>
+        </ul>
 
-        <h4>Expedition skills vs. Widget skills</h4>
-        <p>Expedition skills (the normal ones) simply add together. Widget skills can <em>multiply</em> instead, scaling with the stats you already have — so maxing Widgets on Chenko, Amadeus and Helga pays off more the stronger your account already is.</p>
+        <h4>Worked example — T6 troops, TG0</h4>
+        <p>Base stats: Infantry Atk 243, Cavalry Atk 730, Archer Atk 974 — each with Lethality 10 and Defense 10. The bear: 10 Defense, 83.33 Health.</p>
 
-        <h4>The Pitfall and Archers</h4>
-        <p>The Pitfall's +25% Attack is the same percentage for every troop type, but Archers start with the highest base Attack — so they gain the most actual damage from it. One more reason the formation is Archer-heavy.</p>
+        <p><strong>1 · Attack per troop</strong> = base Attack × (1 + 0.25) × Lethality ÷ 100. With Lethality 10 that comes to × 0.125:</p>
+        <div class="formula">Infantry: 243 × 0.125 = 30.375<br>Cavalry: 730 × 0.125 = 91.25<br>Archer:&nbsp; 974 × 0.125 = 121.75</div>
 
-        <h4>Stat priority (mid-to-late game)</h4>
-        <ol>
-          <li>Archer Lethality</li>
-          <li>Archer Attack</li>
-          <li>Troop Deployment Capacity</li>
-          <li>Cavalry Lethality</li>
-        </ol>
-        <p>Push these through Governor Gear (goggles and boots first), Research, Islands, the War Academy, Charms and Chief Gear. Long term, T11 Archers and Truegold pay off in every event you'll ever run.</p>
+        <p><strong>2 · Bear defense per troop</strong> = Health × Defense ÷ 100 = 83.33 × 10 ÷ 100 = <strong>8.333</strong>.</p>
+
+        <p><strong>3 · The army factor</strong> (the important bit) = √(troops of that type × 5,000). Send 18,000 troops split evenly = 6,000 per type:</p>
+        <div class="formula">army = √(6,000 × 5,000) = 5,477.2</div>
+
+        <p><strong>4 · Damage per type, per round</strong> = army × attack-per-troop ÷ bear-defense ÷ 100:</p>
+        <div class="formula">Infantry: 5,477.2 × 30.375 ÷ 8.333 ÷ 100 = 199.6<br>Cavalry: 5,477.2 × 91.25 ÷ 8.333 ÷ 100 = 599.8<br>Archer:&nbsp; 5,477.2 × 121.75 ÷ 8.333 ÷ 100 = 800.2 → ×1.10 Ranged = 880.2<br>Round total = 1,679.6</div>
+
+        <p><strong>5 · Ten rounds</strong>: 1,679.6 × 10 = 16,796.5, rounded up to <strong>16,797 damage</strong>.</p>
+
+        <h4>Why this means no universal formation</h4>
+        <p>The army factor is a <em>square root</em> of troop count. Double the troops in one type and its damage only rises ~41%, not 100%. So the maths rewards spreading: the damage-maximising count for each type works out roughly proportional to that type's attack <strong>squared</strong>. Since your per-type attack depends on your gear, research and heroes, your best split is unique to you — which is exactly what the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a> solves.</p>
+
+        <h4>What about chance-based skills?</h4>
+        <p>Skills that proc on a chance (Petra's, Marlin's, Jabel's…) add a multiplier only when they fire, so your damage becomes <strong>probabilistic, not random</strong> — it varies run to run but trends toward a predictable average. Flat, always-on buffs (Chenko, Zoe's Stoic, and the like) don't vary at all.</p>
       </div>
     </details>
   </section>
