@@ -75,7 +75,12 @@
 
 <!-- ===================== SUB NAV ===================== -->
 <nav class="subnav" aria-label="Guide sections">
-  <div class="subnav-inner">
+  <button class="subnav-toggle" type="button" data-subnav-toggle aria-expanded="false" aria-controls="subnavList">
+    <i class="fa-solid fa-list-ul"></i>
+    <span class="subnav-current">Jump to section</span>
+    <i class="fa-solid fa-chevron-down subnav-caret"></i>
+  </button>
+  <div class="subnav-inner" id="subnavList">
     <a href="#schedule">Schedule</a>
     <a href="#start">Start Here</a>
     <a href="#plan">Game Plan</a>

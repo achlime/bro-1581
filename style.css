@@ -1250,8 +1250,39 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   box-shadow: none;
 }
 @media (max-width: 640px) {
-  .subnav { padding: 9px 0; }
   .subnav a { font-size: 0.9rem; padding: 9px 14px; }
+}
+
+/* ----- Section menu: real dropdown on mobile (no more horizontal scroll) ----- */
+.subnav-toggle { display: none; }
+@media (max-width: 768px) {
+  .subnav { padding: 0; }
+  .subnav-toggle {
+    display: flex; align-items: center; gap: 11px; width: 100%;
+    background: transparent; border: 0; cursor: pointer;
+    padding: 14px 18px; color: var(--gold-bright);
+    font-family: var(--display); font-weight: 700; font-size: .98rem;
+  }
+  .subnav-toggle .fa-list-ul { color: var(--gold); }
+  .subnav-toggle .subnav-current { flex: 1; text-align: left; color: var(--ink); letter-spacing: .01em; }
+  .subnav-toggle .subnav-caret { color: var(--gold); transition: transform .25s ease; }
+  .subnav.open .subnav-toggle .subnav-caret { transform: rotate(180deg); }
+
+  .subnav-inner {
+    position: absolute; left: 0; right: 0; top: 100%;
+    display: block; max-width: none; margin: 0; padding: 0; gap: 0;
+    background: var(--panel); border-bottom: 1px solid var(--gold-line);
+    box-shadow: 0 18px 32px -16px rgba(0,0,0,.92);
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  }
+  .subnav.open .subnav-inner { max-height: 78vh; overflow-y: auto; }
+  .subnav-inner a {
+    display: block; padding: 15px 20px; border-radius: 0; font-size: 1.02rem;
+    color: var(--ink-dim); border-bottom: 1px solid var(--line-soft);
+  }
+  .subnav-inner a:last-child { border-bottom: none; }
+  .subnav-inner a:hover,
+  .subnav-inner a.active { background: var(--gold-soft); color: var(--gold-bright); box-shadow: none; }
 }
 
 /* 2. Wider reading measure so body text stops wrapping so early */

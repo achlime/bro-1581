@@ -333,6 +333,7 @@ function initScrollSpy() {
     .filter(Boolean);
   if (!sections.length) return;
 
+  const currentLabel = document.querySelector(".subnav-current");
   let active = null;
   const setActive = id => {
     if (id === active) return;
@@ -341,7 +342,8 @@ function initScrollSpy() {
     const a = map[id];
     if (a) {
       a.classList.add("active");
-      a.scrollIntoView({ inline: "center", block: "nearest" }); // keep visible on mobile scroll-nav
+      if (currentLabel) currentLabel.textContent = a.textContent;          // mobile dropdown label
+      if (window.innerWidth > 768) a.scrollIntoView({ inline: "center", block: "nearest" }); // desktop bar only
     }
   };
 
@@ -356,6 +358,25 @@ function initScrollSpy() {
 }
 
 /* ----------------------------------------------------------------------
+   7. SUB-NAV DROPDOWN (mobile) — open/close the section menu
+---------------------------------------------------------------------- */
+function initSubnav() {
+  const nav = document.querySelector(".subnav");
+  const toggle = document.querySelector("[data-subnav-toggle]");
+  if (!nav || !toggle) return;
+
+  const close = () => { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); };
+
+  toggle.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.querySelectorAll(".subnav-inner a").forEach(a => a.addEventListener("click", close));
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) close(); });
+}
+
+/* ----------------------------------------------------------------------
    7. BOOT
 ---------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -365,4 +386,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initApply();
   initHeroFilter();
   initScrollSpy();
+  initSubnav();
 });
