@@ -1155,6 +1155,18 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   .tz-card .countdown { font-size: 1.1rem; }
 }
 
+/* live phase — bear is on right now */
+.tz-card.live {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 1px rgba(192,57,43,.5), 0 0 30px -8px rgba(192,57,43,.6);
+}
+.tz-card.live .countdown {
+  color: #fff; background: #c0392b; border-color: #c0392b;
+  font-weight: 800; letter-spacing: .03em;
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+@keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: .72; } }
+
 /* ==========================================================================
    HOST HERO SPOTLIGHT (e.g. Petra) — widget + key skills
    ========================================================================== */

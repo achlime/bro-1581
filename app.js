@@ -173,19 +173,27 @@ function initCountdown() {
   const CYCLE_DAYS = 2;
   const ANCHOR_DAY = Math.floor(Date.UTC(2026, 5, 9) / DAY_MS);
 
-  // the next upcoming occurrence of a given phase hour, on a Bear Trap day.
-  // computed per-phase so a countdown is always the genuine next event
-  // (and therefore never more than the 48h cycle away).
-  const nextPhase = (hour) => {
+  const RUN_MS = 30 * 60000; // the bear is live for 30 minutes after each phase starts
+  const isBTDay = (d) => ((((d - ANCHOR_DAY) % CYCLE_DAYS) + CYCLE_DAYS) % CYCLE_DAYS) === 0;
+
+  // Per phase: is it live right now, and if so for how long; otherwise the next
+  // future occurrence (always within the 48h cycle).
+  const phaseInfo = (hour) => {
     const now = Date.now();
-    let d = Math.floor(now / DAY_MS);
-    for (let i = 0; i < 30; i++, d++) {
-      const isBT = ((((d - ANCHOR_DAY) % CYCLE_DAYS) + CYCLE_DAYS) % CYCLE_DAYS) === 0;
-      if (!isBT) continue;
-      const t = d * DAY_MS + hour * 3600000;
-      if (t > now) return new Date(t);
+    const today = Math.floor(now / DAY_MS);
+    if (isBTDay(today)) {
+      const start = today * DAY_MS + hour * 3600000;
+      if (now >= start && now < start + RUN_MS) {
+        return { live: true, date: new Date(start), ms: (start + RUN_MS) - now };
+      }
     }
-    return new Date(d * DAY_MS + hour * 3600000);
+    for (let i = 0; i < 30; i++) {
+      const d = today + i;
+      if (!isBTDay(d)) continue;
+      const start = d * DAY_MS + hour * 3600000;
+      if (start > now) return { live: false, date: new Date(start), ms: start - now };
+    }
+    return { live: false, date: new Date(today * DAY_MS + hour * 3600000), ms: 0 };
   };
   const fmt = (d, tz) => ({
     time: new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false }).format(d),
@@ -199,17 +207,31 @@ function initCountdown() {
       String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
   };
   const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  const mmss = ms => {
+    const t = Math.max(0, Math.floor(ms / 1000));
+    return String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0");
+  };
+
+  const render = (id, info, tz) => {
+    const f = fmt(info.date, tz);
+    set(id + "Time", f.time);
+    set(id + "Date", f.date + " · " + tz);
+    const cdEl = document.getElementById(id + "Countdown");
+    if (!cdEl) return;
+    const card = cdEl.closest(".tz-card");
+    if (info.live) {
+      cdEl.textContent = "🔴 ON NOW · ends in " + mmss(info.ms);
+      if (card) card.classList.add("live");
+    } else {
+      cdEl.textContent = cd(info.ms);
+      if (card) card.classList.remove("live");
+    }
+  };
 
   const tick = () => {
     const tz = sel.value;
-    const b1 = nextPhase(BT1_H);
-    const b2 = nextPhase(BT2_H);
-    const f1 = fmt(b1, tz), f2 = fmt(b2, tz);
-    set("bt1Time", f1.time); set("bt1Date", f1.date + " · " + tz);
-    set("bt2Time", f2.time); set("bt2Date", f2.date + " · " + tz);
-    const now = Date.now();
-    set("bt1Countdown", cd(b1.getTime() - now));
-    set("bt2Countdown", cd(b2.getTime() - now));
+    render("bt1", phaseInfo(BT1_H), tz);
+    render("bt2", phaseInfo(BT2_H), tz);
   };
   sel.addEventListener("change", tick);
   tick();
