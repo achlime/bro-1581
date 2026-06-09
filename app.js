@@ -228,10 +228,24 @@ function initCountdown() {
     }
   };
 
+  const banner = document.getElementById("liveBanner");
+  const updateBanner = (i1, i2) => {
+    if (!banner) return;
+    const live = i1.live || i2.live;
+    banner.classList.toggle("show", live);
+    if (live) {
+      const ms = Math.max(i1.live ? i1.ms : 0, i2.live ? i2.ms : 0);
+      const t = document.getElementById("liveBannerTime");
+      if (t) t.textContent = mmss(ms);
+    }
+  };
+
   const tick = () => {
     const tz = sel.value;
-    render("bt1", phaseInfo(BT1_H), tz);
-    render("bt2", phaseInfo(BT2_H), tz);
+    const i1 = phaseInfo(BT1_H), i2 = phaseInfo(BT2_H);
+    render("bt1", i1, tz);
+    render("bt2", i2, tz);
+    updateBanner(i1, i2);
   };
   sel.addEventListener("change", tick);
   tick();
