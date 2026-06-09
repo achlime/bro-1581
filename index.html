@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bear Trap Battle Guide — Brotherhood · Kingshot #1581</title>
+<meta name="description" content="The Brotherhood's Bear Trap guide for Kingshot Server #1581 — the 30-minute game plan, joiner heroes, host lineups, formations, and Master Valora." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Brotherhood — Bear Trap Guide">
+      <span class="crest"><i class="fa-solid fa-chess-rook"></i></span>
+      <span class="brand-text">
+        <span class="brand-name">BROTHERHOOD</span>
+        <span class="brand-sub">Bear Trap Guide · #1581</span>
+      </span>
+    </a>
+
+    <!-- TODO: re-enable nav, language switcher and Apply once the rest of the site is ready
+    <nav class="nav-links" aria-label="Primary">
+      <a href="home.html" data-i18n="nav.home">Home</a>
+      <a href="guides.html" data-i18n="nav.guides">Guides</a>
+      <a href="index.html" class="active" data-i18n="nav.beartrap">Bear Trap</a>
+      <a href="recruitment.html" data-i18n="nav.recruit">Join Us</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang">
+        <button class="lang-btn" data-lang-toggle aria-label="Change language">
+          <i class="fa-solid fa-globe"></i><span data-lang-label>EN</span><i class="fa-solid fa-chevron-down" style="font-size:.6rem"></i>
+        </button>
+        <div class="lang-menu" data-lang-menu></div>
+      </div>
+      <a class="btn btn-gold desktop-cta" href="recruitment.html" data-i18n="nav.apply">Apply</a>
+      <button class="hamburger" data-burger aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    -->
+  </div>
+</header>
+<!-- TODO: re-enable mobile drawer with the rest of the site
+<div class="mobile-drawer" data-drawer>
+  <a href="home.html" data-i18n="nav.home">Home</a>
+  <a href="guides.html" data-i18n="nav.guides">Guides</a>
+  <a href="index.html" class="active" data-i18n="nav.beartrap">Bear Trap</a>
+  <a href="recruitment.html" data-i18n="nav.recruit">Join Us</a>
+  <div class="drawer-cta"><a class="btn btn-gold" href="recruitment.html" style="width:100%" data-i18n="cta.apply">Apply to Join</a></div>
+</div>
+-->
+
+
+<!-- ===================== PAGE HEADER ===================== -->
+<section class="page-header">
+  <div class="crest-lg"><i class="fa-solid fa-paw"></i></div>
+  <h1>Bear Trap Battle Guide</h1>
+  <p>Everything you need to pull your weight in Bear Trap and help the alliance top the rankings.</p>
+  <div class="badges" style="margin-top:22px">
+    <span class="badge">Server #1581</span>
+    <span class="badge alt">Season 3 · Gen 3</span>
+  </div>
+</section>
+
+<!-- ===================== SUB NAV ===================== -->
+<nav class="subnav" aria-label="Guide sections">
+  <div class="subnav-inner">
+    <a href="#schedule">Schedule</a>
+    <a href="#start">Start Here</a>
+    <a href="#plan">Game Plan</a>
+    <a href="#joining">Joining</a>
+    <a href="#hosting">Hosting</a>
+    <a href="#formation">Formation</a>
+    <a href="#valora">Valora</a>
+    <a href="#mistakes">Mistakes</a>
+    <a href="#mechanics">Mechanics</a>
+  </div>
+</nav>
+
+<main class="wrap prose" style="padding-top:24px">
+
+  <!-- 01 · SCHEDULE -->
+  <section class="guide-section" id="schedule">
+    <h2><span class="snum">01</span> Schedule</h2>
+    <p class="lede">Runs every second day, two phases each. Be online 5 minutes early.</p>
+    <div class="tz-box">
+      <div class="tz-controls">
+        <label for="tzSelect">Show me in</label>
+        <select id="tzSelect"></select>
+      </div>
+      <div class="tz-grid">
+        <div class="tz-card">
+          <div class="label"><i class="fa-solid fa-paw"></i> BT1 · First Phase</div>
+          <div class="time" id="bt1Time">—</div>
+          <div class="date" id="bt1Date">UTC 08:00</div>
+          <div class="countdown" id="bt1Countdown">—</div>
+        </div>
+        <div class="tz-card">
+          <div class="label"><i class="fa-solid fa-paw"></i> BT2 · Second Phase</div>
+          <div class="time" id="bt2Time">—</div>
+          <div class="date" id="bt2Date">UTC 13:00</div>
+          <div class="countdown" id="bt2Countdown">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SHORT VERSION -->
+  <div class="glance">
+    <h3><i class="fa-solid fa-list"></i> The short version</h3>
+    <div class="glance-grid">
+      <div class="gi"><i class="fa-solid fa-bullseye"></i><span><b>Joining?</b> Put your best-leveled hero — Chenko, Yeonwoo, Amadeus or Amane — first in your formation. Only that first skill counts; your gear and other heroes don't.</span></div>
+      <div class="gi"><i class="fa-solid fa-chess-rook"></i><span><b>Hosting?</b> Your whole account counts. Run the Gen 3 lineup and appoint Master Valora.</span></div>
+      <div class="gi"><i class="fa-solid fa-bow-arrow"></i><span><b>Formation:</b> 10% Infantry, 10% Cavalry, 80% Archers.</span></div>
+      <div class="gi"><i class="fa-solid fa-clock"></i><span><b>Timing:</b> Get online 5 minutes early. There's no cooldown, so the faster your troops get home, the more rallies you run.</span></div>
+    </div>
+  </div>
+
+  <!-- 02 · START HERE -->
+  <section class="guide-section" id="start">
+    <h2><span class="snum">02</span> Start here — leaders &amp; joiners</h2>
+    <p class="lede">This is the part most governors get wrong, and it's behind a huge share of weak Bear Hunt setups: a rally <strong>leader</strong> and a <strong>joiner</strong> contribute completely different things.</p>
+    <div class="roles">
+      <div class="role host">
+        <div class="role-label">Rally Leader</div>
+        <h3><i class="fa-solid fa-chess-rook"></i> Opens the rally</h3>
+        <p class="who">The full account behind them is active.</p>
+        <ul>
+          <li>Their own troops</li>
+          <li>Combat research bonuses</li>
+          <li>Governor gear &amp; charms</li>
+          <li>Hero equipment stats</li>
+          <li>All three hero skills</li>
+          <li>Island buffs</li>
+        </ul>
+        <a class="card-link" href="#hosting" style="margin-top:14px;display:inline-flex">Hosting playbook <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="role joiner">
+        <div class="role-label">Rally Joiner</div>
+        <h3><i class="fa-solid fa-bullseye"></i> Joins a rally</h3>
+        <p class="who">Only two things you bring count.</p>
+        <ul>
+          <li>Your own troops — always</li>
+          <li>Your <strong>first hero's first Expedition skill</strong></li>
+          <li>2nd &amp; 3rd heroes add march space only — their skills are ignored</li>
+        </ul>
+        <a class="card-link" href="#joining" style="margin-top:14px;display:inline-flex">Joining playbook <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="callout bad">
+      <strong>A wrong hero is worse than no hero</strong>
+      The game keeps only the <strong>four highest-level joiner skills</strong> across the whole rally. If your first hero's first skill is defensive, economic, or construction-related, it doesn't just do nothing — it can block a stronger skill from being picked. Sending no hero at all is genuinely better, because your troops deal full damage either way.
+    </div>
+
+    <div class="callout warn">
+      <strong>Bring your best troops</strong>
+      Don't send troops a tier or more below the rally average — low-tier troops water down its damage. And there's no attack cooldown, so the faster your troops get home, the more rallies you run: teleport close to the Pitfall. (Bear Trap uses no stamina.)
+    </div>
+  </section>
+
+  <!-- 03 · GAME PLAN -->
+  <section class="guide-section" id="plan">
+    <h2><span class="snum">03</span> The 30-minute game plan</h2>
+    <p class="lede">A phase lasts 30 minutes. There's no cooldown between attacks, so the only thing limiting you is march time — keep your troops moving the entire phase.</p>
+
+    <div class="vtimeline">
+      <div class="vtl-item">
+        <div class="vtl-time">−5 min</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Pre-Hunt</h4>
+          <p>Recall any gathering troops, double-check your formation, and move into position near the Pitfall.</p>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-time">0–5 min</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Opening</h4>
+          <p>The strongest leaders open the first rallies, and the strongest joiners fill them.</p>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-time">5–23 min</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Mid-Hunt</h4>
+          <p>Keep cycling: the moment your troops are home, join the next rally and go again.</p>
+        </div>
+      </div>
+      <div class="vtl-item final">
+        <div class="vtl-time">23–30 min</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Final Push</h4>
+          <p>Everyone opens their own rally — strong or not.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <strong>Why the Final Push wins events</strong>
+      In the final minutes, everyone should open their own rally — even weaker players. The reason: every open rally is an empty slot a strong player can drop into the instant their troops get home. More open rallies near the end means more attacks land before the timer runs out, and more total damage for the alliance. It's the easiest win most alliances leave on the table.
+    </div>
+  </section>
+
+  <!-- 04 · JOINING -->
+  <section class="guide-section" id="joining">
+    <h2><span class="snum">04</span> Joining <span class="pill joiner" style="margin-left:8px">Joiner</span></h2>
+    <p class="lede">Only two things you bring matter: your <strong>troops</strong> and your <strong>first hero's first Expedition skill</strong>. Everything else — gear, charms, pets, your other hero slots — does nothing. So your whole job is picking the right hero for slot 1.</p>
+
+    <figure class="figure">
+      <img src="img/joiner-tier-list-gen5.webp" alt="Bear Hunt joiner tier list — S, A, Avoid, and Never-use tiers" loading="lazy" />
+      <figcaption><strong>Joiner tier list.</strong> Top row: send these. Bottom rows: sending troops with no hero is better. The cards below show each top hero's actual first skill.</figcaption>
+    </figure>
+
+    <h3>The heroes — and why they rank</h3>
+    <p class="text-muted" style="margin-bottom:8px">Only the <strong>first skill</strong> applies when you join, so that's all we show. Send the S+ hero whose first skill is the highest level on your account.</p>
+
+    <div class="hero-filter">
+      <div class="seg" role="group" aria-label="Filter heroes by generation">
+        <button data-hero-filter="now" class="active" type="button">Available now</button>
+        <button data-hero-filter="all" type="button">All generations</button>
+      </div>
+      <span class="hint" data-hero-hint>Showing heroes you can get at Gen 3. Switch to see upcoming Gen 4–7 joiners.</span>
+    </div>
+
+    <div class="hero-cards">
+
+      <article class="hcard t-s" data-gen="1">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/chenko-avatar.webp" alt="Chenko" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Chenko</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-epic">Epic</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/chenko-stand-of-arms.webp" alt="Stand of Arms" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Stand of Arms</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Raises the whole rally's <strong>Lethality</strong> — the single biggest source of Bear damage. The best joiner there is.</p>
+            <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="1">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/yeonwoo-avatar.webp" alt="Yeonwoo" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Yeonwoo</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-epic">Epic</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/yeonwoo-on-guard.webp" alt="On Guard" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>On Guard</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">The exact same <strong>Lethality</strong> buff as Chenko. Send whichever of the two is more leveled — they're interchangeable.</p>
+            <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="1">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/amadeus-avatar.webp" alt="Amadeus" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Amadeus</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-infantry">Infantry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 1</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amadeus-battle-ready.webp" alt="Battle Ready" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Battle Ready</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Same <strong>Lethality</strong> buff again. If your Helga is strong enough to host, this is the hero you send as a joiner.</p>
+            <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="1">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/amane-avatar.webp" alt="Amane" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Amane</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-epic">Epic</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amane-tri-phalanx.webp" alt="Tri-Phalanx" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Tri-Phalanx</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Raises the rally's <strong>Attack</strong>. It's a different buff type from the Lethality heroes, so it adds on top of them instead of overlapping.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-a" data-gen="2">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/hilde-avatar.webp" alt="Hilde" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Hilde</b><span class="hc-tier a">A</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 2</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/hilde-noble-path.webp" alt="Noble Path" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Noble Path</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Raises <strong>Attack</strong> and <strong>Defense</strong>. A fine backup when none of your S+ heroes are leveled yet.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">3 → 6 → 9 → 12 → <span class="max">15</span></span></div>
+            <div class="hc-stat hc-stat-row"><span class="k">Defense Up:</span> <span class="scale">2 → 4 → 6 → 8 → <span class="max">10</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="4">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/margot-avatar.webp" alt="Margot" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Margot</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 4</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/margot-warbringer.webp" alt="Warbringer" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Warbringer</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Raises the rally's <strong>Attack</strong>. A different buff type again, so it stacks with the Lethality heroes and Amane.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="5">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/vivian-avatar.webp" alt="Vivian" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Vivian</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 5</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/vivian-crouching-tiger.webp" alt="Crouching Tiger" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Crouching Tiger</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Makes the bear take <strong>more damage from everyone</strong> in the rally — a force-multiplier on top of the other buffs.</p>
+            <div class="hc-stat"><span class="k">Enemy Damage Taken Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="7">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/wee-and-woo-avatar.webp" alt="Wee & Woo" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Wee &amp; Woo</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 7</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/wee-and-woo-artillerymen.webp" alt="Artillerymen" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Artillerymen</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Raises <strong>Attack</strong> and <strong>Lethality</strong> at once — two buffs from a single joiner slot.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">3 → 6 → 9 → 12 → <span class="max">15</span></span></div>
+            <div class="hc-stat hc-stat-row"><span class="k">Lethality Up:</span> <span class="scale">2 → 4 → 6 → 8 → <span class="max">10</span></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hcard t-s" data-gen="7">
+        <div class="hc-head">
+          <div class="hc-av"><img src="img/heroes/ava-avatar.webp" alt="Ava" loading="lazy"></div>
+          <div class="hc-id">
+            <div class="hc-name"><b>Ava</b><span class="hc-tier s">S+</span></div>
+            <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 7</span></div>
+          </div>
+        </div>
+        <div class="hc-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/ava-dissolution.webp" alt="Dissolution" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Dissolution</strong><span class="exp-tag"><i class="fa-solid fa-flag"></i> Expedition 1</span></div>
+            <p class="hc-desc">Lowers the bear's <strong>Defense</strong>, so every attack in the rally hits harder. Best once your rally already has Attack and Lethality covered.</p>
+            <div class="hc-stat"><span class="k">Enemy Defense Down:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25</span></span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="text-muted" style="font-size:.92rem;margin-top:12px"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Each arrow is a skill level. Chenko's <code>5 → … → 25</code> means +25% Lethality at level 5 — so level your joiner's first skill all the way to 5.</p>
+
+    <details class="deep">
+      <summary><i class="fa-solid fa-layer-group lead-ic"></i> How joiner buffs stack <span class="tag-opt">Advanced</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <div class="deep-body">
+        <p>When you join a rally, your slot-1 hero's first skill becomes a buff for the <strong>whole rally</strong>, not just your own troops. A rally can hold <strong>up to four</strong> of these joiner buffs at once — and there are two very different kinds.</p>
+
+        <div class="split">
+          <div class="mini good">
+            <h4><i class="fa-solid fa-check"></i> Always-on buffs — these add up</h4>
+            <p>Chenko, Yeonwoo, Amadeus, Amane and Hilde give a flat boost (like +25% Lethality) that's active the entire fight.</p>
+            <p class="ex">If four people each send Chenko, the rally gets all four boosts. Pile on as many of these as you can.</p>
+          </div>
+          <div class="mini bad">
+            <h4><i class="fa-solid fa-xmark"></i> Lucky-chance buffs — these don't</h4>
+            <p>Jabel, Marlin, Zoe, Jaeger and Petra only trigger on a random chance during the fight.</p>
+            <p class="ex">Sending two of the same does nothing extra — the second is wasted. One per rally at most.</p>
+          </div>
+        </div>
+
+        <h4>The mistake to avoid</h4>
+        <p>A rally only keeps the <strong>four highest-level</strong> joiner buffs. If someone joins late with a high-level lucky-chance hero, the game can bump out a good always-on buff that joined earlier — and the whole rally ends up weaker.</p>
+        <p>The same cap cuts the other way: once four Chenkos (or Yeonwoos) are locked into a rally, a fifth adds <strong>nothing</strong>, no matter how well-leveled.</p>
+        <p>So the rule works both ways — if your skill won't make the rally's top four, don't take the slot. When in doubt, <strong>send your troops with no hero</strong> rather than a high-level off-meta one.</p>
+
+        <h4>How to check what's active</h4>
+        <ol class="steps">
+          <li>In the rally, tap the <strong>flag icon</strong> in the top-right corner.</li>
+          <li>Scroll to the bottom — it lists every buff currently applied to the rally.</li>
+          <li>If something's wrong, the rally leader can remove that player and re-fill the slot.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="deep">
+      <summary><i class="fa-solid fa-table-list lead-ic"></i> Other heroes &amp; the never-send list <span class="tag-opt">Reference</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <div class="deep-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:90px">Tier</th><th>Hero</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill tier-a">A</span></td><td><strong>Thrud</strong> — Archer + Infantry Attack</td><td>Not chance-based; quietly underrated</td></tr>
+              <tr><td><span class="pill tier-b">B</span></td><td>Marlin · Zoe · Jaeger · Petra</td><td>Lucky-chance buffs — one per rally at most</td></tr>
+              <tr><td><span class="pill tier-x">Never</span></td><td>Jabel · Gordon · Edwin · Longfei · Helga · Diana</td><td>Defensive or economy skills — send troops only</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 05 · HOSTING -->
+  <section class="guide-section" id="hosting">
+    <h2><span class="snum">05</span> Hosting <span class="pill host" style="margin-left:8px">Host</span></h2>
+    <p class="lede">When you host, everything you own counts — all three hero slots, your gear, charms, research, Island buffs, and Master Valora. Run the right lineup for your generation.</p>
+
+    <h3>Gen 3 host lineup <span class="text-muted" style="font-size:.8rem;font-weight:400">(that's us)</span></h3>
+    <div class="split">
+      <div class="mini">
+        <h4 style="color:var(--gold-bright)">Spenders / Whales</h4>
+        <p style="font-size:1.05rem;color:var(--ink)">Amadeus · Petra · Marlin</p>
+      </div>
+      <div class="mini">
+        <h4 style="color:var(--gold-bright)">F2P</h4>
+        <p style="font-size:1.05rem;color:var(--ink)">Zoe · Petra · Marlin</p>
+      </div>
+    </div>
+
+    <h3>Why this lineup</h3>
+    <p>The host's whole account counts, so the lineup stacks rally-wide buffs. <strong>Petra and Marlin are the two engines</strong>: between them they cover both big damage multipliers for the entire rally — Petra adds <strong>Squad Attack</strong>, Marlin adds <strong>Squad Lethality</strong>. Your lead hero (Amadeus or Zoe) rounds it out.</p>
+
+    <div class="card spotlight" style="border-top:3px solid var(--gold)">
+      <div class="sp-head">
+        <div class="hc-av"><img src="img/heroes/petra-avatar.webp" alt="Petra" loading="lazy"></div>
+        <div class="hc-id">
+          <div class="hc-name"><b>Petra</b></div>
+          <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
+        </div>
+      </div>
+
+      <div class="callout good" style="margin:0 0 6px">
+        <strong>The Squad Attack engine</strong>
+        Petra's widget skill boosts <strong>Squad Attack</strong> — every troop type, not just Cavalry — and she's the first Cavalry hero with an offensive rally widget skill. That's why she's a lock in the lineup.
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/petra-fates-writ.webp" alt="Fate's Writ widget" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Cosmic Eye</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Fate's Writ</span></div>
+          <p class="hc-desc">Raises <strong>Rally Squad Attack</strong> — applies to the whole rally, all troop types. This is the skill that makes her special.</p>
+          <div class="hc-stat"><span class="k">Rally Squad Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/petra-evil-eye.webp" alt="Evil Eye" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Evil Eye</strong></div>
+          <p class="hc-desc">50% chance on attack to curse the bear, raising the damage it takes from everyone.</p>
+          <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/petra-the-favor.webp" alt="The Favor" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>The Favor</strong></div>
+          <p class="hc-desc">50% chance on attack to raise the whole Squad's Attack again.</p>
+          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        </div>
+      </div>
+
+      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Fate's Writ also adds <strong>+70% Cavalry Lethality</strong> and <strong>+70% Cavalry Health</strong> — so level the widget as high as you can.</p>
+    </div>
+
+    <div class="card spotlight" style="border-top:3px solid var(--gold);margin-top:16px">
+      <div class="sp-head">
+        <div class="hc-av"><img src="img/heroes/marlin-avatar.webp" alt="Marlin" loading="lazy"></div>
+        <div class="hc-id">
+          <div class="hc-name"><b>Marlin</b></div>
+          <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
+        </div>
+      </div>
+
+      <div class="callout good" style="margin:0 0 6px">
+        <strong>The Squad Lethality engine</strong>
+        Marlin's widget adds <strong>Squad Lethality</strong> to the whole rally — the perfect partner to Petra's Squad Attack. Run both and a rally gets both damage multipliers at once.
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/marlin-admiral.webp" alt="Admiral of the Line" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Admiral of the Line</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Mistweaver</span></div>
+          <p class="hc-desc">Raises <strong>Rally Squad Lethality</strong> for the whole rally, all troop types — the second half of the multiplier pair.</p>
+          <div class="hc-stat"><span class="k">Rally Squad Lethality:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/marlin-wild-card.webp" alt="Wild Card" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Wild Card</strong></div>
+          <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
+          <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/marlin-dynamo.webp" alt="Dynamo" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Dynamo</strong></div>
+          <p class="hc-desc">50% chance on attack to raise the whole Squad's damage dealt.</p>
+          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        </div>
+      </div>
+
+      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Mistweaver also adds <strong>+60% Archer Lethality</strong> and <strong>+60% Archer Health</strong> — push the widget as high as you can.</p>
+    </div>
+
+    <h3>Your lead hero</h3>
+    <p>Petra and Marlin sit in both lineups. The third slot is your lead, and it changes with spend. <strong>Amadeus</strong> (spenders) is the premium pick — he stacks <em>both</em> flat multipliers by himself. <strong>Zoe</strong> (F2P) covers the Attack side.</p>
+
+    <div class="card spotlight" style="border-top:3px solid var(--gold)">
+      <div class="sp-head">
+        <div class="hc-av"><img src="img/heroes/amadeus-avatar.webp" alt="Amadeus" loading="lazy"></div>
+        <div class="hc-id">
+          <div class="hc-name"><b>Amadeus</b> <span class="text-muted" style="font-size:.8rem;font-weight:400">Spenders' lead</span></div>
+          <div class="hc-meta"><span class="hc-chip cls-infantry">Infantry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 1</span></div>
+        </div>
+      </div>
+
+      <div class="callout good" style="margin:0 0 6px">
+        <strong>Both multipliers in one hero</strong>
+        Amadeus brings a flat <strong>+25% Squad Lethality</strong> and a flat <strong>+25% Squad Attack</strong> on his own, plus a rally-wide widget on top. That's why spenders run him as the lead.
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/amadeus-discernment.webp" alt="Discernment widget" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Discernment</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Aegis of Fate</span></div>
+          <p class="hc-desc">Raises <strong>Rally Attack</strong> for the whole rally.</p>
+          <div class="hc-stat"><span class="k">Rally Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/amadeus-battle-ready.webp" alt="Battle Ready" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Battle Ready</strong></div>
+          <p class="hc-desc">Raises the whole Squad's <strong>Lethality</strong> — flat and always on.</p>
+          <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/amadeus-way-of-the-blade.webp" alt="Way of the Blade" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Way of the Blade</strong></div>
+          <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
+          <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/amadeus-unrighteous-strike.webp" alt="Unrighteous Strike" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Unrighteous Strike</strong></div>
+          <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
+          <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        </div>
+      </div>
+
+      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> His <strong>Born Leader</strong> talent adds up to +15% Lethality &amp; Health to all your troops, and maxed Aegis of Fate adds +62.5% Infantry Lethality and Health.</p>
+    </div>
+
+    <div class="card spotlight" style="border-top:3px solid var(--gold);margin-top:16px">
+      <div class="sp-head">
+        <div class="hc-av"><img src="img/heroes/zoe-avatar.webp" alt="Zoe" loading="lazy"></div>
+        <div class="hc-id">
+          <div class="hc-name"><b>Zoe</b> <span class="text-muted" style="font-size:.8rem;font-weight:400">F2P lead</span></div>
+          <div class="hc-meta"><span class="hc-chip cls-infantry">Infantry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
+        </div>
+      </div>
+
+      <div class="callout good" style="margin:0 0 6px">
+        <strong>A flat Squad Attack buff — no luck needed</strong>
+        Zoe's Stoic gives the whole rally <strong>+25% Squad Attack</strong> outright, every troop type, with no random chance. That's a strong, reliable multiplier from a F2P hero.
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/zoe-stoic.webp" alt="Stoic" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Stoic</strong></div>
+          <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
+          <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/zoe-infinite-arsenal.webp" alt="Infinite Arsenal" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Infinite Arsenal</strong></div>
+          <p class="hc-desc">50% chance on attack to amplify the damage the bear takes.</p>
+          <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        </div>
+      </div>
+
+      <div class="sp-skill">
+        <div class="hc-skill-ic"><img src="img/heroes/zoe-sundering-wound.webp" alt="Sundering Wound" loading="lazy"></div>
+        <div class="hc-skill-body">
+          <div class="hc-skill-name"><strong>Sundering Wound</strong></div>
+          <p class="hc-desc">20% chance to inflict Sunder — damage over time for 3 turns.</p>
+          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        </div>
+      </div>
+
+      <p class="sp-foot"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Her widget (The Unrighteous) adds +60% Infantry Lethality and Health, but its skill — <strong>Dark Lady</strong> — only buffs <strong>Defender</strong> Squads' Attack. That's for garrison defense, so it does <strong>nothing</strong> on an offensive Bear rally. Zoe's value here is Stoic and her other skills, not the widget.</p>
+    </div>
+
+    <h3>Host setup</h3>
+    <ul class="checklist">
+      <li>All 3 hero slots filled, skills leveled</li>
+      <li>Master Valora appointed</li>
+      <li>Rally timer set to 5 minutes</li>
+      <li>Teleported near the Pitfall</li>
+    </ul>
+
+    <h3>Launching in waves</h3>
+    <p>We stagger rally launches by march capacity so the biggest marches go first and nobody's troops sit idle waiting for a slot. Open the wave that matches your own march size.</p>
+    <div class="vtimeline">
+      <div class="vtl-item">
+        <div class="vtl-time">Start</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Wave 1 — 1,000,000+ capacity</h4>
+          <p>The biggest marches launch the moment the bear spawns.</p>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-time">+30 sec</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Wave 2 — 750,000+ capacity</h4>
+          <p>Opens 30 seconds after the first wave.</p>
+        </div>
+      </div>
+      <div class="vtl-item final">
+        <div class="vtl-time">+15 sec</div>
+        <span class="vtl-node"></span>
+        <div class="vtl-body">
+          <h4>Wave 3 — 500,000+ capacity</h4>
+          <p>Opens 15 seconds after the second wave.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · FORMATION -->
+  <section class="guide-section" id="formation">
+    <h2><span class="snum">06</span> Formation</h2>
+    <p class="lede">We're on Gen 3, so the split is mostly Archers. Set this, then run your own account through the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a> to confirm.</p>
+
+    <div class="stat-row" style="max-width:560px">
+      <div class="stat"><div class="num">10%</div><div class="lbl">Infantry</div></div>
+      <div class="stat"><div class="num">10%</div><div class="lbl">Cavalry</div></div>
+      <div class="stat" style="border-color:var(--gold-line)"><div class="num">80%</div><div class="lbl">Archers</div></div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Run it through the calculator</strong>
+      These numbers are a starting point, not a rule. Some accounts hit harder at 5/5/90 or a nearby split — plug your hero stats into the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a> and go with whatever it ranks highest.
+    </div>
+
+    <details class="deep">
+      <summary><i class="fa-solid fa-table-cells-large lead-ic"></i> Show formations for every generation <span class="tag-opt">Reference</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <div class="deep-body">
+        <p style="margin-top:14px">The mix leans further into Archers as generations go on. Here's the full progression for reference:</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Gen</th><th>Infantry</th><th>Cavalry</th><th>Archers</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>10%</td><td>30%</td><td>60%</td></tr>
+              <tr><td>2</td><td>10%</td><td>20%</td><td>70%</td></tr>
+              <tr><td><strong>3 · BRO</strong></td><td><strong>10%</strong></td><td><strong>10%</strong></td><td><strong>80%</strong></td></tr>
+              <tr><td>4+</td><td>1%</td><td>10%</td><td>89%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-muted" style="font-size:.9rem">At Gen 4 and beyond, keep Infantry above roughly 5,000 troops in absolute numbers — if 1% drops below that, nudge the percentage up.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 07 · VALORA -->
+  <section class="guide-section" id="valora">
+    <h2><span class="snum">07</span> Master Valora <span class="pill sp" style="margin-left:8px">Hosts</span></h2>
+    <p class="lede">The first Master you unlock, built entirely around Bear Hunt. If your alliance lives or dies on Bear damage — and ours does — level her first.</p>
+
+    <h3>Leveling order for hosts</h3>
+    <ol class="steps">
+      <li><strong>Dance of the Hunt</strong> → level 10 — bigger rallies mean more total damage</li>
+      <li><strong>Hunter Instinct talent</strong> — straight Bear damage, +2% up to +30%</li>
+      <li>Relationship to <strong>40</strong>, then level <strong>Savage Advantage</strong> for even more capacity</li>
+      <li>Relationship to <strong>50 → 70 → 100</strong> for up to +15% Squad Attack</li>
+      <li>Last: <strong>Leader by Example</strong> and <strong>Weapon Obsession</strong> for extra rewards</li>
+    </ol>
+
+    <details class="deep">
+      <summary><i class="fa-solid fa-circle-nodes lead-ic"></i> Full skill &amp; relationship tables <span class="tag-opt">Reference</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <div class="deep-body">
+        <h4 style="margin-top:16px">Relationship buff — Squad Attack</h4>
+        <div class="table-wrap" style="margin-bottom:18px">
+          <table>
+            <thead><tr><th>Level</th><th>Affinity</th><th>Emblem</th><th>Squad Attack</th></tr></thead>
+            <tbody>
+              <tr><td>10</td><td>340</td><td>5</td><td>+2.85%</td></tr>
+              <tr><td>30</td><td>760</td><td>15</td><td>+5.55%</td></tr>
+              <tr><td>50</td><td>1,500</td><td>25</td><td>+8.25%</td></tr>
+              <tr><td>70</td><td>2,500</td><td>35</td><td>+10.95%</td></tr>
+              <tr><td>100</td><td>4,000</td><td>50</td><td><strong>+15.00%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Skill</th><th>Effect</th><th>Unlock</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Dance of the Hunt</strong></td><td>+30k → +300k rally squad capacity</td><td>—</td></tr>
+              <tr><td><strong>Savage Advantage</strong></td><td>+3k → +30k Bear Hunt capacity</td><td>Rel. 40</td></tr>
+              <tr><td><strong>Leader by Example</strong></td><td>+100 Enhancement XP parts</td><td>Rel. 20</td></tr>
+              <tr><td><strong>Weapon Obsession</strong></td><td>+1 → +5 Forgehammers</td><td>Rel. 30</td></tr>
+              <tr><td><strong>Hunter Instinct</strong> (talent)</td><td>+2% → +30% Bear damage points</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <p class="text-muted" style="font-size:.92rem"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Joiners benefit too — her capacity skills raise your march size. The Squad Attack buff only applies to the host. Full build: <a href="https://www.kingshotguide.com/masters/valora" target="_blank" rel="noopener">kingshotguide.com/masters/valora</a></p>
+  </section>
+
+  <!-- 08 · MISTAKES -->
+  <section class="guide-section" id="mistakes">
+    <h2><span class="snum">08</span> Top mistakes</h2>
+    <ul class="checklist" style="border:1px solid var(--line);border-radius:var(--radius);overflow:hidden">
+      <li><strong>Wrong hero in joiner slot 1.</strong> Only that first skill counts — an off-meta hero there is a wasted slot. Troops-only beats it.</li>
+      <li><strong>A high-level off-meta hero knocking out an S+ buff.</strong> It can bump a Chenko off the rally. Hosts: kick and re-fill.</li>
+      <li><strong>Sending two lucky-chance heroes.</strong> Two Jabels do the same as one. One per rally.</li>
+      <li><strong>Never checking the calculator.</strong> The formation numbers are a starting point — run yours through the <a href="https://kingshotsimulator.com/bear-formation-helper/" target="_blank" rel="noopener">Bear Formation Helper</a>.</li>
+      <li><strong>Skipping the Final Push.</strong> Even a weak rally creates a slot for a strong player's returning troops.</li>
+      <li><strong>Camping far from the Pitfall.</strong> March time is the only real limit — teleport closer.</li>
+    </ul>
+  </section>
+
+  <!-- 09 · MECHANICS (deep dive) -->
+  <section class="guide-section" id="mechanics">
+    <h2><span class="snum">09</span> Why it works</h2>
+    <p class="lede">You don't need any of this to play well. Open it when you're curious why the meta is the way it is, or want to judge a new hero yourself.</p>
+
+    <details class="deep">
+      <summary><i class="fa-solid fa-flask lead-ic"></i> Damage mechanics — deep dive <span class="tag-opt">Optional</span><span class="chev"><i class="fa-solid fa-chevron-down"></i></span></summary>
+      <div class="deep-body">
+        <h4 style="margin-top:16px">Why Lethality beats Attack</h4>
+        <p>Both raise your damage, but most accounts have far less Lethality than Attack — so adding Lethality moves the needle more.</p>
+        <div class="formula">Attack 10,000 · Lethality 2,000<br>+500 Lethality → about +25% damage<br>+500 Attack → about +5% damage</div>
+        <p>Same 500 points, very different result. That's the whole reason Chenko's +25% Lethality is the best joiner skill.</p>
+
+        <h4>Expedition skills vs. Widget skills</h4>
+        <p>Expedition skills (the normal ones) simply add together. Widget skills can <em>multiply</em> instead, scaling with the stats you already have — so maxing Widgets on Chenko, Amadeus and Helga pays off more the stronger your account already is.</p>
+
+        <h4>The Pitfall and Archers</h4>
+        <p>The Pitfall's +25% Attack is the same percentage for every troop type, but Archers start with the highest base Attack — so they gain the most actual damage from it. One more reason the formation is Archer-heavy.</p>
+
+        <h4>Stat priority (mid-to-late game)</h4>
+        <ol>
+          <li>Archer Lethality</li>
+          <li>Archer Attack</li>
+          <li>Troop Deployment Capacity</li>
+          <li>Cavalry Lethality</li>
+        </ol>
+        <p>Push these through Governor Gear (goggles and boots first), Research, Islands, the War Academy, Charms and Chief Gear. Long term, T11 Archers and Truegold pay off in every event you'll ever run.</p>
+      </div>
+    </details>
+  </section>
+
+  <div style="text-align:center;margin:8px 0 8px">
+    <a class="btn btn-gold" href="recruitment.html"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="cta.apply">Apply to Join</span></a>
+  </div>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="home.html">
+          <span class="crest"><i class="fa-solid fa-chess-rook"></i></span>
+          <span class="brand-text">
+            <span class="brand-name">BROTHERHOOD</span>
+            <span class="brand-sub">Kingshot · #1581</span>
+          </span>
+        </a>
+        <p data-i18n="footer.tagline">A coordinated Kingshot alliance built on shared knowledge, disciplined event play, and members who show up for each other.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.explore">Explore</h4>
+        <ul>
+          <li><a href="home.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="guides.html" data-i18n="nav.guides">Guides</a></li>
+          <li><a href="index.html" data-i18n="nav.beartrap">Bear Trap</a></li>
+          <li><a href="recruitment.html" data-i18n="nav.recruit">Join Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.alliance">Alliance</h4>
+        <ul>
+          <li><a href="https://kingshotoptimizer.com/kingdom-timeline/1581/" target="_blank" rel="noopener">Server #1581 Timeline <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem"></i></a></li>
+          <li><span class="text-muted" style="font-size:.9rem">[BRO] Brotherhood</span></li>
+          <li><span class="text-muted" style="font-size:.9rem">[bro] BROacademy</span></li>
+          <li><span class="text-muted" style="font-size:.9rem">[bra] BroAcademy</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="rule"><i class="fa-solid fa-gem"></i></div>
+      <div data-i18n="footer.rights">Not affiliated with the developers of Kingshot. Made by the Brotherhood, for the Brotherhood.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
