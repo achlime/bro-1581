@@ -1132,17 +1132,27 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
 .deep-body > ol.steps { margin-top: 6px; }
 
 /* ==========================================================================
-   SHORT-VERSION BOX — single column, clean rows
+   SUMMARY BOX — icon badge + title + text rows
    ========================================================================== */
 .glance .glance-grid { grid-template-columns: 1fr; gap: 0; }
 .glance .gi {
-  align-items: flex-start; gap: 14px;
-  padding: 14px 0; border-bottom: 1px solid var(--line-soft);
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 0; border-bottom: 1px solid var(--line-soft);
 }
-.glance .gi:first-child { padding-top: 2px; }
-.glance .gi:last-child { border-bottom: none; padding-bottom: 2px; }
-.glance .gi i { font-size: 1.05rem; width: 20px; text-align: center; margin-top: 2px; }
-.glance .gi span { font-size: 1rem; line-height: 1.6; }
+.glance .gi:first-of-type { padding-top: 6px; }
+.glance .gi:last-child { border-bottom: none; padding-bottom: 4px; }
+.glance .gi-ic {
+  flex: none; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 1rem; margin: 0;
+  color: var(--gold-bright); background: var(--gold-soft); border: 1px solid var(--gold-line);
+}
+.glance .gi-body { flex: 1; min-width: 0; }
+.glance .gi-title {
+  font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+  color: var(--gold-bright); letter-spacing: .02em; margin-bottom: 3px;
+}
+.glance .gi-text { margin: 0; font-size: .96rem; line-height: 1.58; color: var(--ink-dim); }
+.glance .gi-text b { color: var(--ink); }
 
 /* ==========================================================================
    SCHEDULE — larger, more prominent countdown
