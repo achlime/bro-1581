@@ -1440,6 +1440,28 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   .tz-card { padding: 16px; }
 }
 
+/* make the Summary box impossible to miss */
+.glance {
+  border: 1px solid var(--gold);
+  background:
+    radial-gradient(130% 100% at 0% 0%, rgba(201,162,74,.12), transparent 58%),
+    linear-gradient(180deg, var(--panel), var(--panel-2));
+  box-shadow: 0 0 0 1px rgba(201,162,74,.14), 0 20px 46px -26px rgba(201,162,74,.5);
+  position: relative; overflow: hidden;
+}
+.glance::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright), var(--gold-deep));
+}
+.glance h3 {
+  font-size: 1.45rem; letter-spacing: .02em; color: var(--gold-bright);
+  display: inline-flex; align-items: center; gap: 11px;
+  margin-bottom: 16px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--gold-line);
+}
+.glance h3 i { color: var(--gold); }
+@media (max-width: 600px) { .glance h3 { font-size: 1.3rem; } }
+
 /* "deep-dive below" line under the short version */
 .glance-more {
   margin: 16px 0 0; padding-top: 15px;
