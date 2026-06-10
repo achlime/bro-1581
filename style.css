@@ -1439,3 +1439,13 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   .tz-box { padding: 18px; }
   .tz-card { padding: 16px; }
 }
+
+/* "deep-dive below" line under the short version */
+.glance-more {
+  margin: 16px 0 0; padding-top: 15px;
+  border-top: 1px solid var(--line-soft);
+  display: flex; align-items: center; gap: 9px;
+  font-size: .92rem; color: var(--muted);
+}
+.glance-more em { font-style: italic; color: var(--ink-dim); }
+.glance-more i { color: var(--gold); }
