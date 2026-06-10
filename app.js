@@ -360,6 +360,21 @@ function initScrollSpy() {
 /* ----------------------------------------------------------------------
    7. SUB-NAV DROPDOWN (mobile) — open/close the section menu
 ---------------------------------------------------------------------- */
+function initTranslateMenu() {
+  const wrap = document.querySelector("[data-tl-menu]");
+  const btn = document.querySelector("[data-tl-btn]");
+  if (!wrap || !btn) return;
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = wrap.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("click", () => {
+    wrap.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+  });
+}
+
 function initSubnav() {
   const nav = document.querySelector(".subnav");
   const toggle = document.querySelector("[data-subnav-toggle]");
@@ -387,4 +402,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroFilter();
   initScrollSpy();
   initSubnav();
+  initTranslateMenu();
 });
