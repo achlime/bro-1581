@@ -166,7 +166,7 @@
 
     <div class="callout bad">
       <strong>A wrong hero is worse than no hero</strong>
-      The game keeps only the <strong>four highest-level joiner skills</strong> across the whole rally. If your first hero's first skill is defensive, economic, or construction-related, it doesn't just do nothing — it can block a stronger skill from being picked. Sending no hero at all is genuinely better, because your troops deal full damage either way.
+      A rally only uses the <strong>four highest-level</strong> joiner skills (ties broken by who joined first). So a high-level off-meta skill — say a level-5 Jabel — can push out a lower-level S+ skill, even one that joined earlier. If your first hero's skill is defensive or economic, it's not just wasted; it can block a stronger one. No hero at all beats the wrong hero, since your troops deal full damage either way.
     </div>
 
     <div class="callout warn">
@@ -430,10 +430,11 @@
           </div>
         </div>
 
-        <h4>The mistake to avoid</h4>
-        <p>A rally only keeps the <strong>four highest-level</strong> joiner buffs. If someone joins late with a high-level lucky-chance hero, the game can bump out a good always-on buff that joined earlier — and the whole rally ends up weaker.</p>
-        <p>The same cap cuts the other way: once four Chenkos (or Yeonwoos) are locked into a rally, a fifth adds <strong>nothing</strong>, no matter how well-leveled.</p>
-        <p>So the rule works both ways — if your skill won't make the rally's top four, don't take the slot. When in doubt, <strong>send your troops with no hero</strong> rather than a high-level off-meta one.</p>
+        <h4>How the rally picks the four</h4>
+        <p>The rally takes the <strong>four highest-level</strong> joiner skills across everyone, and breaks ties by <strong>join order</strong> (earlier joiners win a tie). Level comes first — <em>not</em> when you joined.</p>
+        <p><strong>Worked example:</strong> you send a Chenko with a <strong>level&nbsp;4</strong> skill and you're 2nd into the rally. Someone joins 10th with a <strong>level&nbsp;5</strong> Jabel. Because level&nbsp;5 beats level&nbsp;4, the Jabel takes a slot and can bump your Chenko out — even though you joined eight places earlier.</p>
+        <p>Two things follow from this: <strong>level your S+ skills as high as you can</strong> so they stay in the top four, and make sure people are <strong>sending the right heroes</strong> — a high-level junk skill actively pushes a good one out. No leveled S+ hero ready? Send troops with <strong>no hero</strong> rather than a high-level off-meta one.</p>
+        <p>The cap cuts the other way too: once four Chenkos (or Yeonwoos) are locked in, a fifth adds <strong>nothing</strong> — so check the rally before you pile on.</p>
 
         <h4>How to check what's active</h4>
         <ol class="steps">
@@ -479,195 +480,190 @@
     </div>
 
     <h3>Why this lineup</h3>
-    <p>A host's whole account counts, so the lineup is built to buff the entire rally at once. <strong>Petra</strong> raises everyone's Attack and <strong>Marlin</strong> raises everyone's Lethality — the two stats that drive Bear damage. <strong>Amadeus</strong> (spenders) or <strong>Zoe</strong> (F2P) takes the third slot.</p>
+    <p>A host's whole account counts, so the lineup buffs the <em>entire rally</em> at once. All three of your heroes work for the rally: <strong>Petra</strong> (Cavalry) pumps Squad Attack, <strong>Marlin</strong> (Archer) pumps Squad Lethality, and your <strong>Infantry hero</strong> stacks more on top. Tap each to see why.</p>
 
-    <div class="card spotlight" style="border-top:3px solid var(--gold)">
-      <div class="sp-head">
+    <details class="hero-acc">
+      <summary>
         <div class="hc-av"><img src="img/heroes/petra-avatar.webp" alt="Petra" loading="lazy"></div>
         <div class="hc-id">
           <div class="hc-name"><b>Petra</b></div>
           <div class="hc-meta"><span class="hc-chip cls-cavalry">Cavalry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
         </div>
-      </div>
-
-      <div class="callout good" style="margin:0 0 6px">
-        <strong>The Squad Attack engine</strong>
-        Petra's widget skill boosts <strong>Squad Attack</strong> — every troop type, not just Cavalry — and she's the first Cavalry hero with an offensive rally widget skill. That's why she's a lock in the lineup.
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/petra-fates-writ.webp" alt="Fate's Writ widget" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Cosmic Eye</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Fate's Writ</span></div>
-          <p class="hc-desc">Raises <strong>Rally Squad Attack</strong> — applies to the whole rally, all troop types. This is the skill that makes her special.</p>
-          <div class="hc-stat"><span class="k">Rally Squad Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        <span class="acc-role">Squad Attack</span>
+        <i class="fa-solid fa-chevron-down acc-caret"></i>
+      </summary>
+      <div class="spotlight hero-acc-body">
+        <div class="callout good" style="margin:0 0 6px">
+          <strong>The Squad Attack engine</strong>
+          Petra's widget skill boosts <strong>Squad Attack</strong> — every troop type, not just Cavalry — and she's the first Cavalry hero with an offensive rally widget skill. That's why she's a lock in the lineup.
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/petra-evil-eye.webp" alt="Evil Eye" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Evil Eye</strong></div>
-          <p class="hc-desc">50% chance on attack to curse the bear, raising the damage it takes from everyone.</p>
-          <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/petra-fates-writ.webp" alt="Fate's Writ widget" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Cosmic Eye</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Fate's Writ</span></div>
+            <p class="hc-desc">Raises <strong>Rally Squad Attack</strong> — applies to the whole rally, all troop types. This is the skill that makes her special.</p>
+            <div class="hc-stat"><span class="k">Rally Squad Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+          </div>
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/petra-the-favor.webp" alt="The Favor" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>The Favor</strong></div>
-          <p class="hc-desc">50% chance on attack to raise the whole Squad's Attack again.</p>
-          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/petra-evil-eye.webp" alt="Evil Eye" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Evil Eye</strong></div>
+            <p class="hc-desc">50% chance on attack to curse the bear, raising the damage it takes from everyone.</p>
+            <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+          </div>
         </div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/petra-the-favor.webp" alt="The Favor" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>The Favor</strong></div>
+            <p class="hc-desc">50% chance on attack to raise the whole Squad's Attack again.</p>
+            <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+          </div>
+        </div>
+        <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Fate's Writ also adds <strong>+70% Cavalry Lethality</strong> and <strong>+70% Cavalry Health</strong> — so level the widget as high as you can.</p>
       </div>
+    </details>
 
-      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Fate's Writ also adds <strong>+70% Cavalry Lethality</strong> and <strong>+70% Cavalry Health</strong> — so level the widget as high as you can.</p>
-    </div>
-
-    <div class="card spotlight" style="border-top:3px solid var(--gold);margin-top:16px">
-      <div class="sp-head">
+    <details class="hero-acc">
+      <summary>
         <div class="hc-av"><img src="img/heroes/marlin-avatar.webp" alt="Marlin" loading="lazy"></div>
         <div class="hc-id">
           <div class="hc-name"><b>Marlin</b></div>
           <div class="hc-meta"><span class="hc-chip cls-archer">Archer</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
         </div>
-      </div>
-
-      <div class="callout good" style="margin:0 0 6px">
-        <strong>The Squad Lethality engine</strong>
-        Marlin's widget adds <strong>Squad Lethality</strong> to the whole rally — the perfect partner to Petra's Squad Attack. Run both and a rally gets both damage multipliers at once.
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/marlin-admiral.webp" alt="Admiral of the Line" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Admiral of the Line</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Mistweaver</span></div>
-          <p class="hc-desc">Raises <strong>Rally Squad Lethality</strong> for the whole rally, all troop types — the second half of the multiplier pair.</p>
-          <div class="hc-stat"><span class="k">Rally Squad Lethality:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        <span class="acc-role">Squad Lethality</span>
+        <i class="fa-solid fa-chevron-down acc-caret"></i>
+      </summary>
+      <div class="spotlight hero-acc-body">
+        <div class="callout good" style="margin:0 0 6px">
+          <strong>The Squad Lethality engine</strong>
+          Marlin's widget adds <strong>Squad Lethality</strong> to the whole rally — the perfect partner to Petra's Squad Attack. Run both and a rally gets both damage multipliers at once.
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/marlin-wild-card.webp" alt="Wild Card" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Wild Card</strong></div>
-          <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
-          <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/marlin-admiral.webp" alt="Admiral of the Line" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Admiral of the Line</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Mistweaver</span></div>
+            <p class="hc-desc">Raises <strong>Rally Squad Lethality</strong> for the whole rally, all troop types — the second half of the multiplier pair.</p>
+            <div class="hc-stat"><span class="k">Rally Squad Lethality:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+          </div>
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/marlin-dynamo.webp" alt="Dynamo" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Dynamo</strong></div>
-          <p class="hc-desc">50% chance on attack to raise the whole Squad's damage dealt.</p>
-          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/marlin-wild-card.webp" alt="Wild Card" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Wild Card</strong></div>
+            <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
+            <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+          </div>
         </div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/marlin-dynamo.webp" alt="Dynamo" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Dynamo</strong></div>
+            <p class="hc-desc">50% chance on attack to raise the whole Squad's damage dealt.</p>
+            <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+          </div>
+        </div>
+        <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Mistweaver also adds <strong>+60% Archer Lethality</strong> and <strong>+60% Archer Health</strong> — push the widget as high as you can.</p>
       </div>
+    </details>
 
-      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> Maxed, Mistweaver also adds <strong>+60% Archer Lethality</strong> and <strong>+60% Archer Health</strong> — push the widget as high as you can.</p>
-    </div>
+    <h3>Your Infantry hero</h3>
+    <p>Petra and Marlin are fixed in both lineups. The <strong>Infantry</strong> slot is the one that changes with spend: <strong>Amadeus</strong> (spenders) brings both flat multipliers by himself, while <strong>Zoe</strong> (F2P) covers the Attack side.</p>
 
-    <h3>Your lead hero</h3>
-    <p>Petra and Marlin sit in both lineups. The third slot is your lead, and it changes with spend. <strong>Amadeus</strong> (spenders) is the premium pick — he stacks <em>both</em> flat multipliers by himself. <strong>Zoe</strong> (F2P) covers the Attack side.</p>
-
-    <div class="card spotlight" style="border-top:3px solid var(--gold)">
-      <div class="sp-head">
+    <details class="hero-acc">
+      <summary>
         <div class="hc-av"><img src="img/heroes/amadeus-avatar.webp" alt="Amadeus" loading="lazy"></div>
         <div class="hc-id">
-          <div class="hc-name"><b>Amadeus</b> <span class="text-muted" style="font-size:.8rem;font-weight:400">Spenders' lead</span></div>
+          <div class="hc-name"><b>Amadeus</b></div>
           <div class="hc-meta"><span class="hc-chip cls-infantry">Infantry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 1</span></div>
         </div>
-      </div>
-
-      <div class="callout good" style="margin:0 0 6px">
-        <strong>Both multipliers in one hero</strong>
-        Amadeus brings a flat <strong>+25% Squad Lethality</strong> and a flat <strong>+25% Squad Attack</strong> on his own, plus a rally-wide widget on top. That's why spenders run him as the lead.
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/amadeus-discernment.webp" alt="Discernment widget" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Discernment</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Aegis of Fate</span></div>
-          <p class="hc-desc">Raises <strong>Rally Attack</strong> for the whole rally.</p>
-          <div class="hc-stat"><span class="k">Rally Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+        <span class="acc-role">Infantry · Spenders</span>
+        <i class="fa-solid fa-chevron-down acc-caret"></i>
+      </summary>
+      <div class="spotlight hero-acc-body">
+        <div class="callout good" style="margin:0 0 6px">
+          <strong>Both multipliers in one hero</strong>
+          Amadeus brings a flat <strong>+25% Squad Lethality</strong> and a flat <strong>+25% Squad Attack</strong> on his own, plus a rally-wide widget on top. That's why spenders run him in the Infantry slot.
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/amadeus-battle-ready.webp" alt="Battle Ready" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Battle Ready</strong></div>
-          <p class="hc-desc">Raises the whole Squad's <strong>Lethality</strong> — flat and always on.</p>
-          <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amadeus-discernment.webp" alt="Discernment widget" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Discernment</strong> <span class="tag-widget"><i class="fa-solid fa-gem"></i> Widget · Aegis of Fate</span></div>
+            <p class="hc-desc">Raises <strong>Rally Attack</strong> for the whole rally.</p>
+            <div class="hc-stat"><span class="k">Rally Attack:</span> <span class="scale">5 → 7.5 → 10 → 12.5 → <span class="max">15%</span></span></div>
+          </div>
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/amadeus-way-of-the-blade.webp" alt="Way of the Blade" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Way of the Blade</strong></div>
-          <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
-          <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amadeus-battle-ready.webp" alt="Battle Ready" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Battle Ready</strong></div>
+            <p class="hc-desc">Raises the whole Squad's <strong>Lethality</strong> — flat and always on.</p>
+            <div class="hc-stat"><span class="k">Lethality Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+          </div>
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/amadeus-unrighteous-strike.webp" alt="Unrighteous Strike" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Unrighteous Strike</strong></div>
-          <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
-          <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amadeus-way-of-the-blade.webp" alt="Way of the Blade" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Way of the Blade</strong></div>
+            <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+          </div>
         </div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/amadeus-unrighteous-strike.webp" alt="Unrighteous Strike" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Unrighteous Strike</strong></div>
+            <p class="hc-desc">40% chance on attack to deal 50% extra damage for all squads.</p>
+            <div class="hc-stat"><span class="k">Damage Dealt Chance:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+          </div>
+        </div>
+        <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> His <strong>Born Leader</strong> talent adds up to +15% Lethality &amp; Health to all your troops, and maxed Aegis of Fate adds +62.5% Infantry Lethality and Health.</p>
       </div>
+    </details>
 
-      <p class="sp-foot"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> His <strong>Born Leader</strong> talent adds up to +15% Lethality &amp; Health to all your troops, and maxed Aegis of Fate adds +62.5% Infantry Lethality and Health.</p>
-    </div>
-
-    <div class="card spotlight" style="border-top:3px solid var(--gold);margin-top:16px">
-      <div class="sp-head">
+    <details class="hero-acc">
+      <summary>
         <div class="hc-av"><img src="img/heroes/zoe-avatar.webp" alt="Zoe" loading="lazy"></div>
         <div class="hc-id">
-          <div class="hc-name"><b>Zoe</b> <span class="text-muted" style="font-size:.8rem;font-weight:400">F2P lead</span></div>
+          <div class="hc-name"><b>Zoe</b></div>
           <div class="hc-meta"><span class="hc-chip cls-infantry">Infantry</span><span class="hc-chip rar-legendary">Legendary</span><span class="hc-chip gen">Gen 3</span></div>
         </div>
-      </div>
-
-      <div class="callout good" style="margin:0 0 6px">
-        <strong>A flat Squad Attack buff — no luck needed</strong>
-        Zoe's Stoic gives the whole rally <strong>+25% Squad Attack</strong> outright, every troop type, with no random chance. That's a strong, reliable multiplier from a F2P hero.
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/zoe-stoic.webp" alt="Stoic" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Stoic</strong></div>
-          <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
-          <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+        <span class="acc-role">Infantry · F2P</span>
+        <i class="fa-solid fa-chevron-down acc-caret"></i>
+      </summary>
+      <div class="spotlight hero-acc-body">
+        <div class="callout good" style="margin:0 0 6px">
+          <strong>A flat Squad Attack buff — no luck needed</strong>
+          Zoe's Stoic gives the whole rally <strong>+25% Squad Attack</strong> outright, every troop type, with no random chance. That's a strong, reliable multiplier from a F2P hero.
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/zoe-infinite-arsenal.webp" alt="Infinite Arsenal" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Infinite Arsenal</strong></div>
-          <p class="hc-desc">50% chance on attack to amplify the damage the bear takes.</p>
-          <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/zoe-stoic.webp" alt="Stoic" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Stoic</strong></div>
+            <p class="hc-desc">Raises the whole Squad's <strong>Attack</strong> — flat and always on.</p>
+            <div class="hc-stat"><span class="k">Attack Up:</span> <span class="scale">5 → 10 → 15 → 20 → <span class="max">25%</span></span></div>
+          </div>
         </div>
-      </div>
-
-      <div class="sp-skill">
-        <div class="hc-skill-ic"><img src="img/heroes/zoe-sundering-wound.webp" alt="Sundering Wound" loading="lazy"></div>
-        <div class="hc-skill-body">
-          <div class="hc-skill-name"><strong>Sundering Wound</strong></div>
-          <p class="hc-desc">20% chance to inflict Sunder — damage over time for 3 turns.</p>
-          <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/zoe-infinite-arsenal.webp" alt="Infinite Arsenal" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Infinite Arsenal</strong></div>
+            <p class="hc-desc">50% chance on attack to amplify the damage the bear takes.</p>
+            <div class="hc-stat"><span class="k">Enemy Damage Taken:</span> <span class="scale">10 → 20 → 30 → 40 → <span class="max">50%</span></span></div>
+          </div>
         </div>
+        <div class="sp-skill">
+          <div class="hc-skill-ic"><img src="img/heroes/zoe-sundering-wound.webp" alt="Sundering Wound" loading="lazy"></div>
+          <div class="hc-skill-body">
+            <div class="hc-skill-name"><strong>Sundering Wound</strong></div>
+            <p class="hc-desc">20% chance to inflict Sunder — damage over time for 3 turns.</p>
+            <div class="hc-stat"><span class="k">Damage Up:</span> <span class="scale">8 → 16 → 24 → 32 → <span class="max">40%</span></span></div>
+          </div>
+        </div>
+        <p class="sp-foot"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Her widget (The Unrighteous) adds +60% Infantry Lethality and Health, but its skill — <strong>Dark Lady</strong> — only buffs <strong>Defender</strong> Squads' Attack. That's for garrison defense, so it does <strong>nothing</strong> on an offensive Bear rally. Zoe's value here is Stoic and her other skills, not the widget.</p>
       </div>
-
-      <p class="sp-foot"><i class="fa-solid fa-circle-info" style="color:var(--gold)"></i> Her widget (The Unrighteous) adds +60% Infantry Lethality and Health, but its skill — <strong>Dark Lady</strong> — only buffs <strong>Defender</strong> Squads' Attack. That's for garrison defense, so it does <strong>nothing</strong> on an offensive Bear rally. Zoe's value here is Stoic and her other skills, not the widget.</p>
-    </div>
+    </details>
 
     <h3>Launching in waves</h3>
     <p>We stagger rally launches by march capacity so the biggest marches go first and nobody's troops sit idle waiting for a slot. Open the wave that matches your own march size.</p>

@@ -1449,3 +1449,47 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
 }
 .glance-more em { font-style: italic; color: var(--ink-dim); }
 .glance-more i { color: var(--gold); }
+
+/* ==========================================================================
+   HOST HERO ACCORDIONS (Petra / Marlin / Amadeus / Zoe)
+   ========================================================================== */
+.hero-acc {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 12px;
+}
+.hero-acc > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 14px; padding: 15px 18px;
+}
+.hero-acc > summary::-webkit-details-marker { display: none; }
+.hero-acc > summary:hover { background: rgba(201,162,74,.04); }
+.hero-acc > summary .hc-av {
+  width: 52px; height: 52px; flex: none;
+  border: 1px solid var(--gold-line); border-radius: var(--radius);
+  overflow: hidden; background: var(--bg-2);
+}
+.hero-acc > summary .hc-av img { width: 100%; height: 100%; object-fit: cover; }
+.hero-acc > summary .hc-id { flex: 1; min-width: 0; }
+.hero-acc > summary .hc-name { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.hero-acc > summary .hc-name b { font-family: var(--display); font-weight: 700; font-size: 1.18rem; color: var(--ink); }
+.hero-acc .acc-role {
+  flex: none; white-space: nowrap;
+  font-size: .66rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--gold-bright); background: var(--gold-soft);
+  border: 1px solid var(--gold-line); padding: 4px 10px; border-radius: 999px;
+}
+.hero-acc .acc-caret { flex: none; color: var(--gold); transition: transform .2s ease; }
+.hero-acc[open] .acc-caret { transform: rotate(180deg); }
+
+/* body reuses the spotlight skill styles; just neutralise the card padding/border */
+.hero-acc .hero-acc-body.spotlight {
+  padding: 2px 18px 18px; border-top: 1px solid var(--line-soft); border-radius: 0;
+}
+.hero-acc .hero-acc-body .callout { margin-top: 16px; }
+
+@media (max-width: 520px) {
+  .hero-acc .acc-role { display: none; }   /* role is explained inside; keep summary clean */
+  .hero-acc > summary { padding: 13px 14px; gap: 12px; }
+  .hero-acc .hero-acc-body.spotlight { padding: 2px 14px 16px; }
+}
