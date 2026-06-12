@@ -160,6 +160,10 @@ function buildRows() {
 }
 
 function applyUnit(u) {
+  // capture totals under the OLD unit first, so switching converts instead of
+  // silently dropping whatever was in the hidden columns
+  const totals = {};
+  TYPES.forEach(t => { totals[t.id] = rowMinutes(t.id); });
   unit = u;
   document.querySelectorAll("[data-unit]").forEach(b => b.classList.toggle("active", b.dataset.unit === u));
   document.querySelectorAll(".su-row").forEach(r => {
@@ -167,6 +171,7 @@ function applyUnit(u) {
     r.querySelector(".su-hrs").style.display  = (u === "min") ? "none" : "";
     r.querySelector(".su-min").style.display  = "";
   });
+  TYPES.forEach(t => { if (totals[t.id] > 0) setRow(t.id, totals[t.id]); });
   updateTotals();
 }
 
@@ -230,41 +235,76 @@ async function compressImage(file) {
 
 /* parse OCR text → minutes per type.
    Two-line labels ("Construction" / "Speedup") put the numbers 1–2 lines below
-   the keyword, so we search from each label until the NEXT label/section. */
+   the keyword, so we search from each label until the NEXT label/section.
+   If a label OCR'd too badly to match, we recover it by position: the row sits
+   between two rows we DID find, so we split that stretch into number-clusters. */
 function parseOcr(text) {
   const t = (text || "").toLowerCase();
   const num = s => parseInt(s.replace(/[^\d]/g, ""), 10) || 0;
 
-  // our four labels…
-  const marks = [];
-  [
-    { id: "general",      re: /general\s*speed/ },
-    { id: "training",     re: /(soldier|troop)[\s\S]{0,12}?training|training[\s\S]{0,12}?speed/ },
-    { id: "construction", re: /construc/ },
-    { id: "research",     re: /research/ }
-  ].forEach(L => {
-    const m = t.match(L.re);
-    if (m) marks.push({ id: L.id, at: m.index });
-  });
-  marks.sort((a, b) => a.at - b.at);
+  const ORDER = ["general", "training", "construction", "research"];
+  const RES = {
+    general:      /general/,
+    training:     /(soldier|troop)[\s\S]{0,16}?train|train[\s\S]{0,14}?speed|soldier(?![\s\S]{0,16}heal)/,
+    construction: /construc/,
+    research:     /research/
+  };
+  const marks = {};
+  ORDER.forEach(id => { const m = t.match(RES[id]); if (m) marks[id] = m.index; });
 
-  // …and the rows/sections that end a search window
+  // rows/sections we must never read numbers from
   const stops = [];
-  const stopRe = /learning|healing|day\(s\)\s*$|overview|resources/g;
+  const stopRe = /learning|healing|overview|resources/g;
   let sm; while ((sm = stopRe.exec(t))) stops.push(sm.index);
 
-  const found = {};
-  marks.forEach((mk, i) => {
-    let end = (i + 1 < marks.length) ? marks[i + 1].at : t.length;
-    stops.forEach(s => { if (s > mk.at + 5 && s < end) end = s; });
-    const seg = t.slice(mk.at, Math.min(end, mk.at + 200));
+  const endAt = from => {
+    let end = t.length;
+    ORDER.forEach(id => { if (marks[id] != null && marks[id] > from && marks[id] < end) end = marks[id]; });
+    stops.forEach(s => { if (s > from + 5 && s < end) end = s; });
+    return end;
+  };
+  const grab = seg => {
     const d = seg.match(/([\d,.]+)\s*da?y/);
     const h = seg.match(/([\d,.]+)\s*hr/);
     const m = seg.match(/([\d,.]+)\s*min/);
-    if (d || h || m) {
-      found[mk.id] = (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
-    }
+    if (!d && !h && !m) return null;
+    return (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
+  };
+
+  // pass 1: labelled windows
+  const found = {};
+  ORDER.forEach(id => {
+    if (marks[id] == null) return;
+    const v = grab(t.slice(marks[id], Math.min(endAt(marks[id]), marks[id] + 200)));
+    if (v != null) found[id] = v;
   });
+
+  // pass 2: positional recovery for garbled labels.
+  // Split a stretch into clusters: a new cluster starts whenever the unit rank
+  // (day < hr < min) fails to increase — e.g. "…27 min 17 day…" or "…min …min".
+  const clusters = seg => {
+    const re = /([\d,.]+)\s*(da?y|hr|min)/g;
+    const out = []; let last = -1; let m;
+    while ((m = re.exec(seg))) {
+      const r = m[2][0] === "d" ? 0 : m[2][0] === "h" ? 1 : 2;
+      if (r <= last || !out.length) out.push(0);
+      out[out.length - 1] += num(m[1]) * (r === 0 ? 1440 : r === 1 ? 60 : 1);
+      last = r;
+    }
+    return out;
+  };
+  ORDER.forEach((id, i) => {
+    if (found[id] != null) return;
+    let pi = i - 1; while (pi >= 0 && marks[ORDER[pi]] == null) pi--;
+    if (pi < 0) return;                       // need a found row above us
+    let ni = i + 1; while (ni < ORDER.length && marks[ORDER[ni]] == null) ni++;
+    const from = marks[ORDER[pi]];
+    const to = ni < ORDER.length ? marks[ORDER[ni]] : endAt(from);
+    const cs = clusters(t.slice(from, to));
+    const want = i - pi;                      // cluster 0 belongs to the row above
+    if (cs.length > want && cs[want] > 0) found[id] = cs[want];
+  });
+
   return found;
 }
 
@@ -282,11 +322,15 @@ async function runOcr(dataUrl) {
     const { data } = await Tesseract.recognize(dataUrl, "eng");
     console.log("[speedups] OCR text:\n" + (data.text || "(empty)")); // debugging aid for misreads
     const found = parseOcr(data.text || "");
-    const hits = Object.keys(found).length;
-    if (hits) {
+    const names = { general: "General", training: "Soldier Training", construction: "Construction", research: "Research" };
+    const got = Object.keys(names).filter(k => k in found).map(k => names[k]);
+    const missing = Object.keys(names).filter(k => !(k in found)).map(k => names[k]);
+    if (got.length) {
       Object.entries(found).forEach(([t, mins]) => setRow(t, mins));
       updateTotals();
-      ocrStatus(`<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read ${hits} value${hits > 1 ? "s" : ""} from your screenshot — please check them below, then submit.`);
+      ocrStatus(missing.length
+        ? `<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Read ${got.join(", ")} — but couldn't read <strong>${missing.join(", ")}</strong>. Please type ${missing.length > 1 ? "those" : "that one"} in below and double-check the rest.`
+        : `<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read all four from your screenshot — please check them below, then submit.`);
     } else {
       ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn't read the numbers — no problem, just type them in below.`);
     }
