@@ -1602,3 +1602,21 @@ input[type="file"]::file-selector-button {
   .nav-right .btn-sm { padding: 8px 10px; font-size: .74rem; }
   .brand .brand-name { font-size: .88rem; letter-spacing: .04em; }
 }
+
+/* ==========================================================================
+   FORM READABILITY — larger text on the census form (desktop + mobile)
+   ========================================================================== */
+.form label { font-size: .94rem; }
+.form input, .form select, .form textarea { font-size: 1.05rem; }  /* ≥16px also stops iOS focus-zoom */
+.form .form-note { font-size: .98rem; }
+.su-label { font-size: 1.1rem; }
+.su-cell label { font-size: .92rem; }
+.su-cell input { font-size: 1.12rem; width: 96px; }
+.su-total { font-size: 1rem; }
+.ocr-status { font-size: 1.02rem; }
+input[type="file"] { font-size: 1rem; }
+input[type="file"]::file-selector-button { font-size: .9rem; }
+.form-success div, .form-success strong { font-size: 1rem; }
+@media (max-width: 640px) {
+  .su-cell input { width: 84px; }
+}
