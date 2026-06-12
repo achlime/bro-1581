@@ -212,31 +212,43 @@ async function compressImage(file) {
   return c.toDataURL("image/jpeg", 0.85);
 }
 
-/* parse OCR text → minutes per type */
+/* parse OCR text → minutes per type.
+   Two-line labels ("Construction" / "Speedup") put the numbers 1–2 lines below
+   the keyword, so we search from each label until the NEXT label/section. */
 function parseOcr(text) {
+  const t = (text || "").toLowerCase();
+  const num = s => parseInt(s.replace(/[^\d]/g, ""), 10) || 0;
+
+  // our four labels…
+  const marks = [];
+  [
+    { id: "general",      re: /general\s*speed/ },
+    { id: "training",     re: /(soldier|troop)[\s\S]{0,12}?training|training[\s\S]{0,12}?speed/ },
+    { id: "construction", re: /construc/ },
+    { id: "research",     re: /research/ }
+  ].forEach(L => {
+    const m = t.match(L.re);
+    if (m) marks.push({ id: L.id, at: m.index });
+  });
+  marks.sort((a, b) => a.at - b.at);
+
+  // …and the rows/sections that end a search window
+  const stops = [];
+  const stopRe = /learning|healing|day\(s\)\s*$|overview|resources/g;
+  let sm; while ((sm = stopRe.exec(t))) stops.push(sm.index);
+
   const found = {};
-  const num = s => parseInt(s.replace(/[,.\s]/g, ""), 10) || 0;
-  const lines = text.split(/\n+/);
-  const labelOf = line => {
-    const l = line.toLowerCase();
-    if (l.includes("general")) return "general";
-    if (l.includes("training") || l.includes("soldier train")) return "training";
-    if (l.includes("construc")) return "construction";
-    if (l.includes("research")) return "research";
-    return null;
-  };
-  for (let i = 0; i < lines.length; i++) {
-    const t = labelOf(lines[i]);
-    if (!t || found[t] != null) continue;
-    // numbers may be on the same line or the next one (two-line labels)
-    const seg = lines[i] + " " + (lines[i + 1] || "");
-    const d = seg.match(/([\d,.]+)\s*da?y/i);
-    const h = seg.match(/([\d,.]+)\s*hr/i);
-    const m = seg.match(/([\d,.]+)\s*min/i);
+  marks.forEach((mk, i) => {
+    let end = (i + 1 < marks.length) ? marks[i + 1].at : t.length;
+    stops.forEach(s => { if (s > mk.at + 5 && s < end) end = s; });
+    const seg = t.slice(mk.at, Math.min(end, mk.at + 200));
+    const d = seg.match(/([\d,.]+)\s*da?y/);
+    const h = seg.match(/([\d,.]+)\s*hr/);
+    const m = seg.match(/([\d,.]+)\s*min/);
     if (d || h || m) {
-      found[t] = (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
+      found[mk.id] = (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
     }
-  }
+  });
   return found;
 }
 
@@ -252,6 +264,7 @@ async function runOcr(dataUrl) {
       });
     }
     const { data } = await Tesseract.recognize(dataUrl, "eng");
+    console.log("[speedups] OCR text:\n" + (data.text || "(empty)")); // debugging aid for misreads
     const found = parseOcr(data.text || "");
     const hits = Object.keys(found).length;
     if (hits) {
