@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Submit Your Speedups — Brotherhood · Kingshot #1581</title>
+<meta name="description" content="Submit your Construction, Research, Troop Training and General speedups for KvK title allocation. [BRO] Brotherhood, Server #1581." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Brotherhood — Bear Trap Guide">
+      <span class="crest"><i class="fa-solid fa-chess-rook"></i></span>
+      <span class="brand-text">
+        <span class="brand-name">BROTHERHOOD</span>
+        <span class="brand-sub">Speedup Census · #1581</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a class="btn btn-ghost btn-sm" href="index.html"><i class="fa-solid fa-arrow-left"></i> Bear Trap Guide</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== PAGE HEADER ===================== -->
+<section class="page-header">
+  <div class="crest-lg"><i class="fa-solid fa-forward-fast"></i></div>
+  <h1>Submit Your Speedups</h1>
+  <p>We're allocating KvK titles based on who's ready to burn the most speedups. Tell us what you're holding — takes 2 minutes.</p>
+  <div class="badges" style="margin-top:22px">
+    <span class="badge">KvK Prep</span>
+    <span class="badge alt">Server #1581</span>
+  </div>
+</section>
+
+<main class="wrap prose" style="padding-top:40px;max-width:880px">
+
+  <div class="callout info" id="setupNotice" style="display:none">
+    <strong>Submissions aren't open yet</strong>
+    The collection backend hasn't been connected. R4/R5: see the setup notes in the repo.
+  </div>
+
+  <form class="form" id="speedupForm" novalidate>
+
+    <!-- GOVERNOR NAME -->
+    <div class="field">
+      <label for="govName">Governor Name <span class="req">*</span></label>
+      <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required />
+    </div>
+
+    <!-- SCREENSHOT + OCR -->
+    <div class="field">
+      <label for="shot">Screenshot (optional, recommended)</label>
+      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>. Upload that screen and we'll read the numbers for you — then just check they're right.</p>
+      <input type="file" id="shot" accept="image/*" />
+      <div id="ocrStatus" class="ocr-status" style="display:none"></div>
+      <img id="shotPreview" alt="Screenshot preview" style="display:none;max-width:280px;border-radius:6px;border:1px solid var(--line);margin-top:10px" />
+    </div>
+
+    <!-- UNIT TOGGLE -->
+    <div class="field">
+      <label>Your numbers are shown in…</label>
+      <p class="form-note" style="margin:0 0 10px">Match the checkbox at the bottom of the game's Overview panel — Day(s), Hrs or Min.</p>
+      <div class="hero-filter" style="margin:0">
+        <div class="seg" role="group" aria-label="Unit">
+          <button type="button" data-unit="days" class="active">Day(s)</button>
+          <button type="button" data-unit="hrs">Hrs</button>
+          <button type="button" data-unit="min">Min</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEEDUP ROWS -->
+    <div class="su-rows" id="suRows">
+      <!-- rows injected by JS -->
+    </div>
+
+    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row blank (or zero) if you have none of that type.</p>
+
+    <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Speedups</button>
+
+    <div class="form-success" id="okBox">
+      <i class="fa-solid fa-circle-check"></i>
+      <div style="flex:1">
+        <strong style="font-family:var(--display);color:var(--ink)">Got it — thanks!</strong>
+        <div style="font-size:.9rem;color:var(--muted);margin-top:2px" id="okText">Your speedups are logged for the KvK title list.</div>
+      </div>
+    </div>
+    <div class="callout bad" id="errBox" style="display:none">
+      <strong>That didn't send</strong>
+      <span id="errText">Please try again, or message your numbers to R4 Kadi in-game.</span>
+    </div>
+  </form>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <div class="rule"><i class="fa-solid fa-gem"></i></div>
+      <div>[BRO] Brotherhood · Kingshot Server #1581 · Your data goes to alliance leadership only.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   CONFIG — paste the Google Apps Script Web App URL between the quotes.
+   (Deploy steps are in apps-script/Code.gs in this repo.)
+===================================================================== */
+const SCRIPT_URL = "";
+
+/* ---------------- the four speedup types ---------------- */
+const TYPES = [
+  { id: "construction", label: "Construction", icon: "fa-hammer" },
+  { id: "research",     label: "Research",     icon: "fa-flask" },
+  { id: "training",     label: "Troop Training", icon: "fa-person-military-rifle" },
+  { id: "general",      label: "General",      icon: "fa-forward-fast" }
+];
+let unit = "days";
+
+/* ---------------- build the input rows ---------------- */
+function buildRows() {
+  const wrap = document.getElementById("suRows");
+  wrap.innerHTML = TYPES.map(t => `
+    <div class="su-row" data-type="${t.id}">
+      <div class="su-label"><i class="fa-solid ${t.icon}"></i> ${t.label}</div>
+      <div class="su-inputs">
+        <span class="su-cell su-days"><input type="number" min="0" inputmode="numeric" placeholder="0" id="${t.id}_d" aria-label="${t.label} days"><label>day</label></span>
+        <span class="su-cell su-hrs"><input type="number" min="0" inputmode="numeric" placeholder="0" id="${t.id}_h" aria-label="${t.label} hours"><label>hr</label></span>
+        <span class="su-cell su-min"><input type="number" min="0" inputmode="numeric" placeholder="0" id="${t.id}_m" aria-label="${t.label} minutes"><label>min</label></span>
+      </div>
+      <div class="su-total" id="${t.id}_total"></div>
+    </div>`).join("");
+  wrap.addEventListener("input", updateTotals);
+}
+
+function applyUnit(u) {
+  unit = u;
+  document.querySelectorAll("[data-unit]").forEach(b => b.classList.toggle("active", b.dataset.unit === u));
+  document.querySelectorAll(".su-row").forEach(r => {
+    r.querySelector(".su-days").style.display = (u === "days") ? "" : "none";
+    r.querySelector(".su-hrs").style.display  = (u === "min") ? "none" : "";
+    r.querySelector(".su-min").style.display  = "";
+  });
+  updateTotals();
+}
+
+const val = id => Math.max(0, parseInt((document.getElementById(id)?.value || "0").replace(/[^\d]/g, ""), 10) || 0);
+
+function rowMinutes(t) {
+  const d = unit === "days" ? val(t + "_d") : 0;
+  const h = unit === "min" ? 0 : val(t + "_h");
+  const m = val(t + "_m");
+  return d * 1440 + h * 60 + m;
+}
+const pretty = mins => {
+  if (!mins) return "";
+  const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
+  return [d ? d + "d" : "", h ? h + "h" : "", m ? m + "m" : ""].filter(Boolean).join(" ");
+};
+function updateTotals() {
+  TYPES.forEach(t => {
+    const mins = rowMinutes(t.id);
+    document.getElementById(t.id + "_total").textContent = mins ? "= " + pretty(mins) : "";
+  });
+}
+
+/* set a row from total minutes (used by OCR) */
+function setRow(t, mins) {
+  const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
+  if (unit === "days") {
+    document.getElementById(t + "_d").value = d || "";
+    document.getElementById(t + "_h").value = h || "";
+    document.getElementById(t + "_m").value = m || "";
+  } else if (unit === "hrs") {
+    document.getElementById(t + "_h").value = (d * 24 + h) || "";
+    document.getElementById(t + "_m").value = m || "";
+  } else {
+    document.getElementById(t + "_m").value = mins || "";
+  }
+}
+
+/* ---------------- screenshot: preview + compress + OCR ---------------- */
+let shotData = null; // { name, type, b64 }
+
+function ocrStatus(msg, spin) {
+  const el = document.getElementById("ocrStatus");
+  el.style.display = "flex";
+  el.innerHTML = (spin ? '<i class="fa-solid fa-spinner fa-spin"></i> ' : "") + msg;
+}
+
+async function compressImage(file) {
+  const img = await new Promise((res, rej) => {
+    const i = new Image();
+    i.onload = () => res(i); i.onerror = rej;
+    i.src = URL.createObjectURL(file);
+  });
+  const scale = Math.min(1, 1600 / img.width);
+  const c = document.createElement("canvas");
+  c.width = Math.round(img.width * scale);
+  c.height = Math.round(img.height * scale);
+  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+  return c.toDataURL("image/jpeg", 0.85);
+}
+
+/* parse OCR text → minutes per type */
+function parseOcr(text) {
+  const found = {};
+  const num = s => parseInt(s.replace(/[,.\s]/g, ""), 10) || 0;
+  const lines = text.split(/\n+/);
+  const labelOf = line => {
+    const l = line.toLowerCase();
+    if (l.includes("general")) return "general";
+    if (l.includes("training") || l.includes("soldier train")) return "training";
+    if (l.includes("construc")) return "construction";
+    if (l.includes("research")) return "research";
+    return null;
+  };
+  for (let i = 0; i < lines.length; i++) {
+    const t = labelOf(lines[i]);
+    if (!t || found[t] != null) continue;
+    // numbers may be on the same line or the next one (two-line labels)
+    const seg = lines[i] + " " + (lines[i + 1] || "");
+    const d = seg.match(/([\d,.]+)\s*da?y/i);
+    const h = seg.match(/([\d,.]+)\s*hr/i);
+    const m = seg.match(/([\d,.]+)\s*min/i);
+    if (d || h || m) {
+      found[t] = (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
+    }
+  }
+  return found;
+}
+
+async function runOcr(dataUrl) {
+  ocrStatus("Reading your screenshot… (10–20 seconds)", true);
+  try {
+    if (!window.Tesseract) {
+      await new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    const { data } = await Tesseract.recognize(dataUrl, "eng");
+    const found = parseOcr(data.text || "");
+    const hits = Object.keys(found).length;
+    if (hits) {
+      Object.entries(found).forEach(([t, mins]) => setRow(t, mins));
+      updateTotals();
+      ocrStatus(`<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read ${hits} value${hits > 1 ? "s" : ""} from your screenshot — please check them below, then submit.`);
+    } else {
+      ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn't read the numbers — no problem, just type them in below.`);
+    }
+  } catch (e) {
+    ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Reader didn't load — just type your numbers in below.`);
+  }
+}
+
+document.getElementById("shot").addEventListener("change", async e => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const dataUrl = await compressImage(file);
+  shotData = { name: file.name, type: "image/jpeg", b64: dataUrl.split(",")[1] };
+  const prev = document.getElementById("shotPreview");
+  prev.src = dataUrl; prev.style.display = "block";
+  runOcr(dataUrl);
+});
+
+/* ---------------- submit ---------------- */
+document.getElementById("speedupForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = document.getElementById("errBox"), ok = document.getElementById("okBox");
+  err.style.display = "none"; ok.classList.remove("show");
+
+  const gov = document.getElementById("govName").value.trim();
+  if (!gov) { document.getElementById("govName").focus(); return; }
+
+  const entries = {};
+  let any = false;
+  TYPES.forEach(t => {
+    const mins = rowMinutes(t.id);
+    entries[t.id] = { minutes: mins, display: pretty(mins) || "0" };
+    if (mins > 0) any = true;
+  });
+  if (!any) {
+    document.getElementById("errText").textContent = "Enter at least one speedup amount (or upload a screenshot so we can read it).";
+    err.style.display = "block"; return;
+  }
+  if (!SCRIPT_URL) {
+    document.getElementById("errText").textContent = "Submissions aren't connected yet — message your numbers to R4 Kadi in-game for now.";
+    err.style.display = "block"; return;
+  }
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, // simple request: no CORS preflight
+      body: JSON.stringify({ governor: gov, unit, entries, screenshot: shotData })
+    });
+    const out = await res.json().catch(() => ({ ok: res.ok }));
+    if (!out.ok) throw new Error(out.error || "Server error");
+    ok.classList.add("show");
+    document.getElementById("okText").textContent =
+      `Logged for ${gov}: ` + TYPES.map(t => `${t.label} ${entries[t.id].display}`).join(" · ");
+    e.target.reset(); shotData = null;
+    document.getElementById("shotPreview").style.display = "none";
+    document.getElementById("ocrStatus").style.display = "none";
+    updateTotals();
+  } catch (ex) {
+    document.getElementById("errText").textContent = "Couldn't reach the collection sheet. Try again in a minute, or message your numbers to R4 Kadi in-game.";
+    err.style.display = "block";
+  } finally {
+    btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Speedups';
+  }
+});
+
+/* ---------------- boot ---------------- */
+buildRows();
+applyUnit("days");
+document.querySelectorAll("[data-unit]").forEach(b => b.addEventListener("click", () => applyUnit(b.dataset.unit)));
+if (!SCRIPT_URL) document.getElementById("setupNotice").style.display = "block";
+</script>
+</body>
+</html>

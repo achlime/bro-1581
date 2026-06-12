@@ -1154,6 +1154,52 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
 .glance .gi-text { margin: 0; font-size: .96rem; line-height: 1.58; color: var(--ink-dim); }
 .glance .gi-text b { color: var(--ink); }
 
+/* ==========================================================================
+   SPEEDUP CENSUS FORM (speedups.html)
+   ========================================================================== */
+.su-rows { display: flex; flex-direction: column; gap: 10px; margin: 6px 0 18px; }
+.su-row {
+  display: grid; grid-template-columns: 175px 1fr auto; align-items: center; gap: 14px;
+  background: var(--bg-2); border: 1px solid var(--line-soft); border-radius: var(--radius);
+  padding: 13px 16px;
+}
+.su-label {
+  font-family: var(--display); font-weight: 700; font-size: .95rem; color: var(--ink);
+  display: flex; align-items: center; gap: 9px;
+}
+.su-label i { color: var(--gold); width: 18px; text-align: center; }
+.su-inputs { display: flex; gap: 10px; flex-wrap: wrap; }
+.su-cell { display: flex; align-items: center; gap: 6px; }
+.su-cell input {
+  width: 86px; padding: 10px 10px; text-align: right;
+  background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+  border-radius: var(--radius); font-size: 1rem; font-family: var(--body);
+}
+.su-cell input:focus { outline: none; border-color: var(--gold-line); }
+.su-cell label { font-size: .76rem; color: var(--muted); font-weight: 600; }
+.su-total { font-size: .82rem; color: var(--gold-bright); font-weight: 600; white-space: nowrap; min-width: 76px; text-align: right; }
+.ocr-status {
+  display: flex; align-items: center; gap: 9px; margin-top: 10px;
+  font-size: .9rem; color: var(--ink-dim);
+  background: var(--panel-2); border: 1px solid var(--line-soft);
+  border-radius: var(--radius); padding: 10px 14px;
+}
+input[type="file"] {
+  width: 100%; color: var(--muted); font-size: .9rem;
+  background: var(--bg-2); border: 1px dashed var(--gold-line); border-radius: var(--radius);
+  padding: 14px;
+}
+input[type="file"]::file-selector-button {
+  font-family: var(--display); font-weight: 700; font-size: .8rem; letter-spacing: .02em;
+  color: #1a130a; background: linear-gradient(170deg, var(--gold-bright), var(--gold-deep));
+  border: 0; border-radius: var(--radius); padding: 9px 16px; margin-right: 13px; cursor: pointer;
+}
+@media (max-width: 640px) {
+  .su-row { grid-template-columns: 1fr; gap: 9px; padding: 13px 14px; }
+  .su-total { text-align: left; min-width: 0; }
+  .su-cell input { width: 76px; }
+}
+
 /* language menu items rendered as links (auto-translate switcher) */
 .lang-menu a {
   width: 100%; text-align: left; text-decoration: none;
@@ -1534,4 +1580,25 @@ thead th { letter-spacing: .03em; font-weight: 700; font-size: .76rem; }
   .hero-acc .acc-role { display: none; }   /* role is explained inside; keep summary clean */
   .hero-acc > summary { padding: 13px 14px; gap: 12px; }
   .hero-acc .hero-acc-body.spotlight { padding: 2px 14px 16px; }
+}
+
+/* ==========================================================================
+   COMPACT NAV ≤560px — brand + Speedups + language fit one row
+   (kept at end of file so it wins the cascade over the lockup rules)
+   ========================================================================== */
+@media (max-width: 560px) {
+  .su-cta-label { display: none; }                  /* "Submit Speedups" → "Speedups" */
+  .nav-right { gap: 8px; }
+  .nav-right .btn-sm { padding: 9px 12px; font-size: .78rem; }
+  .lang-btn > span { display: none; }               /* "Language" → globe icon */
+  .lang-btn { padding: 9px 10px; }
+  .nav .brand { gap: 9px; }
+  .nav .brand .crest { width: 36px; height: 40px; font-size: 1rem; }
+  .brand .brand-name { font-size: .95rem; letter-spacing: .06em; }
+  .brand .brand-sub { display: none; }              /* page header already says it */
+}
+@media (max-width: 420px) {
+  .nav-inner { padding-left: 12px; padding-right: 12px; }
+  .nav-right .btn-sm { padding: 8px 10px; font-size: .74rem; }
+  .brand .brand-name { font-size: .88rem; letter-spacing: .04em; }
 }
