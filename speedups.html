@@ -175,7 +175,10 @@ function applyUnit(u) {
   updateTotals();
 }
 
-const val = id => Math.max(0, parseInt((document.getElementById(id)?.value || "0").replace(/[^\d]/g, ""), 10) || 0);
+const val = id => {
+  const el = document.getElementById(id);
+  return Math.max(0, parseInt(((el && el.value) || "0").replace(/[^\d]/g, ""), 10) || 0);
+};
 
 function rowMinutes(t) {
   const d = unit === "days" ? val(t + "_d") : 0;
@@ -342,11 +345,31 @@ async function runOcr(dataUrl) {
 document.getElementById("shot").addEventListener("change", async e => {
   const file = e.target.files && e.target.files[0];
   if (!file) return;
-  const dataUrl = await compressImage(file);
-  shotData = { name: file.name, type: "image/jpeg", b64: dataUrl.split(",")[1] };
   const prev = document.getElementById("shotPreview");
-  prev.src = dataUrl; prev.style.display = "block";
-  runOcr(dataUrl);
+  try {
+    const dataUrl = await compressImage(file);
+    shotData = { name: file.name, type: "image/jpeg", b64: dataUrl.split(",")[1] };
+    prev.src = dataUrl; prev.style.display = "block";
+    runOcr(dataUrl);
+  } catch (ex) {
+    // image couldn't be decoded in this browser (e.g. HEIC on some devices):
+    // still attach the original file for leadership; member types the numbers.
+    prev.style.display = "none";
+    try {
+      if (file.size > 6 * 1024 * 1024) throw new Error("too big");
+      const b64 = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(String(r.result).split(",")[1]);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+      shotData = { name: file.name, type: file.type || "application/octet-stream", b64 };
+      ocrStatus('<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn\'t read this image format on your device — it\'s still attached, just type your numbers in below.');
+    } catch (ex2) {
+      shotData = null;
+      ocrStatus('<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn\'t use that image — try a normal screenshot, or just type your numbers in below.');
+    }
+  }
 });
 
 /* ---------------- submit ---------------- */
@@ -414,6 +437,17 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     btn.setAttribute("aria-expanded", "false");
   });
 })();
+
+/* ---------------- surface unexpected errors (so "I got an error" comes with details) ---------------- */
+function showError(detail) {
+  const err = document.getElementById("errBox");
+  const txt = document.getElementById("errText");
+  if (!err || !txt) return;
+  txt.textContent = "Something went wrong — screenshot this and send it to R4 Kadi: " + detail;
+  err.style.display = "block";
+}
+window.addEventListener("error", e => showError(e.message || "unknown error"));
+window.addEventListener("unhandledrejection", e => showError((e.reason && (e.reason.message || e.reason)) || "unknown error"));
 
 /* ---------------- boot ---------------- */
 buildRows();
