@@ -247,7 +247,7 @@ function parseOcr(text) {
 
   const ORDER = ["general", "training", "construction", "research"];
   const RES = {
-    general:      /general/,
+    general:      /enera/,   // survives common OCR garbles of "General"
     training:     /(soldier|troop)[\s\S]{0,16}?train|train[\s\S]{0,14}?speed|soldier(?![\s\S]{0,16}heal)/,
     construction: /construc/,
     research:     /research/
@@ -299,13 +299,22 @@ function parseOcr(text) {
   ORDER.forEach((id, i) => {
     if (found[id] != null) return;
     let pi = i - 1; while (pi >= 0 && marks[ORDER[pi]] == null) pi--;
-    if (pi < 0) return;                       // need a found row above us
     let ni = i + 1; while (ni < ORDER.length && marks[ORDER[ni]] == null) ni++;
-    const from = marks[ORDER[pi]];
-    const to = ni < ORDER.length ? marks[ORDER[ni]] : endAt(from);
-    const cs = clusters(t.slice(from, to));
-    const want = i - pi;                      // cluster 0 belongs to the row above
-    if (cs.length > want && cs[want] > 0) found[id] = cs[want];
+    if (pi >= 0) {
+      // anchored on a found row ABOVE: cluster 0 is that row's own numbers
+      const from = marks[ORDER[pi]];
+      const to = ni < ORDER.length ? marks[ORDER[ni]] : endAt(from);
+      const cs = clusters(t.slice(from, to));
+      const want = i - pi;
+      if (cs.length > want && cs[want] > 0) found[id] = cs[want];
+    } else if (ni < ORDER.length && marks[ORDER[ni]] != null) {
+      // row(s) missing ABOVE the first label we found (e.g. a garbled "General"):
+      // count clusters backwards from that label — the row directly above it is
+      // the LAST cluster before it, immune to phantom numbers further up.
+      const cs = clusters(t.slice(0, marks[ORDER[ni]]));
+      const idx = cs.length - (ni - i);
+      if (idx >= 0 && cs[idx] > 0) found[id] = cs[idx];
+    }
   });
 
   return found;
