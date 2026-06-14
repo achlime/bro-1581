@@ -24,11 +24,12 @@
  */
 
 const FOLDER_NAME = "BRO Speedup Screenshots";
+const ALLIANCES = ["[BRO] Brotherhood", "[bra] BroAcademy", "[bro] BROacademy"];
 const HEADERS = [
-  "Timestamp", "Governor",
-  "Construction (min)", "Research (min)", "Troop Training (min)", "General (min)",
+  "Timestamp", "Governor", "Alliance",
+  "General (min)", "Soldier Training (min)", "Construction (min)", "Research (min)",
   "Total (min)",
-  "Construction", "Research", "Troop Training", "General",
+  "General", "Soldier Training", "Construction", "Research",
   "Screenshot"
 ];
 
@@ -37,6 +38,11 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     const gov = String(data.governor || "").trim().slice(0, 60);
     if (!gov) return reply({ ok: false, error: "Missing governor name" });
+
+    // alliance must be one of the known options (defends the public endpoint)
+    let alliance = String(data.alliance || "").trim();
+    if (ALLIANCES.indexOf(alliance) === -1) alliance = "";
+    if (!alliance) return reply({ ok: false, error: "Missing or invalid alliance" });
 
     const en = data.entries || {};
     const mins = t => Math.max(0, parseInt(en[t] && en[t].minutes, 10) || 0);
@@ -65,10 +71,10 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
     sheet.appendRow([
-      new Date(), gov,
-      c, r, tr, g,
-      c + r + tr + g,
-      disp("construction"), disp("research"), disp("training"), disp("general"),
+      new Date(), gov, alliance,
+      g, tr, c, r,
+      g + tr + c + r,
+      disp("general"), disp("training"), disp("construction"), disp("research"),
       shotUrl
     ]);
 

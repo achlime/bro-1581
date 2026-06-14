@@ -70,6 +70,17 @@
       <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required />
     </div>
 
+    <!-- ALLIANCE -->
+    <div class="field">
+      <label for="alliance">Alliance <span class="req">*</span></label>
+      <select id="alliance" name="alliance" required>
+        <option value="" disabled selected>Choose your alliance…</option>
+        <option value="[BRO] Brotherhood">[BRO] Brotherhood</option>
+        <option value="[bra] BroAcademy">[bra] BroAcademy</option>
+        <option value="[bro] BROacademy">[bro] BROacademy</option>
+      </select>
+    </div>
+
     <!-- SCREENSHOT + OCR -->
     <div class="field">
       <label for="shot">Screenshot (optional, recommended)</label>
@@ -390,6 +401,14 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
   const gov = document.getElementById("govName").value.trim();
   if (!gov) { document.getElementById("govName").focus(); return; }
 
+  const alliance = document.getElementById("alliance").value;
+  if (!alliance) {
+    document.getElementById("errText").textContent = "Please choose your alliance.";
+    err.style.display = "block";
+    document.getElementById("alliance").focus();
+    return;
+  }
+
   const entries = {};
   let any = false;
   TYPES.forEach(t => {
@@ -412,13 +431,13 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" }, // simple request: no CORS preflight
-      body: JSON.stringify({ governor: gov, unit, entries, screenshot: shotData })
+      body: JSON.stringify({ governor: gov, alliance, unit, entries, screenshot: shotData })
     });
     const out = await res.json().catch(() => ({ ok: res.ok }));
     if (!out.ok) throw new Error(out.error || "Server error");
     ok.classList.add("show");
     document.getElementById("okText").textContent =
-      `Logged for ${gov}: ` + TYPES.map(t => `${t.label} ${entries[t.id].display}`).join(" · ");
+      `Logged for ${gov} (${alliance}): ` + TYPES.map(t => `${t.label} ${entries[t.id].display}`).join(" · ");
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
