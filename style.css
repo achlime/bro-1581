@@ -1648,3 +1648,54 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 .tc-when { display: block; margin-top: 5px; font-size: .84rem; color: var(--muted); }
 /* preferred-time input */
 #prefTime { color-scheme: dark; }
+
+/* ==========================================================================
+   KvK TITLE APPLICATION — multi-select titles, day chips, time windows
+   ========================================================================== */
+/* selected title gets a gold check badge (multi-select) */
+.title-card { padding-right: 40px; }
+.title-card.selected::after {
+  content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+  position: absolute; top: 13px; right: 14px; color: var(--gold-bright); font-size: .95rem;
+}
+
+/* Chief Minister day chips */
+.day-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.day-chip {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px;
+  padding: 9px 15px; font-size: .92rem; color: var(--ink-dim); transition: all .12s ease;
+}
+.day-chip input { width: 17px; height: 17px; accent-color: var(--gold); margin: 0; }
+.day-chip.on { border-color: var(--gold); background: var(--gold-soft); color: var(--gold-bright); }
+
+/* availability windows */
+.win-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.win-row input[type="time"] {
+  flex: 1; min-width: 0; padding: 12px 12px; font-size: 1.05rem;
+  background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+  border-radius: var(--radius); color-scheme: dark;
+}
+.win-row input[type="time"]:focus { outline: none; border-color: var(--gold-line); }
+.win-sep { color: var(--muted); font-size: .9rem; flex: none; }
+.win-del {
+  flex: none; width: 40px; height: 44px; border-radius: var(--radius);
+  background: transparent; border: 1px solid var(--line); color: var(--muted);
+  font-size: 1.4rem; line-height: 1; cursor: pointer; transition: all .12s ease;
+}
+.win-del:hover { color: var(--red); border-color: var(--red); }
+
+/* flexible toggle line */
+.flex-line {
+  display: flex; align-items: center; gap: 11px; cursor: pointer;
+  color: var(--ink-dim); font-size: 1rem; margin-bottom: 14px;
+}
+.flex-line input { width: 19px; height: 19px; accent-color: var(--gold); margin: 0; flex: none; }
+
+#localNow strong { color: var(--gold-bright); }
+
+@media (max-width: 480px) {
+  .win-row input[type="time"] { font-size: 1rem; padding: 11px 8px; }
+  .win-sep { font-size: .82rem; }
+  .win-del { width: 38px; height: 42px; }
+}

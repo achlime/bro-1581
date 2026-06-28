@@ -32,8 +32,8 @@ const ALLIANCES = [
 ];
 const TITLES = ["Chief Minister", "Noble Advisor"];
 const HEADERS = [
-  "Timestamp", "Governor", "Game ID", "Alliance", "Title",
-  "Preferred Time (UTC)", "Preferred Time (entered)", "Notes",
+  "Timestamp", "Governor", "Game ID", "Alliance",
+  "Titles", "CM Days", "Availability (UTC)", "Availability (entered)", "Notes",
   "General (min)", "Soldier Training (min)", "Construction (min)", "Research (min)",
   "Total (min)",
   "General", "Soldier Training", "Construction", "Research",
@@ -52,14 +52,23 @@ function doPost(e) {
     let alliance = String(data.alliance || "").trim().slice(0, 60);
     if (!alliance) return reply({ ok: false, error: "Missing alliance" });
 
-    // title must be one of the known governor titles
-    const title = String(data.title || "").trim();
-    if (TITLES.indexOf(title) === -1) return reply({ ok: false, error: "Missing or invalid title" });
+    // titles: one or more of the known governor titles
+    const titles = (Array.isArray(data.titles) ? data.titles : [])
+      .map(t => String(t).trim())
+      .filter(t => TITLES.indexOf(t) !== -1);
+    if (!titles.length) return reply({ ok: false, error: "Missing or invalid title" });
+    const titlesStr = titles.join("; ");
 
-    // preferred time must be HH:MM (UTC, computed client-side)
-    const prefUtc = String(data.preferredUtc || "").trim();
-    if (!/^\d{1,2}:\d{2}$/.test(prefUtc)) return reply({ ok: false, error: "Missing or invalid preferred time" });
-    const prefEntered = String(data.preferredEntered || "").trim().slice(0, 80);
+    // Chief Minister day preferences (free order, validated lightly)
+    const cmDays = (Array.isArray(data.cmDays) ? data.cmDays : [])
+      .map(d => String(d).trim()).filter(d => /^Day [1-6]$/.test(d)).join(", ");
+
+    // availability: { flexible, summaryUtc, summaryEntered }
+    const av = data.availability || {};
+    const availUtc = String(av.summaryUtc || "").trim().slice(0, 200);
+    const availEntered = String(av.summaryEntered || "").trim().slice(0, 200);
+    if (!av.flexible && !availUtc) return reply({ ok: false, error: "Missing availability" });
+
     const notes = String(data.notes || "").trim().slice(0, 200);
 
     const en = data.entries || {};
@@ -90,8 +99,8 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
     sheet.appendRow([
-      new Date(), gov, gameId, alliance, title,
-      prefUtc, prefEntered, notes,
+      new Date(), gov, gameId, alliance,
+      titlesStr, cmDays, availUtc, availEntered, notes,
       g, tr, c, r,
       g + tr + c + r,
       disp("general"), disp("training"), disp("construction"), disp("research"),

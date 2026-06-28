@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KvK Title Application — Kingshot #1581</title>
-<meta name="description" content="Apply for a KvK governor title (Chief Minister / Noble Advisor), tell us your preferred time, and submit your speedups. Kingshot Server #1581." />
+<meta name="description" content="Apply for a KvK governor title (Chief Minister / Noble Advisor), tell us your available time windows, and submit your speedups. Kingshot Server #1581." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -31,12 +31,14 @@
         </button>
         <div class="lang-menu">
           <a href="https://achlime.github.io/bro-1581/speedups.html"><span class="flag">🇬🇧</span> English</a>
-          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=zh-CN&amp;_x_tr_hl=en"><span class="flag">🇨🇳</span> 中文 (Chinese)</a>
-          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=ko&amp;_x_tr_hl=en"><span class="flag">🇰🇷</span> 한국어 (Korean)</a>
           <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=de&amp;_x_tr_hl=en"><span class="flag">🇩🇪</span> Deutsch (German)</a>
-          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=fr&amp;_x_tr_hl=en"><span class="flag">🇫🇷</span> Français (French)</a>
-          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=it&amp;_x_tr_hl=en"><span class="flag">🇮🇹</span> Italiano (Italian)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=ko&amp;_x_tr_hl=en"><span class="flag">🇰🇷</span> 한국어 (Korean)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=zh-CN&amp;_x_tr_hl=en"><span class="flag">🇨🇳</span> 中文 (Chinese)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=id&amp;_x_tr_hl=en"><span class="flag">🇮🇩</span> Bahasa (Indonesian)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=pl&amp;_x_tr_hl=en"><span class="flag">🇵🇱</span> Polski (Polish)</a>
           <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=ar&amp;_x_tr_hl=en"><span class="flag">🇸🇦</span> العربية (Arabic)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=it&amp;_x_tr_hl=en"><span class="flag">🇮🇹</span> Italiano (Italian)</a>
+          <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=fr&amp;_x_tr_hl=en"><span class="flag">🇫🇷</span> Français (French)</a>
           <a href="https://achlime-github-io.translate.goog/bro-1581/speedups.html?_x_tr_sl=en&amp;_x_tr_tl=hi&amp;_x_tr_hl=en"><span class="flag">🇮🇳</span> हिन्दी (Hindi)</a>
         </div>
       </div>
@@ -48,7 +50,7 @@
 <section class="page-header">
   <div class="crest-lg"><i class="fa-solid fa-crown"></i></div>
   <h1>KvK Title Application</h1>
-  <p>Apply for a governor title for KvK — tell us who you are, the title you want and when, and your speedups so leadership can sort the slots. Takes 2 minutes.</p>
+  <p>One quick form: drop your speedups screenshot, we'll suggest your titles, you pick when you're free. Leadership handles the rest.</p>
   <div class="badges" style="margin-top:22px">
     <span class="badge">KvK Prep</span>
     <span class="badge alt">Server #1581</span>
@@ -99,64 +101,17 @@
       <input type="text" id="allianceOther" placeholder="Type your alliance (e.g. [TAG] Name)" autocomplete="off" style="display:none;margin-top:10px" />
     </div>
 
-    <!-- TITLE -->
-    <div class="field">
-      <label>Title you're applying for <span class="req">*</span></label>
-      <div class="title-cards" id="titleCards">
-        <label class="title-card">
-          <input type="radio" name="title" value="Chief Minister" />
-          <span class="tc-body">
-            <span class="tc-name"><i class="fa-solid fa-scale-balanced"></i> Chief Minister</span>
-            <span class="tc-buff">+10% Construction, Research &amp; Training speed</span>
-            <span class="tc-when">Used Day 1, 2 &amp; 5 — construction / truegold</span>
-          </span>
-        </label>
-        <label class="title-card">
-          <input type="radio" name="title" value="Noble Advisor" />
-          <span class="tc-body">
-            <span class="tc-name"><i class="fa-solid fa-chess-knight"></i> Noble Advisor</span>
-            <span class="tc-buff">+50% Training speed + 200 training capacity</span>
-            <span class="tc-when">Used Day 4 — troop training (overflow → Chief Minister)</span>
-          </span>
-        </label>
-      </div>
-    </div>
-
-    <!-- PREFERRED TIME -->
-    <div class="field">
-      <label for="prefTime">Preferred time <span class="req">*</span></label>
-      <p class="form-note" style="margin:0 0 10px">When would you like the title? Pick a time, and tell us if it's your local time or UTC.</p>
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <input type="time" id="prefTime" name="prefTime" required style="width:auto" />
-        <div class="hero-filter" style="margin:0">
-          <div class="seg" role="group" aria-label="Time zone">
-            <button type="button" data-tz="local" class="active">My local time</button>
-            <button type="button" data-tz="utc">UTC</button>
-          </div>
-        </div>
-      </div>
-      <div id="utcPreview" class="ocr-status" style="display:none;margin-top:10px"></div>
-    </div>
-
-    <!-- NOTES -->
-    <div class="field">
-      <label for="notes">Notes <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-      <input type="text" id="notes" name="notes" placeholder="e.g. prefer Day 2, or overflow CM is fine" autocomplete="off" />
-    </div>
-
-    <!-- SPEEDUPS SECTION -->
+    <!-- ============ YOUR SPEEDUPS ============ -->
     <h3 class="form-section">Your speedups <span class="req">*</span></h3>
 
-    <!-- SCREENSHOT + OCR -->
     <div class="field">
-      <label for="shot">Screenshot (optional, recommended)</label>
-      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>. Upload that screen and we'll read the numbers for you — then just check they're right.</p>
+      <label for="shot">Screenshot <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(the easy way)</span></label>
+      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>. Upload it and we'll read your numbers <em>and</em> suggest your titles — just check it over.</p>
       <input type="file" id="shot" accept="image/*" />
       <div id="ocrStatus" class="ocr-status" style="display:none"></div>
       <img id="shotPreview" alt="Screenshot preview" style="display:none;max-width:280px;border-radius:6px;border:1px solid var(--line);margin-top:10px" />
     </div>
 
-    <!-- UNIT TOGGLE -->
     <div class="field">
       <label>Your numbers are shown in…</label>
       <p class="form-note" style="margin:0 0 10px">Match the checkbox at the bottom of the game's Overview panel — Day(s), Hrs or Min.</p>
@@ -169,12 +124,67 @@
       </div>
     </div>
 
-    <!-- SPEEDUP ROWS -->
-    <div class="su-rows" id="suRows">
-      <!-- rows injected by JS -->
+    <div class="su-rows" id="suRows"><!-- rows injected by JS --></div>
+    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row blank (or zero) if you have none of that type.</p>
+
+    <!-- ============ TITLES ============ -->
+    <h3 class="form-section">Title(s) you want <span class="req">*</span></h3>
+    <p class="form-note" style="margin:0 0 12px">We tick the ones that match your speedups — change them if you like. You can apply for both.</p>
+    <div class="title-cards" id="titleCards">
+      <label class="title-card" data-title="Chief Minister">
+        <input type="checkbox" name="title" value="Chief Minister" />
+        <span class="tc-body">
+          <span class="tc-name"><i class="fa-solid fa-scale-balanced"></i> Chief Minister</span>
+          <span class="tc-buff">+10% Construction, Research &amp; Training speed</span>
+          <span class="tc-when">Days 1, 2 &amp; 5 — construction / research / truegold</span>
+        </span>
+      </label>
+      <label class="title-card" data-title="Noble Advisor">
+        <input type="checkbox" name="title" value="Noble Advisor" />
+        <span class="tc-body">
+          <span class="tc-name"><i class="fa-solid fa-chess-knight"></i> Noble Advisor</span>
+          <span class="tc-buff">+50% Training speed + 200 training capacity</span>
+          <span class="tc-when">Day 4 — troop training</span>
+        </span>
+      </label>
     </div>
 
-    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row blank (or zero) if you have none of that type.</p>
+    <div class="field" id="cmDaysWrap" style="display:none;margin-top:14px">
+      <label>Best day(s) for Chief Minister?</label>
+      <p class="form-note" style="margin:0 0 10px">Pick whichever suit you — leadership fits people in across these days.</p>
+      <div class="day-chips" id="cmDays">
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 1"><span>Day 1 · Construction</span></label>
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 2"><span>Day 2 · Research</span></label>
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 5"><span>Day 5 · Power Boost</span></label>
+      </div>
+    </div>
+
+    <!-- ============ AVAILABILITY ============ -->
+    <h3 class="form-section">When can you take the title? <span class="req">*</span></h3>
+    <p class="form-note" style="margin:0 0 6px"><i class="fa-regular fa-clock"></i> <span id="localNow">…</span></p>
+    <p class="form-note" style="margin:0 0 12px">Give the time window(s) that work for you. We'll convert to UTC for leadership.</p>
+
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <span class="form-note" style="margin:0">These times are in:</span>
+      <div class="hero-filter" style="margin:0">
+        <div class="seg" role="group" aria-label="Time zone">
+          <button type="button" data-tz="local" class="active">My local time</button>
+          <button type="button" data-tz="utc">UTC</button>
+        </div>
+      </div>
+    </div>
+
+    <label class="flex-line"><input type="checkbox" id="flexible"> <span>I'm flexible — any time works</span></label>
+
+    <div id="windows"><!-- window rows injected by JS --></div>
+    <button type="button" class="btn btn-ghost btn-sm" id="addWindow" style="margin-top:2px"><i class="fa-solid fa-plus"></i> Add another window</button>
+    <div id="windowsUtc" class="ocr-status" style="display:none;margin-top:12px"></div>
+
+    <!-- ============ NOTES ============ -->
+    <div class="field" style="margin-top:26px">
+      <label for="notes">Notes <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <input type="text" id="notes" name="notes" placeholder="Anything leadership should know" autocomplete="off" />
+    </div>
 
     <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
 
@@ -187,7 +197,7 @@
     </div>
     <div class="callout bad" id="errBox" style="display:none">
       <strong>That didn't send</strong>
-      <span id="errText">Please try again, or message your numbers to R4 Kadi in-game.</span>
+      <span id="errText">Please try again, or message your details to R4 Kadi in-game.</span>
     </div>
   </form>
 
@@ -205,13 +215,11 @@
 
 <script>
 /* =====================================================================
-   CONFIG — paste the Google Apps Script Web App URL between the quotes.
-   (Deploy steps are in apps-script/Code.gs in this repo.)
+   CONFIG — Google Apps Script Web App URL (see apps-script/Code.gs).
 ===================================================================== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVCx-VR9tmh1UZI3anm8AqMVR5nX00TQuPW9ERsp9iWWdydAOc8sbzBIwSvgMXqCC6/exec";
 
-/* ---------------- the four speedup types ---------------- */
-/* ordered to match the game's Overview panel, top to bottom */
+/* ---------------- the four speedup types (game order) ---------------- */
 const TYPES = [
   { id: "general",      label: "General",          icon: "fa-forward-fast" },
   { id: "training",     label: "Soldier Training", icon: "fa-person-military-rifle" },
@@ -220,7 +228,7 @@ const TYPES = [
 ];
 let unit = "days";
 
-/* ---------------- build the input rows ---------------- */
+/* ---------------- speedup rows ---------------- */
 function buildRows() {
   const wrap = document.getElementById("suRows");
   wrap.innerHTML = TYPES.map(t => `
@@ -237,8 +245,6 @@ function buildRows() {
 }
 
 function applyUnit(u) {
-  // capture totals under the OLD unit first, so switching converts instead of
-  // silently dropping whatever was in the hidden columns
   const totals = {};
   TYPES.forEach(t => { totals[t.id] = rowMinutes(t.id); });
   unit = u;
@@ -256,7 +262,6 @@ const val = id => {
   const el = document.getElementById(id);
   return Math.max(0, parseInt(((el && el.value) || "0").replace(/[^\d]/g, ""), 10) || 0);
 };
-
 function rowMinutes(t) {
   const d = unit === "days" ? val(t + "_d") : 0;
   const h = unit === "min" ? 0 : val(t + "_h");
@@ -273,9 +278,8 @@ function updateTotals() {
     const mins = rowMinutes(t.id);
     document.getElementById(t.id + "_total").textContent = mins ? "= " + pretty(mins) : "";
   });
+  inferTitles(); // suggest titles from the speedups (until the user overrides)
 }
-
-/* set a row from total minutes (used by OCR) */
 function setRow(t, mins) {
   const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
   if (unit === "days") {
@@ -291,14 +295,12 @@ function setRow(t, mins) {
 }
 
 /* ---------------- screenshot: preview + compress + OCR ---------------- */
-let shotData = null; // { name, type, b64 }
-
+let shotData = null;
 function ocrStatus(msg, spin) {
   const el = document.getElementById("ocrStatus");
   el.style.display = "flex";
   el.innerHTML = (spin ? '<i class="fa-solid fa-spinner fa-spin"></i> ' : "") + msg;
 }
-
 async function compressImage(file) {
   const img = await new Promise((res, rej) => {
     const i = new Image();
@@ -312,31 +314,22 @@ async function compressImage(file) {
   c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
   return c.toDataURL("image/jpeg", 0.85);
 }
-
-/* parse OCR text → minutes per type.
-   Two-line labels ("Construction" / "Speedup") put the numbers 1–2 lines below
-   the keyword, so we search from each label until the NEXT label/section.
-   If a label OCR'd too badly to match, we recover it by position: the row sits
-   between two rows we DID find, so we split that stretch into number-clusters. */
+/* parse OCR text → minutes per type (handles two-line + garbled labels). */
 function parseOcr(text) {
   const t = (text || "").toLowerCase();
   const num = s => parseInt(s.replace(/[^\d]/g, ""), 10) || 0;
-
   const ORDER = ["general", "training", "construction", "research"];
   const RES = {
-    general:      /enera/,   // survives common OCR garbles of "General"
+    general:      /enera/,
     training:     /(soldier|troop)[\s\S]{0,16}?train|train[\s\S]{0,14}?speed|soldier(?![\s\S]{0,16}heal)/,
     construction: /construc/,
     research:     /research/
   };
   const marks = {};
   ORDER.forEach(id => { const m = t.match(RES[id]); if (m) marks[id] = m.index; });
-
-  // rows/sections we must never read numbers from
   const stops = [];
   const stopRe = /learning|healing|overview|resources/g;
   let sm; while ((sm = stopRe.exec(t))) stops.push(sm.index);
-
   const endAt = from => {
     let end = t.length;
     ORDER.forEach(id => { if (marks[id] != null && marks[id] > from && marks[id] < end) end = marks[id]; });
@@ -350,18 +343,12 @@ function parseOcr(text) {
     if (!d && !h && !m) return null;
     return (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
   };
-
-  // pass 1: labelled windows
   const found = {};
   ORDER.forEach(id => {
     if (marks[id] == null) return;
     const v = grab(t.slice(marks[id], Math.min(endAt(marks[id]), marks[id] + 200)));
     if (v != null) found[id] = v;
   });
-
-  // pass 2: positional recovery for garbled labels.
-  // Split a stretch into clusters: a new cluster starts whenever the unit rank
-  // (day < hr < min) fails to increase — e.g. "…27 min 17 day…" or "…min …min".
   const clusters = seg => {
     const re = /([\d,.]+)\s*(da?y|hr|min)/g;
     const out = []; let last = -1; let m;
@@ -378,25 +365,19 @@ function parseOcr(text) {
     let pi = i - 1; while (pi >= 0 && marks[ORDER[pi]] == null) pi--;
     let ni = i + 1; while (ni < ORDER.length && marks[ORDER[ni]] == null) ni++;
     if (pi >= 0) {
-      // anchored on a found row ABOVE: cluster 0 is that row's own numbers
       const from = marks[ORDER[pi]];
       const to = ni < ORDER.length ? marks[ORDER[ni]] : endAt(from);
       const cs = clusters(t.slice(from, to));
       const want = i - pi;
       if (cs.length > want && cs[want] > 0) found[id] = cs[want];
     } else if (ni < ORDER.length && marks[ORDER[ni]] != null) {
-      // row(s) missing ABOVE the first label we found (e.g. a garbled "General"):
-      // count clusters backwards from that label — the row directly above it is
-      // the LAST cluster before it, immune to phantom numbers further up.
       const cs = clusters(t.slice(0, marks[ORDER[ni]]));
       const idx = cs.length - (ni - i);
       if (idx >= 0 && cs[idx] > 0) found[id] = cs[idx];
     }
   });
-
   return found;
 }
-
 async function runOcr(dataUrl) {
   ocrStatus("Reading your screenshot… (10–20 seconds)", true);
   try {
@@ -409,7 +390,7 @@ async function runOcr(dataUrl) {
       });
     }
     const { data } = await Tesseract.recognize(dataUrl, "eng");
-    console.log("[speedups] OCR text:\n" + (data.text || "(empty)")); // debugging aid for misreads
+    console.log("[speedups] OCR text:\n" + (data.text || "(empty)"));
     const found = parseOcr(data.text || "");
     const names = { general: "General", training: "Soldier Training", construction: "Construction", research: "Research" };
     const got = Object.keys(names).filter(k => k in found).map(k => names[k]);
@@ -419,7 +400,7 @@ async function runOcr(dataUrl) {
       updateTotals();
       ocrStatus(missing.length
         ? `<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Read ${got.join(", ")} — but couldn't read <strong>${missing.join(", ")}</strong>. Please type ${missing.length > 1 ? "those" : "that one"} in below and double-check the rest.`
-        : `<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read all four from your screenshot — please check them below, then submit.`);
+        : `<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read all four — check them below. We've ticked your titles to match.`);
     } else {
       ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn't read the numbers — no problem, just type them in below.`);
     }
@@ -427,7 +408,6 @@ async function runOcr(dataUrl) {
     ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Reader didn't load — just type your numbers in below.`);
   }
 }
-
 document.getElementById("shot").addEventListener("change", async e => {
   const file = e.target.files && e.target.files[0];
   if (!file) return;
@@ -438,8 +418,6 @@ document.getElementById("shot").addEventListener("change", async e => {
     prev.src = dataUrl; prev.style.display = "block";
     runOcr(dataUrl);
   } catch (ex) {
-    // image couldn't be decoded in this browser (e.g. HEIC on some devices):
-    // still attach the original file for leadership; member types the numbers.
     prev.style.display = "none";
     try {
       if (file.size > 6 * 1024 * 1024) throw new Error("too big");
@@ -472,7 +450,33 @@ function resolveAlliance() {
   return sel.value;
 }
 
-/* ---------------- preferred time (UTC / local) ---------------- */
+/* ---------------- titles + inference ---------------- */
+let titlesTouched = false, cmDaysTouched = false;
+function titleInput(value) { return [...document.querySelectorAll('input[name="title"]')].find(i => i.value === value); }
+function selectedTitles() { return [...document.querySelectorAll('input[name="title"]:checked')].map(i => i.value); }
+function selectedCmDays() { return [...document.querySelectorAll('input[name="cmDay"]:checked')].map(i => i.value); }
+function setCmDay(v, on) { const el = [...document.querySelectorAll('input[name="cmDay"]')].find(i => i.value === v); if (el) el.checked = on; refreshDayChips(); }
+function refreshDayChips() {
+  document.querySelectorAll(".day-chip").forEach(c => c.classList.toggle("on", c.querySelector("input").checked));
+}
+function refreshTitleCards() {
+  document.querySelectorAll(".title-card").forEach(c => c.classList.toggle("selected", c.querySelector("input").checked));
+  document.getElementById("cmDaysWrap").style.display = titleInput("Chief Minister").checked ? "" : "none";
+}
+function inferTitles() {
+  if (titlesTouched) return;
+  const c = rowMinutes("construction"), r = rowMinutes("research"), tr = rowMinutes("training"), g = rowMinutes("general");
+  titleInput("Chief Minister").checked = (c + r + g) > 0;
+  titleInput("Noble Advisor").checked = tr > 0;
+  if (!cmDaysTouched) {
+    setCmDay("Day 1", c > 0);
+    setCmDay("Day 2", r > 0);
+    setCmDay("Day 5", (c > 0 || r > 0 || g > 0));
+  }
+  refreshTitleCards();
+}
+
+/* ---------------- availability (windows, UTC/local, flexible) ---------------- */
 let timeMode = "local";
 const TZ = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } })();
 function localToUtc(hhmm) {
@@ -482,28 +486,73 @@ function localToUtc(hhmm) {
   const utcMin = (((localMin + new Date().getTimezoneOffset()) % 1440) + 1440) % 1440;
   return String(Math.floor(utcMin / 60)).padStart(2, "0") + ":" + String(utcMin % 60).padStart(2, "0");
 }
+function addWindow(from, to) {
+  const wrap = document.getElementById("windows");
+  const div = document.createElement("div");
+  div.className = "win-row";
+  div.innerHTML =
+    '<input type="time" class="win-from" aria-label="Window start" value="' + (from || "") + '">' +
+    '<span class="win-sep">to</span>' +
+    '<input type="time" class="win-to" aria-label="Window end" value="' + (to || "") + '">' +
+    '<button type="button" class="win-del" aria-label="Remove this window">&times;</button>';
+  wrap.appendChild(div);
+  div.querySelector(".win-del").addEventListener("click", () => { div.remove(); refreshWinDels(); updateWindowsPreview(); });
+  div.addEventListener("input", updateWindowsPreview);
+  refreshWinDels();
+  updateWindowsPreview();
+}
+function refreshWinDels() {
+  const rows = [...document.querySelectorAll(".win-row")];
+  rows.forEach(r => { r.querySelector(".win-del").style.display = rows.length > 1 ? "" : "none"; });
+}
 function applyTimeMode(m) {
   timeMode = m;
   document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
-  updateUtcPreview();
+  updateWindowsPreview();
 }
-function updateUtcPreview() {
-  const t = document.getElementById("prefTime").value;
-  const box = document.getElementById("utcPreview");
-  if (!t) { box.style.display = "none"; return; }
-  box.style.display = "flex";
-  if (timeMode === "utc") {
-    box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Stored as <strong>' + t + ' UTC</strong>.';
-  } else {
-    box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> ' + t + ' your time = <strong>' + localToUtc(t) + ' UTC</strong>'
-      + (TZ ? ' <span style="color:var(--muted)">(' + TZ + ')</span>' : '');
+function applyFlexible() {
+  const flex = document.getElementById("flexible").checked;
+  document.getElementById("windows").style.display = flex ? "none" : "";
+  document.getElementById("addWindow").style.display = flex ? "none" : "";
+  updateWindowsPreview();
+}
+function collectAvailability() {
+  if (document.getElementById("flexible").checked) {
+    return { flexible: true, mode: timeMode, windows: [], summaryUtc: "Flexible (any time)", summaryEntered: "Flexible (any time)", valid: true };
   }
+  const windows = [], utcParts = [], localParts = [];
+  document.querySelectorAll(".win-row").forEach(r => {
+    const f = r.querySelector(".win-from").value, t = r.querySelector(".win-to").value;
+    if (!f || !t) return;
+    if (timeMode === "utc") { windows.push({ fromUtc: f, toUtc: t, fromLocal: "", toLocal: "" }); utcParts.push(f + "–" + t); }
+    else {
+      const fu = localToUtc(f), tu = localToUtc(t);
+      windows.push({ fromUtc: fu, toUtc: tu, fromLocal: f, toLocal: t });
+      utcParts.push(fu + "–" + tu); localParts.push(f + "–" + t);
+    }
+  });
+  const summaryUtc = utcParts.join("; ");
+  const summaryEntered = timeMode === "utc"
+    ? utcParts.join("; ") + " UTC"
+    : localParts.join("; ") + " Local" + (TZ ? " · " + TZ : "");
+  return { flexible: false, mode: timeMode, windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
 }
-function preferredTimes() {
-  const t = document.getElementById("prefTime").value;
-  if (!t) return null;
-  if (timeMode === "utc") return { utc: t, entered: t + " UTC" };
-  return { utc: localToUtc(t), entered: t + " Local" + (TZ ? " · " + TZ : "") };
+function updateWindowsPreview() {
+  const box = document.getElementById("windowsUtc");
+  const av = collectAvailability();
+  if (av.flexible) { box.style.display = "flex"; box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Flexible — any time works.'; return; }
+  if (!av.windows.length) { box.style.display = "none"; return; }
+  box.style.display = "flex";
+  box.innerHTML = (timeMode === "utc")
+    ? '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Stored as <strong>' + av.summaryUtc + ' UTC</strong>.'
+    : '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> In UTC that\'s <strong>' + av.summaryUtc + '</strong> <span style="color:var(--muted)">(from your ' + (TZ || "local") + ' time)</span>.';
+}
+function tickClock() {
+  const el = document.getElementById("localNow");
+  if (!el) return;
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, "0"), mm = String(now.getMinutes()).padStart(2, "0");
+  el.innerHTML = 'Your local time is <strong>' + hh + ":" + mm + '</strong>' + (TZ ? ' <span style="color:var(--muted)">(' + TZ + ')</span>' : "");
 }
 
 /* ---------------- submit ---------------- */
@@ -513,28 +562,19 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
   const fail = (msg, focusId) => {
     document.getElementById("errText").textContent = msg;
     err.style.display = "block";
-    if (focusId) { const el = document.getElementById(focusId); if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.focus(); } }
+    const el = focusId && document.getElementById(focusId);
+    if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); if (el.focus) el.focus(); }
   };
   err.style.display = "none"; ok.classList.remove("show");
 
   const gov = document.getElementById("govName").value.trim();
   if (!gov) return fail("Please enter your Governor name.", "govName");
-
   const gameId = document.getElementById("gameId").value.trim().slice(0, 30);
 
   const allianceSel = document.getElementById("alliance").value;
   const alliance = resolveAlliance();
   if (!allianceSel) return fail("Please choose your alliance.", "alliance");
   if (allianceSel === "Other" && !alliance) return fail("Please type your alliance name.", "allianceOther");
-
-  const titleEl = document.querySelector('input[name="title"]:checked');
-  const title = titleEl ? titleEl.value : "";
-  if (!title) return fail("Please choose the title you're applying for.", "titleCards");
-
-  const pt = preferredTimes();
-  if (!pt || !pt.utc) return fail("Please enter your preferred time.", "prefTime");
-
-  const notes = document.getElementById("notes").value.trim().slice(0, 200);
 
   const entries = {};
   let any = false;
@@ -543,42 +583,43 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     entries[t.id] = { minutes: mins, display: pretty(mins) || "0" };
     if (mins > 0) any = true;
   });
-  if (!any) {
-    document.getElementById("errText").textContent = "Enter at least one speedup amount (or upload a screenshot so we can read it).";
-    err.style.display = "block"; return;
-  }
-  if (!SCRIPT_URL) {
-    document.getElementById("errText").textContent = "Submissions aren't connected yet — message your numbers to R4 Kadi in-game for now.";
-    err.style.display = "block"; return;
-  }
+  if (!any) return fail("Add your speedups — upload a screenshot, or type at least one in.", "shot");
+
+  const titles = selectedTitles();
+  if (!titles.length) return fail("Choose at least one title — Chief Minister, Noble Advisor, or both.", "titleCards");
+  const cmDays = titles.indexOf("Chief Minister") !== -1 ? selectedCmDays() : [];
+
+  const av = collectAvailability();
+  if (!av.valid) return fail("Add at least one time window, or tick “I'm flexible”.", "windows");
+
+  const notes = document.getElementById("notes").value.trim().slice(0, 200);
+
+  if (!SCRIPT_URL) return fail("Submissions aren't connected yet — message your details to R4 Kadi in-game for now.");
 
   const btn = document.getElementById("submitBtn");
   btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
   try {
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, // simple request: no CORS preflight
-      body: JSON.stringify({
-        governor: gov, gameId, alliance, title,
-        preferredUtc: pt.utc, preferredEntered: pt.entered, notes,
-        unit, entries, screenshot: shotData
-      })
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ governor: gov, gameId, alliance, titles, cmDays, availability: av, notes, unit, entries, screenshot: shotData })
     });
     const out = await res.json().catch(() => ({ ok: res.ok }));
     if (!out.ok) throw new Error(out.error || "Server error");
     ok.classList.add("show");
-    document.getElementById("okText").textContent =
-      `${title} at ${pt.utc} UTC — logged for ${gov} (${alliance}).`;
+    document.getElementById("okText").textContent = `${titles.join(" + ")} — application logged for ${gov} (${alliance}).`;
+    // reset
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
-    document.getElementById("utcPreview").style.display = "none";
-    refreshAllianceOther();
-    applyTimeMode("local");
-    updateTotals();
+    document.getElementById("windowsUtc").style.display = "none";
+    titlesTouched = false; cmDaysTouched = false;
+    refreshAllianceOther(); refreshTitleCards(); refreshDayChips();
+    document.getElementById("windows").innerHTML = ""; addWindow();
+    applyFlexible(); applyTimeMode("local"); updateTotals();
+    ok.scrollIntoView({ behavior: "smooth", block: "center" });
   } catch (ex) {
-    document.getElementById("errText").textContent = "Couldn't reach the collection sheet. Try again in a minute, or message your details to R4 Kadi in-game.";
-    err.style.display = "block";
+    fail("Couldn't reach the collection sheet. Try again in a minute, or message your details to R4 Kadi in-game.");
   } finally {
     btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
   }
@@ -589,21 +630,13 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
   const wrap = document.querySelector("[data-tl-menu]");
   const btn = document.querySelector("[data-tl-btn]");
   if (!wrap || !btn) return;
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-    const open = wrap.classList.toggle("open");
-    btn.setAttribute("aria-expanded", open ? "true" : "false");
-  });
-  document.addEventListener("click", () => {
-    wrap.classList.remove("open");
-    btn.setAttribute("aria-expanded", "false");
-  });
+  btn.addEventListener("click", e => { e.stopPropagation(); const open = wrap.classList.toggle("open"); btn.setAttribute("aria-expanded", open ? "true" : "false"); });
+  document.addEventListener("click", () => { wrap.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); });
 })();
 
-/* ---------------- surface unexpected errors (so "I got an error" comes with details) ---------------- */
+/* ---------------- surface unexpected errors ---------------- */
 function showError(detail) {
-  const err = document.getElementById("errBox");
-  const txt = document.getElementById("errText");
+  const err = document.getElementById("errBox"), txt = document.getElementById("errText");
   if (!err || !txt) return;
   txt.textContent = "Something went wrong — screenshot this and send it to R4 Kadi: " + detail;
   err.style.display = "block";
@@ -616,17 +649,19 @@ buildRows();
 applyUnit("days");
 document.querySelectorAll("[data-unit]").forEach(b => b.addEventListener("click", () => applyUnit(b.dataset.unit)));
 
-// alliance "Other" + preferred-time controls
 document.getElementById("alliance").addEventListener("change", refreshAllianceOther);
 refreshAllianceOther();
-document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", () => applyTimeMode(b.dataset.tz)));
-document.getElementById("prefTime").addEventListener("input", updateUtcPreview);
-applyTimeMode("local");
 
-// highlight the chosen title card
-document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => {
-  document.querySelectorAll(".title-card").forEach(c => c.classList.toggle("selected", c.querySelector("input").checked));
-}));
+document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { titlesTouched = true; refreshTitleCards(); }));
+document.querySelectorAll('input[name="cmDay"]').forEach(r => r.addEventListener("change", () => { cmDaysTouched = true; refreshDayChips(); }));
+
+document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", () => applyTimeMode(b.dataset.tz)));
+document.getElementById("flexible").addEventListener("change", applyFlexible);
+document.getElementById("addWindow").addEventListener("click", () => addWindow());
+addWindow();
+applyTimeMode("local");
+applyFlexible();
+tickClock(); setInterval(tickClock, 30000);
 
 if (!SCRIPT_URL) document.getElementById("setupNotice").style.display = "block";
 </script>
