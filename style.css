@@ -1758,3 +1758,27 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
   border-bottom: 1px solid var(--gold-line);
 }
 .ext-link:hover { border-bottom-color: var(--gold-bright); }
+
+/* collapsible info note (native <details>) */
+.info-accordion {
+  background: var(--gold-soft); border: 1px solid var(--gold-line); border-radius: var(--radius);
+}
+.info-accordion > summary {
+  list-style: none; cursor: pointer; padding: 13px 16px;
+  font-family: var(--display); font-weight: 700; color: var(--gold-bright);
+  display: flex; align-items: center; gap: 10px;
+}
+.info-accordion > summary::-webkit-details-marker { display: none; }
+.info-accordion > summary::before {
+  content: "\f05a"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+  color: var(--gold); font-size: .95rem;
+}
+.info-accordion > summary::after {
+  content: "\f078"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+  margin-left: auto; font-size: .72rem; color: var(--muted); transition: transform .2s ease;
+}
+.info-accordion[open] > summary::after { transform: rotate(180deg); }
+.info-accordion > p {
+  margin: 0; padding: 0 16px 14px; color: var(--ink-dim);
+  font-size: .96rem; line-height: 1.55;
+}

@@ -163,18 +163,16 @@
 
     <!-- ============ AVAILABILITY ============ -->
     <h3 class="form-section">Preferred time <span class="req">*</span></h3>
-    <div class="callout info" style="margin:0 0 18px">
-      <strong>This is a request, not a guaranteed slot.</strong>
-      Title slots are limited. We give priority to the highest speedups so the kingdom scores the most points, then place everyone else where we can. The more speedups you have, the better your chance of a slot.
-    </div>
+    <details class="info-accordion" style="margin:0 0 18px">
+      <summary>This is a request, not a guaranteed slot</summary>
+      <p>Title slots are limited. We give priority to the highest speedups so the kingdom scores the most points, then place everyone else where we can. The more speedups you have, the better your chance of a slot.</p>
+    </details>
 
-    <div class="toggle-line" style="margin-bottom:14px">
-      <span class="form-note">Enter times in</span>
-      <div class="hero-filter" style="margin:0">
-        <div class="seg" role="group" aria-label="Time mode">
-          <button type="button" data-tz="local" class="active">My local time</button>
-          <button type="button" data-tz="utc">UTC</button>
-        </div>
+    <div class="hero-filter" style="margin:0 0 14px">
+      <div class="seg" role="group" aria-label="Time mode">
+        <button type="button" data-tz="local" class="active">My local time</button>
+        <button type="button" data-tz="utc">UTC</button>
+        <button type="button" data-tz="server">Server time</button>
       </div>
     </div>
 
@@ -558,7 +556,7 @@ function labelFor(sel) {
   const o = sel.options[sel.selectedIndex];
   return o ? o.textContent.replace(/ - detected$/, "") : "";
 }
-function effOffset() { return timeMode === "utc" ? 0 : tzOffset; }
+function effOffset() { return timeMode === "local" ? tzOffset : 0; }
 function localToUtc(hhmm) {
   const m = /^(\d{1,2}):(\d{2})$/.exec(hhmm || "");
   if (!m) return "";
@@ -613,13 +611,13 @@ function applyFlexible() {
 function applyTimeMode(m) {
   timeMode = m;
   document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
-  document.getElementById("tzWrap").style.display = (m === "utc") ? "none" : "";
+  document.getElementById("tzWrap").style.display = (m === "local") ? "" : "none";
   tickTz(); updateWindowsPreview();
 }
 function tzInfo() {
-  return timeMode === "utc"
-    ? { mode: "utc", offset: "UTC±0:00", label: "UTC" }
-    : { mode: "local", offset: fmtOffset(tzOffset), label: tzLabel };
+  if (timeMode === "local") return { mode: "local", offset: fmtOffset(tzOffset), label: tzLabel };
+  if (timeMode === "server") return { mode: "server", offset: "UTC+0:00", label: "Server time (UTC)" };
+  return { mode: "utc", offset: "UTC+0:00", label: "UTC" };
 }
 function collectAvailability() {
   if (document.getElementById("flexible").checked) {
@@ -634,9 +632,9 @@ function collectAvailability() {
     utcParts.push(fu + "-" + tu); localParts.push(f + "-" + t);
   });
   const summaryUtc = utcParts.join("; ");
-  const summaryEntered = timeMode === "utc"
-    ? utcParts.join("; ") + " UTC"
-    : localParts.join("; ") + " (" + fmtOffset(tzOffset) + ")";
+  const summaryEntered = timeMode === "local"
+    ? localParts.join("; ") + " (" + fmtOffset(tzOffset) + ")"
+    : utcParts.join("; ") + (timeMode === "server" ? " server time" : " UTC");
   return { flexible: false, timezone: tzInfo(), windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
 }
 function updateWindowsPreview() { /* UTC preview removed — windows convert on submit */ }
