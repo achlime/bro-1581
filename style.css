@@ -173,11 +173,13 @@ ul { list-style: none; }
 .lang { position: relative; }
 .lang-btn {
   display: flex; align-items: center; gap: 7px;
-  background: transparent; border: 1px solid var(--line); color: var(--ink-dim);
-  font-family: var(--body); font-size: .8rem; font-weight: 600;
-  padding: 8px 11px; border-radius: var(--radius); cursor: pointer; transition: all .15s ease;
+  background: var(--gold-soft); border: 1px solid var(--gold-line); color: var(--gold-bright);
+  font-family: var(--body); font-size: .82rem; font-weight: 700;
+  padding: 9px 13px; border-radius: var(--radius); cursor: pointer; transition: all .15s ease;
 }
-.lang-btn:hover { border-color: var(--gold-line); color: var(--gold-bright); }
+.lang-btn .fa-globe { font-size: .98rem; }
+.lang-btn:hover { background: var(--gold); border-color: var(--gold); color: #1a130a; }
+.lang-btn:hover .fa-chevron-down { color: #1a130a; }
 .lang-menu {
   position: absolute; right: 0; top: calc(100% + 8px); min-width: 158px;
   background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
