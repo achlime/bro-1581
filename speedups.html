@@ -50,7 +50,7 @@
 <section class="page-header">
   <div class="crest-lg"><i class="fa-solid fa-crown"></i></div>
   <h1>KvK Title Application</h1>
-  <p>One quick form: drop your speedups screenshot, we'll suggest your titles, you pick when you're free. Leadership handles the rest.</p>
+  <p>Pick your title, add your speedups, and tell us when you're free.</p>
   <div class="badges" style="margin-top:22px">
     <span class="badge">KvK Prep</span>
     <span class="badge alt">Server #1581</span>
@@ -105,8 +105,8 @@
     <h3 class="form-section">Your speedups <span class="req">*</span></h3>
 
     <div class="field">
-      <label for="shot">Screenshot <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(the easy way)</span></label>
-      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>. Upload it and we'll read your numbers <em>and</em> suggest your titles — just check it over.</p>
+      <label for="shot">Screenshot <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>.</p>
       <input type="file" id="shot" accept="image/*" />
       <div id="ocrStatus" class="ocr-status" style="display:none"></div>
       <img id="shotPreview" alt="Screenshot preview" style="display:none;max-width:280px;border-radius:6px;border:1px solid var(--line);margin-top:10px" />
@@ -129,7 +129,6 @@
 
     <!-- ============ TITLES ============ -->
     <h3 class="form-section">Title(s) you want <span class="req">*</span></h3>
-    <p class="form-note" style="margin:0 0 12px">We tick the ones that match your speedups — change them if you like. You can apply for both.</p>
     <div class="title-cards" id="titleCards">
       <label class="title-card" data-title="Chief Minister">
         <input type="checkbox" name="title" value="Chief Minister" />
@@ -161,8 +160,7 @@
 
     <!-- ============ AVAILABILITY ============ -->
     <h3 class="form-section">When can you take the title? <span class="req">*</span></h3>
-    <p class="form-note" style="margin:0 0 6px"><i class="fa-regular fa-clock"></i> <span id="localNow">…</span></p>
-    <p class="form-note" style="margin:0 0 12px">Give the time window(s) that work for you. We'll convert to UTC for leadership.</p>
+    <p class="form-note" style="margin:0 0 12px"><i class="fa-regular fa-clock"></i> <span id="localNow">…</span></p>
 
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
       <span class="form-note" style="margin:0">These times are in:</span>
@@ -486,18 +484,29 @@ function localToUtc(hhmm) {
   const utcMin = (((localMin + new Date().getTimezoneOffset()) % 1440) + 1440) % 1440;
   return String(Math.floor(utcMin / 60)).padStart(2, "0") + ":" + String(utcMin % 60).padStart(2, "0");
 }
+/* 30-minute options: 00:00, 00:30, … 23:30 */
+function timeOptions(selected) {
+  let html = '<option value="" disabled' + (selected ? "" : " selected") + '>--:--</option>';
+  for (let h = 0; h < 24; h++) {
+    for (const mm of ["00", "30"]) {
+      const v = String(h).padStart(2, "0") + ":" + mm;
+      html += '<option value="' + v + '"' + (v === selected ? " selected" : "") + '>' + v + '</option>';
+    }
+  }
+  return html;
+}
 function addWindow(from, to) {
   const wrap = document.getElementById("windows");
   const div = document.createElement("div");
   div.className = "win-row";
   div.innerHTML =
-    '<input type="time" class="win-from" aria-label="Window start" value="' + (from || "") + '">' +
+    '<select class="win-from" aria-label="Window start">' + timeOptions(from) + '</select>' +
     '<span class="win-sep">to</span>' +
-    '<input type="time" class="win-to" aria-label="Window end" value="' + (to || "") + '">' +
+    '<select class="win-to" aria-label="Window end">' + timeOptions(to) + '</select>' +
     '<button type="button" class="win-del" aria-label="Remove this window">&times;</button>';
   wrap.appendChild(div);
   div.querySelector(".win-del").addEventListener("click", () => { div.remove(); refreshWinDels(); updateWindowsPreview(); });
-  div.addEventListener("input", updateWindowsPreview);
+  div.addEventListener("change", updateWindowsPreview);
   refreshWinDels();
   updateWindowsPreview();
 }
