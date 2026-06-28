@@ -50,7 +50,8 @@
 <section class="page-header">
   <div class="crest-lg"><i class="fa-solid fa-crown"></i></div>
   <h1>KvK Title Application</h1>
-  <p>Pick your title, add your speedups, and tell us when you're free.</p>
+  <p>Choose a title, add your speedups, and pick the times that suit you.</p>
+  <p style="margin-top:12px"><a class="ext-link" href="https://kingshotdata.com/events/kingdom-of-power-kvk-event/" target="_blank" rel="noopener">New to KvK? Read the full event guide <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.78em"></i></a></p>
   <div class="badges" style="margin-top:22px">
     <span class="badge">KvK Prep</span>
     <span class="badge alt">Server #1581</span>
@@ -74,7 +75,7 @@
 
     <!-- GAME ID -->
     <div class="field">
-      <label for="gameId">Game ID <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <label for="gameId">Game ID <span class="opt">(optional)</span></label>
       <p class="form-note" style="margin:0 0 8px">Helps us find you if you change your name. In game: tap your avatar → your ID is under your name.</p>
       <input type="text" id="gameId" name="gameId" inputmode="numeric" placeholder="e.g. 123456789" autocomplete="off" />
     </div>
@@ -105,30 +106,33 @@
     <h3 class="form-section">Your speedups <span class="req">*</span></h3>
 
     <div class="field">
-      <label for="shot">Screenshot <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-      <p class="form-note" style="margin:0 0 10px">In game: <strong>Backpack → Speedups → Overview</strong>.</p>
+      <label for="shot">Screenshot <span class="opt">(optional)</span></label>
+      <p class="form-note" style="margin:0 0 10px">Upload your speedup screen and we will read the numbers for you. In game: <strong>Backpack → Speedups → Overview</strong>.</p>
       <input type="file" id="shot" accept="image/*" />
       <div id="ocrStatus" class="ocr-status" style="display:none"></div>
       <img id="shotPreview" alt="Screenshot preview" style="display:none;max-width:280px;border-radius:6px;border:1px solid var(--line);margin-top:10px" />
     </div>
 
     <div class="field">
-      <label>Your numbers are shown in…</label>
-      <p class="form-note" style="margin:0 0 10px">Match the checkbox at the bottom of the game's Overview panel — Day(s), Hrs or Min.</p>
-      <div class="hero-filter" style="margin:0">
-        <div class="seg" role="group" aria-label="Unit">
-          <button type="button" data-unit="days" class="active">Day(s)</button>
-          <button type="button" data-unit="hrs">Hrs</button>
-          <button type="button" data-unit="min">Min</button>
+      <div class="toggle-line">
+        <span class="form-note">My numbers are in</span>
+        <div class="hero-filter" style="margin:0">
+          <div class="seg" role="group" aria-label="Unit">
+            <button type="button" data-unit="days" class="active">Day(s)</button>
+            <button type="button" data-unit="hrs">Hrs</button>
+            <button type="button" data-unit="min">Min</button>
+          </div>
         </div>
       </div>
+      <p class="form-note" style="margin:8px 0 0">Match the unit shown at the bottom of the game's Overview panel.</p>
     </div>
 
     <div class="su-rows" id="suRows"><!-- rows injected by JS --></div>
-    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row blank (or zero) if you have none of that type.</p>
+    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row at zero if you have none of that type.</p>
 
     <!-- ============ TITLES ============ -->
-    <h3 class="form-section">Title(s) you want <span class="req">*</span></h3>
+    <h3 class="form-section">Titles you want <span class="req">*</span></h3>
+    <p class="form-note" style="margin:0 0 14px">Pick one or both.</p>
     <div class="title-cards" id="titleCards">
       <label class="title-card" data-title="Chief Minister">
         <input type="checkbox" name="title" value="Chief Minister" />
@@ -149,8 +153,8 @@
     </div>
 
     <div class="field" id="cmDaysWrap" style="display:none;margin-top:14px">
-      <label>Best day(s) for Chief Minister?</label>
-      <p class="form-note" style="margin:0 0 10px">Pick whichever suit you — leadership fits people in across these days.</p>
+      <label>Best days for Chief Minister</label>
+      <p class="form-note" style="margin:0 0 10px">Pick any that suit you.</p>
       <div class="day-chips" id="cmDays">
         <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 1"><span>Day 1 · Construction</span></label>
         <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 2"><span>Day 2 · Research</span></label>
@@ -159,28 +163,36 @@
     </div>
 
     <!-- ============ AVAILABILITY ============ -->
-    <h3 class="form-section">When can you take the title? <span class="req">*</span></h3>
-    <p class="form-note" style="margin:0 0 12px"><i class="fa-regular fa-clock"></i> <span id="localNow">…</span></p>
+    <h3 class="form-section">Preferred time <span class="req">*</span></h3>
+    <div class="callout info" style="margin:0 0 18px">
+      <strong>This is a request, not a guaranteed slot.</strong>
+      Title slots are limited. We give priority to the highest speedups so the kingdom scores the most points, then place everyone else where we can. The more speedups you have, the better your chance of a slot.
+    </div>
 
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-      <span class="form-note" style="margin:0">These times are in:</span>
+    <div class="toggle-line" style="margin-bottom:14px">
+      <span class="form-note">Enter times in</span>
       <div class="hero-filter" style="margin:0">
-        <div class="seg" role="group" aria-label="Time zone">
+        <div class="seg" role="group" aria-label="Time mode">
           <button type="button" data-tz="local" class="active">My local time</button>
           <button type="button" data-tz="utc">UTC</button>
         </div>
       </div>
     </div>
 
-    <label class="flex-line"><input type="checkbox" id="flexible"> <span>I'm flexible — any time works</span></label>
+    <div class="field" id="tzWrap">
+      <label for="tz">Your timezone</label>
+      <select id="tz" name="tz"></select>
+      <p class="form-note" style="margin:8px 0 0">It is <strong id="tzNow">…</strong> right now in this timezone. If that is wrong, pick the closest match.</p>
+    </div>
+
+    <label class="flex-line" style="margin-top:4px"><input type="checkbox" id="flexible"> <span>I am flexible — any time works</span></label>
 
     <div id="windows"><!-- window rows injected by JS --></div>
     <button type="button" class="btn btn-ghost btn-sm" id="addWindow" style="margin-top:2px"><i class="fa-solid fa-plus"></i> Add another window</button>
-    <div id="windowsUtc" class="ocr-status" style="display:none;margin-top:12px"></div>
 
     <!-- ============ NOTES ============ -->
     <div class="field" style="margin-top:26px">
-      <label for="notes">Notes <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <label for="notes">Notes <span class="opt">(optional)</span></label>
       <input type="text" id="notes" name="notes" placeholder="Anything leadership should know" autocomplete="off" />
     </div>
 
@@ -215,7 +227,7 @@
 /* =====================================================================
    CONFIG — Google Apps Script Web App URL (see apps-script/Code.gs).
 ===================================================================== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVCx-VR9tmh1UZI3anm8AqMVR5nX00TQuPW9ERsp9iWWdydAOc8sbzBIwSvgMXqCC6/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQBY5vDDCGUFo3H8CzjJWwcDScda3IqlIdGeGGwr2j8KFbm6ioS9SNgWIWRHN8FTnE/exec";
 
 /* ---------------- the four speedup types (game order) ---------------- */
 const TYPES = [
@@ -398,7 +410,7 @@ async function runOcr(dataUrl) {
       updateTotals();
       ocrStatus(missing.length
         ? `<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Read ${got.join(", ")} — but couldn't read <strong>${missing.join(", ")}</strong>. Please type ${missing.length > 1 ? "those" : "that one"} in below and double-check the rest.`
-        : `<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read all four — check them below. We've ticked your titles to match.`);
+        : `<i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Read all four — please check them below.`);
     } else {
       ocrStatus(`<i class="fa-solid fa-circle-exclamation" style="color:var(--orange)"></i> Couldn't read the numbers — no problem, just type them in below.`);
     }
@@ -474,14 +486,84 @@ function inferTitles() {
   refreshTitleCards();
 }
 
-/* ---------------- availability (windows, UTC/local, flexible) ---------------- */
-let timeMode = "local";
-const TZ = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } })();
+/* ---------------- availability (windows, timezone, flexible) ---------------- */
+/* Major cities by IANA zone. Offsets are computed live, so DST is handled. */
+const TZ_CITIES = [
+  ["Pacific/Midway","Midway"],["Pacific/Honolulu","Honolulu"],["America/Anchorage","Anchorage"],
+  ["America/Los_Angeles","Los Angeles"],["America/Denver","Denver"],["America/Phoenix","Phoenix"],
+  ["America/Chicago","Chicago"],["America/Mexico_City","Mexico City"],["America/New_York","New York"],
+  ["America/Toronto","Toronto"],["America/Bogota","Bogota"],["America/Lima","Lima"],
+  ["America/Halifax","Halifax"],["America/Caracas","Caracas"],["America/Santiago","Santiago"],
+  ["America/St_Johns","St. John's"],["America/Sao_Paulo","Sao Paulo"],["America/Argentina/Buenos_Aires","Buenos Aires"],
+  ["Atlantic/Azores","Azores"],["Atlantic/Cape_Verde","Cape Verde"],["Europe/London","London"],
+  ["Europe/Lisbon","Lisbon"],["Africa/Lagos","Lagos"],["Europe/Paris","Paris"],["Europe/Berlin","Berlin"],
+  ["Europe/Madrid","Madrid"],["Europe/Rome","Rome"],["Europe/Amsterdam","Amsterdam"],["Europe/Warsaw","Warsaw"],
+  ["Africa/Cairo","Cairo"],["Europe/Athens","Athens"],["Africa/Johannesburg","Johannesburg"],
+  ["Europe/Istanbul","Istanbul"],["Europe/Moscow","Moscow"],["Africa/Nairobi","Nairobi"],
+  ["Asia/Riyadh","Riyadh"],["Asia/Tehran","Tehran"],["Asia/Dubai","Dubai"],["Asia/Baku","Baku"],
+  ["Asia/Kabul","Kabul"],["Asia/Karachi","Karachi"],["Asia/Tashkent","Tashkent"],
+  ["Asia/Kolkata","Mumbai / New Delhi"],["Asia/Kathmandu","Kathmandu"],["Asia/Dhaka","Dhaka"],
+  ["Asia/Almaty","Almaty"],["Asia/Yangon","Yangon"],["Asia/Bangkok","Bangkok"],["Asia/Jakarta","Jakarta"],
+  ["Asia/Ho_Chi_Minh","Ho Chi Minh City"],["Asia/Shanghai","Beijing / Shanghai"],["Asia/Singapore","Singapore"],
+  ["Asia/Manila","Manila"],["Asia/Hong_Kong","Hong Kong"],["Asia/Taipei","Taipei"],["Australia/Perth","Perth"],
+  ["Asia/Tokyo","Tokyo"],["Asia/Seoul","Seoul"],["Australia/Darwin","Darwin"],["Australia/Adelaide","Adelaide"],
+  ["Australia/Brisbane","Brisbane"],["Australia/Sydney","Sydney"],["Pacific/Guam","Guam"],
+  ["Pacific/Noumea","Noumea"],["Pacific/Auckland","Auckland"],["Pacific/Fiji","Fiji"]
+];
+function fmtOffset(min) {
+  const a = Math.abs(min);
+  return "UTC" + (min < 0 ? "-" : "+") + Math.floor(a / 60) + ":" + String(a % 60).padStart(2, "0");
+}
+/* current UTC offset (minutes east) of an IANA zone, DST included */
+function zoneOffset(zone, date) {
+  date = date || new Date();
+  try {
+    const dtf = new Intl.DateTimeFormat("en-US", { timeZone: zone, hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    const p = {};
+    dtf.formatToParts(date).forEach(x => { if (x.type !== "literal") p[x.type] = x.value; });
+    const hh = p.hour === "24" ? 0 : +p.hour;
+    const asUTC = Date.UTC(+p.year, p.month - 1, +p.day, hh, +p.minute, +p.second);
+    return Math.round((asUTC - date.getTime()) / 60000);
+  } catch (e) { return -new Date().getTimezoneOffset(); }
+}
+function cityFromZone(z) { return ((z || "").split("/").pop() || z).replace(/_/g, " "); }
+const DETECTED_ZONE = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } })();
+let timeMode = "local", tzOffset = 0, tzLabel = "", defaultOffset = 0;
+/* One entry per UTC offset, with example cities. Cities are bucketed by their
+   CURRENT offset, so the examples stay accurate through DST. */
+function buildTzSelect() {
+  const sel = document.getElementById("tz");
+  if (!sel) return;
+  const buckets = {};
+  TZ_CITIES.forEach(([zone, label]) => {
+    const off = zoneOffset(zone);
+    (buckets[off] = buckets[off] || []).push(label);
+  });
+  const detectedOff = DETECTED_ZONE ? zoneOffset(DETECTED_ZONE) : -new Date().getTimezoneOffset();
+  if (!buckets[detectedOff]) buckets[detectedOff] = [];
+  const detCity = DETECTED_ZONE ? cityFromZone(DETECTED_ZONE) : "";
+  if (detCity && !buckets[detectedOff].some(c => c.indexOf(detCity) !== -1)) buckets[detectedOff].unshift(detCity);
+  defaultOffset = detectedOff;
+  tzOffset = detectedOff;
+  const offs = Object.keys(buckets).map(Number).sort((a, b) => a - b);
+  sel.innerHTML = offs.map(off => {
+    const cities = buckets[off].slice(0, 4).join(", ");
+    return '<option value="' + off + '"' + (off === detectedOff ? " selected" : "") + ">" +
+      fmtOffset(off) + (cities ? " (" + cities + ")" : "") + (off === detectedOff ? " - detected" : "") + "</option>";
+  }).join("");
+  tzLabel = labelFor(sel);
+  sel.addEventListener("change", () => { tzOffset = parseInt(sel.value, 10) || 0; tzLabel = labelFor(sel); tickTz(); updateWindowsPreview(); });
+}
+function labelFor(sel) {
+  const o = sel.options[sel.selectedIndex];
+  return o ? o.textContent.replace(/ - detected$/, "") : "";
+}
+function effOffset() { return timeMode === "utc" ? 0 : tzOffset; }
 function localToUtc(hhmm) {
   const m = /^(\d{1,2}):(\d{2})$/.exec(hhmm || "");
   if (!m) return "";
   const localMin = (+m[1]) * 60 + (+m[2]);
-  const utcMin = (((localMin + new Date().getTimezoneOffset()) % 1440) + 1440) % 1440;
+  const utcMin = (((localMin - effOffset()) % 1440) + 1440) % 1440;
   return String(Math.floor(utcMin / 60)).padStart(2, "0") + ":" + String(utcMin % 60).padStart(2, "0");
 }
 /* 30-minute options: 00:00, 00:30, … 23:30 */
@@ -514,10 +596,13 @@ function refreshWinDels() {
   const rows = [...document.querySelectorAll(".win-row")];
   rows.forEach(r => { r.querySelector(".win-del").style.display = rows.length > 1 ? "" : "none"; });
 }
-function applyTimeMode(m) {
-  timeMode = m;
-  document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
-  updateWindowsPreview();
+function tickTz() {
+  const el = document.getElementById("tzNow");
+  if (!el) return;
+  const now = new Date();
+  const utcMin = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const localMin = (((utcMin + tzOffset) % 1440) + 1440) % 1440;
+  el.textContent = String(Math.floor(localMin / 60)).padStart(2, "0") + ":" + String(localMin % 60).padStart(2, "0");
 }
 function applyFlexible() {
   const flex = document.getElementById("flexible").checked;
@@ -525,44 +610,36 @@ function applyFlexible() {
   document.getElementById("addWindow").style.display = flex ? "none" : "";
   updateWindowsPreview();
 }
+function applyTimeMode(m) {
+  timeMode = m;
+  document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
+  document.getElementById("tzWrap").style.display = (m === "utc") ? "none" : "";
+  tickTz(); updateWindowsPreview();
+}
+function tzInfo() {
+  return timeMode === "utc"
+    ? { mode: "utc", offset: "UTC±0:00", label: "UTC" }
+    : { mode: "local", offset: fmtOffset(tzOffset), label: tzLabel };
+}
 function collectAvailability() {
   if (document.getElementById("flexible").checked) {
-    return { flexible: true, mode: timeMode, windows: [], summaryUtc: "Flexible (any time)", summaryEntered: "Flexible (any time)", valid: true };
+    return { flexible: true, timezone: tzInfo(), windows: [], summaryUtc: "Flexible (any time)", summaryEntered: "Flexible (any time)", valid: true };
   }
   const windows = [], utcParts = [], localParts = [];
   document.querySelectorAll(".win-row").forEach(r => {
     const f = r.querySelector(".win-from").value, t = r.querySelector(".win-to").value;
     if (!f || !t) return;
-    if (timeMode === "utc") { windows.push({ fromUtc: f, toUtc: t, fromLocal: "", toLocal: "" }); utcParts.push(f + "–" + t); }
-    else {
-      const fu = localToUtc(f), tu = localToUtc(t);
-      windows.push({ fromUtc: fu, toUtc: tu, fromLocal: f, toLocal: t });
-      utcParts.push(fu + "–" + tu); localParts.push(f + "–" + t);
-    }
+    const fu = localToUtc(f), tu = localToUtc(t);
+    windows.push({ fromUtc: fu, toUtc: tu, fromLocal: f, toLocal: t });
+    utcParts.push(fu + "-" + tu); localParts.push(f + "-" + t);
   });
   const summaryUtc = utcParts.join("; ");
   const summaryEntered = timeMode === "utc"
     ? utcParts.join("; ") + " UTC"
-    : localParts.join("; ") + " Local" + (TZ ? " · " + TZ : "");
-  return { flexible: false, mode: timeMode, windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
+    : localParts.join("; ") + " (" + fmtOffset(tzOffset) + ")";
+  return { flexible: false, timezone: tzInfo(), windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
 }
-function updateWindowsPreview() {
-  const box = document.getElementById("windowsUtc");
-  const av = collectAvailability();
-  if (av.flexible) { box.style.display = "flex"; box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Flexible — any time works.'; return; }
-  if (!av.windows.length) { box.style.display = "none"; return; }
-  box.style.display = "flex";
-  box.innerHTML = (timeMode === "utc")
-    ? '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Stored as <strong>' + av.summaryUtc + ' UTC</strong>.'
-    : '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> In UTC that\'s <strong>' + av.summaryUtc + '</strong> <span style="color:var(--muted)">(from your ' + (TZ || "local") + ' time)</span>.';
-}
-function tickClock() {
-  const el = document.getElementById("localNow");
-  if (!el) return;
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2, "0"), mm = String(now.getMinutes()).padStart(2, "0");
-  el.innerHTML = 'Your local time is <strong>' + hh + ":" + mm + '</strong>' + (TZ ? ' <span style="color:var(--muted)">(' + TZ + ')</span>' : "");
-}
+function updateWindowsPreview() { /* UTC preview removed — windows convert on submit */ }
 
 /* ---------------- submit ---------------- */
 document.getElementById("speedupForm").addEventListener("submit", async e => {
@@ -611,7 +688,7 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ governor: gov, gameId, alliance, titles, cmDays, availability: av, notes, unit, entries, screenshot: shotData })
+      body: JSON.stringify({ governor: gov, gameId, alliance, titles, cmDays, availability: av, timezone: av.timezone, notes, unit, entries, screenshot: shotData })
     });
     const out = await res.json().catch(() => ({ ok: res.ok }));
     if (!out.ok) throw new Error(out.error || "Server error");
@@ -621,11 +698,12 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
-    document.getElementById("windowsUtc").style.display = "none";
     titlesTouched = false; cmDaysTouched = false;
     refreshAllianceOther(); refreshTitleCards(); refreshDayChips();
     document.getElementById("windows").innerHTML = ""; addWindow();
-    applyFlexible(); applyTimeMode("local"); updateTotals();
+    const tzSel = document.getElementById("tz");
+    tzSel.value = String(defaultOffset); tzOffset = defaultOffset; tzLabel = labelFor(tzSel);
+    applyTimeMode("local"); applyFlexible(); updateTotals();
     ok.scrollIntoView({ behavior: "smooth", block: "center" });
   } catch (ex) {
     fail("Couldn't reach the collection sheet. Try again in a minute, or message your details to R4 Kadi in-game.");
@@ -664,13 +742,14 @@ refreshAllianceOther();
 document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { titlesTouched = true; refreshTitleCards(); }));
 document.querySelectorAll('input[name="cmDay"]').forEach(r => r.addEventListener("change", () => { cmDaysTouched = true; refreshDayChips(); }));
 
+buildTzSelect();
 document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", () => applyTimeMode(b.dataset.tz)));
 document.getElementById("flexible").addEventListener("change", applyFlexible);
 document.getElementById("addWindow").addEventListener("click", () => addWindow());
 addWindow();
 applyTimeMode("local");
 applyFlexible();
-tickClock(); setInterval(tickClock, 30000);
+tickTz(); setInterval(tickTz, 30000);
 
 if (!SCRIPT_URL) document.getElementById("setupNotice").style.display = "block";
 </script>

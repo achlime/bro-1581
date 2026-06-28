@@ -1,22 +1,22 @@
 /**
- * [BRO] Brotherhood — Speedup Census backend
+ * [BRO] Brotherhood — KvK Title Application backend
  * Receives submissions from speedups.html, logs them to this spreadsheet,
  * and saves screenshots to a Drive folder.
  *
- * ── ONE-TIME SETUP (~10 minutes) ────────────────────────────────────────────
- * 1. Go to sheets.google.com → create a new spreadsheet, name it "BRO Speedups".
+ * ── ONE-TIME SETUP (~5 minutes) ─────────────────────────────────────────────
+ * 1. Go to sheets.google.com → create a new spreadsheet, name it "BRO KvK Titles".
  * 2. In that sheet: Extensions → Apps Script. Delete the sample code and paste
  *    this entire file. Save (Ctrl+S).
  * 3. Click "Deploy" → "New deployment" → gear icon → "Web app".
- *      - Description: BRO Speedups
+ *      - Description: BRO KvK Titles
  *      - Execute as: Me
  *      - Who has access: Anyone        ← required so members can submit
  *    Click Deploy. Authorize when prompted (it only touches this sheet + a
  *    Drive folder it creates).
  * 4. Copy the Web app URL (ends in /exec).
  * 5. In speedups.html, paste that URL into:  const SCRIPT_URL = "...";
- *    Commit + push. Done — submissions appear as rows here, screenshots in
- *    a Drive folder called "BRO Speedup Screenshots".
+ *    The header row + columns are created automatically on the first submission;
+ *    screenshots go to a Drive folder called "BRO Speedup Screenshots".
  *
  * To update the script later: edit, then Deploy → Manage deployments → edit
  * (pencil) → Version: New version → Deploy. The URL stays the same.
@@ -33,7 +33,7 @@ const ALLIANCES = [
 const TITLES = ["Chief Minister", "Noble Advisor"];
 const HEADERS = [
   "Timestamp", "Governor", "Game ID", "Alliance",
-  "Titles", "CM Days", "Availability (UTC)", "Availability (entered)", "Notes",
+  "Titles", "CM Days", "Availability (UTC)", "Availability (entered)", "Timezone", "Notes",
   "General (min)", "Soldier Training (min)", "Construction (min)", "Research (min)",
   "Total (min)",
   "General", "Soldier Training", "Construction", "Research",
@@ -69,6 +69,10 @@ function doPost(e) {
     const availEntered = String(av.summaryEntered || "").trim().slice(0, 200);
     if (!av.flexible && !availUtc) return reply({ ok: false, error: "Missing availability" });
 
+    // timezone / location ("UTC+10:00 · Brisbane, Sydney" or "UTC")
+    const tz = data.timezone || av.timezone || {};
+    const timezone = String(tz.label || tz.offset || "").slice(0, 80);
+
     const notes = String(data.notes || "").trim().slice(0, 200);
 
     const en = data.entries || {};
@@ -100,7 +104,7 @@ function doPost(e) {
     }
     sheet.appendRow([
       new Date(), gov, gameId, alliance,
-      titlesStr, cmDays, availUtc, availEntered, notes,
+      titlesStr, cmDays, availUtc, availEntered, timezone, notes,
       g, tr, c, r,
       g + tr + c + r,
       disp("general"), disp("training"), disp("construction"), disp("research"),
