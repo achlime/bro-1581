@@ -69,7 +69,8 @@
     <!-- GOVERNOR NAME -->
     <div class="field">
       <label for="govName">Governor Name <span class="req">*</span></label>
-      <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required />
+      <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required aria-describedby="err_govName" />
+      <p class="field-error" id="err_govName" role="alert"></p>
     </div>
 
     <!-- GAME ID -->
@@ -99,6 +100,7 @@
         <option value="Other">Other…</option>
       </select>
       <input type="text" id="allianceOther" placeholder="Type your alliance (e.g. [TAG] Name)" autocomplete="off" style="display:none;margin-top:10px" />
+      <p class="field-error" id="err_alliance" role="alert"></p>
     </div>
 
     <!-- ============ YOUR SPEEDUPS ============ -->
@@ -128,6 +130,7 @@
 
     <div class="su-rows" id="suRows"><!-- rows injected by JS --></div>
     <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row at zero if you have none of that type.</p>
+    <p class="field-error" id="err_speedups" role="alert"></p>
 
     <!-- ============ TITLES ============ -->
     <h3 class="form-section">Titles you want <span class="req">*</span></h3>
@@ -150,6 +153,7 @@
         </span>
       </label>
     </div>
+    <p class="field-error" id="err_titles" role="alert"></p>
 
     <div class="field" id="cmDaysWrap" style="display:none;margin-top:14px">
       <label>Best days for Chief Minister</label>
@@ -185,6 +189,7 @@
 
     <div id="windows"><!-- window rows injected by JS --></div>
     <button type="button" class="btn btn-ghost btn-sm" id="addWindow" style="margin-top:2px"><i class="fa-solid fa-plus"></i> Add another window</button>
+    <p class="field-error" id="err_availability" role="alert"></p>
 
     <!-- ============ NOTES ============ -->
     <div class="field" style="margin-top:26px">
@@ -290,6 +295,7 @@ function updateTotals() {
     document.getElementById(t.id + "_total").textContent = mins ? "= " + pretty(mins) : "";
   });
   inferTitles(); // suggest titles from the speedups (until the user overrides)
+  revalidate("speedups"); revalidate("titles");
 }
 function setRow(t, mins) {
   const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
@@ -670,7 +676,54 @@ function collectAvailability() {
     : utcParts.join("; ") + " UTC";
   return { flexible: false, timezone: tzInfo(), windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
 }
-function updateWindowsPreview() { /* UTC preview removed — windows convert on submit */ }
+/* ---------------- inline validation ---------------- */
+let attempted = false;
+const VKEYS = ["govName", "alliance", "speedups", "titles", "availability"];
+function fieldMsg(key) {
+  if (key === "govName") return document.getElementById("govName").value.trim() ? "" : "Enter your governor name.";
+  if (key === "alliance") {
+    const sel = document.getElementById("alliance").value;
+    if (!sel) return "Choose your alliance.";
+    if (sel === "Other" && !document.getElementById("allianceOther").value.trim()) return "Type your alliance name.";
+    return "";
+  }
+  if (key === "speedups") {
+    let any = false; TYPES.forEach(t => { if (rowMinutes(t.id) > 0) any = true; });
+    return any ? "" : "Add at least one speedup — upload a screenshot or type a total below.";
+  }
+  if (key === "titles") return selectedTitles().length ? "" : "Choose at least one title.";
+  if (key === "availability") return collectAvailability().valid ? "" : "Add a time window, or tick “I am flexible”.";
+  return "";
+}
+const ERR_CTRLS = { govName: ["govName"], alliance: ["alliance", "allianceOther"] };
+function setFieldError(key, msg) {
+  const el = document.getElementById("err_" + key);
+  if (el) { el.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> ' + msg; el.style.display = "flex"; }
+  const live = key === "alliance" ? [document.getElementById("alliance").value === "Other" ? "allianceOther" : "alliance"] : (ERR_CTRLS[key] || []);
+  (ERR_CTRLS[key] || []).forEach(id => { const c = document.getElementById(id); if (c) c.classList.remove("is-invalid"); });
+  live.forEach(id => { const c = document.getElementById(id); if (c) c.classList.add("is-invalid"); });
+}
+function clearFieldError(key) {
+  const el = document.getElementById("err_" + key);
+  if (el) { el.style.display = "none"; el.textContent = ""; }
+  (ERR_CTRLS[key] || []).forEach(id => { const c = document.getElementById(id); if (c) c.classList.remove("is-invalid"); });
+}
+function revalidate(key) { if (!attempted) return; const m = fieldMsg(key); m ? setFieldError(key, m) : clearFieldError(key); }
+function validateAll() {
+  attempted = true;
+  let first = null;
+  VKEYS.forEach(k => { const m = fieldMsg(k); if (m) { setFieldError(k, m); if (!first) first = k; } else clearFieldError(k); });
+  return first;
+}
+function focusFor(key) {
+  if (key === "govName") return document.getElementById("govName");
+  if (key === "alliance") return document.getElementById(document.getElementById("alliance").value === "Other" ? "allianceOther" : "alliance");
+  if (key === "speedups") return document.getElementById("general_d") || document.getElementById("shot");
+  if (key === "titles") return document.querySelector('input[name="title"]');
+  if (key === "availability") return document.querySelector(".win-from") || document.getElementById("flexible");
+  return null;
+}
+function updateWindowsPreview() { revalidate("availability"); }
 
 /* ---------------- submit ---------------- */
 document.getElementById("speedupForm").addEventListener("submit", async e => {
@@ -684,31 +737,24 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
   };
   err.style.display = "none"; ok.classList.remove("show");
 
+  const firstBad = validateAll();
+  if (firstBad) {
+    const el = focusFor(firstBad);
+    if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); try { el.focus({ preventScroll: true }); } catch (_) { if (el.focus) el.focus(); } }
+    return;
+  }
+
   const gov = document.getElementById("govName").value.trim();
-  if (!gov) return fail("Please enter your Governor name.", "govName");
   const gameId = document.getElementById("gameId").value.trim().slice(0, 30);
-
-  const allianceSel = document.getElementById("alliance").value;
   const alliance = resolveAlliance();
-  if (!allianceSel) return fail("Please choose your alliance.", "alliance");
-  if (allianceSel === "Other" && !alliance) return fail("Please type your alliance name.", "allianceOther");
-
   const entries = {};
-  let any = false;
   TYPES.forEach(t => {
     const mins = rowMinutes(t.id);
     entries[t.id] = { minutes: mins, display: pretty(mins) || "0" };
-    if (mins > 0) any = true;
   });
-  if (!any) return fail("Add your speedups — upload a screenshot, or type at least one in.", "shot");
-
   const titles = selectedTitles();
-  if (!titles.length) return fail("Choose at least one title — Chief Minister, Noble Advisor, or both.", "titleCards");
   const cmDays = titles.indexOf("Chief Minister") !== -1 ? selectedCmDays() : [];
-
   const av = collectAvailability();
-  if (!av.valid) return fail("Add at least one time window, or tick “I'm flexible”.", "windows");
-
   const notes = document.getElementById("notes").value.trim().slice(0, 200);
 
   if (!SCRIPT_URL) return fail("Submissions aren't connected yet — message your details to R4 Kadi in-game for now.");
@@ -729,6 +775,7 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
+    attempted = false; VKEYS.forEach(clearFieldError);
     titlesTouched = false; cmDaysTouched = false;
     refreshAllianceOther(); refreshTitleCards(); refreshDayChips();
     document.getElementById("windows").innerHTML = ""; addWindow();
@@ -767,10 +814,12 @@ buildRows();
 applyUnit("days");
 document.querySelectorAll("[data-unit]").forEach(b => b.addEventListener("click", () => applyUnit(b.dataset.unit)));
 
-document.getElementById("alliance").addEventListener("change", refreshAllianceOther);
+document.getElementById("govName").addEventListener("input", () => revalidate("govName"));
+document.getElementById("alliance").addEventListener("change", () => { refreshAllianceOther(); revalidate("alliance"); });
+document.getElementById("allianceOther").addEventListener("input", () => revalidate("alliance"));
 refreshAllianceOther();
 
-document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { titlesTouched = true; refreshTitleCards(); }));
+document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { titlesTouched = true; refreshTitleCards(); revalidate("titles"); }));
 document.querySelectorAll('input[name="cmDay"]').forEach(r => r.addEventListener("change", () => { cmDaysTouched = true; refreshDayChips(); }));
 
 buildTzSelect();

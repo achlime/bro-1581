@@ -1629,7 +1629,7 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
    ========================================================================== */
 .form-section {
   font-family: var(--display); font-weight: 700; font-size: 1.18rem; color: var(--gold-bright);
-  margin: 30px 0 14px; padding-top: 24px; border-top: 1px solid var(--line);
+  margin: 40px 0 18px; padding-top: 30px; border-top: 1px solid var(--line);
 }
 .title-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 600px) { .title-cards { grid-template-columns: 1fr; } }
@@ -1772,6 +1772,16 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
   outline: 2px solid var(--gold-bright); outline-offset: 2px;
 }
 
+/* inline field validation */
+.field-error {
+  display: none; align-items: center; gap: 8px;
+  color: var(--crimson-bright); font-size: .9rem; line-height: 1.4;
+  margin: 9px 0 0; font-family: var(--body);
+}
+.field-error i { font-size: .92em; flex: none; }
+.form .is-invalid { border-color: var(--crimson-bright); box-shadow: 0 0 0 1px var(--crimson-bright); }
+.form .is-invalid:focus { border-color: var(--crimson-bright); box-shadow: 0 0 0 3px rgba(214,77,77,.18); }
+
 /* collapsible info note (native <details>) */
 .info-accordion {
   background: var(--gold-soft); border: 1px solid var(--gold-line); border-radius: var(--radius);
@@ -1794,4 +1804,18 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 .info-accordion > p {
   margin: 0; padding: 0 16px 14px; color: var(--ink-dim);
   font-size: .96rem; line-height: 1.55;
+}
+
+/* ==========================================================================
+   MOBILE — roomier content width + comfortable touch targets on the form
+   ========================================================================== */
+@media (max-width: 560px) {
+  .form { padding: 22px 15px; }
+  .form-section { margin-top: 34px; padding-top: 26px; }
+  .hero-filter .seg button { min-height: 42px; }
+  .day-chip { min-height: 44px; }
+  .flex-line { padding: 5px 0; }
+  #addWindow.btn-sm { min-height: 42px; padding-top: 11px; padding-bottom: 11px; }
+  .win-del { min-height: 44px; }
+  .info-accordion > summary { padding: 15px 16px; }
 }
