@@ -116,10 +116,10 @@
       <div class="toggle-line">
         <span class="form-note">My numbers are in</span>
         <div class="hero-filter" style="margin:0">
-          <div class="seg" role="group" aria-label="Unit">
-            <button type="button" data-unit="days" class="active">Day(s)</button>
-            <button type="button" data-unit="hrs">Hrs</button>
-            <button type="button" data-unit="min">Min</button>
+          <div class="seg" role="group" aria-label="Your numbers are shown in">
+            <button type="button" data-unit="days" class="active" aria-pressed="true">Day(s)</button>
+            <button type="button" data-unit="hrs" aria-pressed="false">Hrs</button>
+            <button type="button" data-unit="min" aria-pressed="false">Min</button>
           </div>
         </div>
       </div>
@@ -169,10 +169,9 @@
     </details>
 
     <div class="hero-filter" style="margin:0 0 14px">
-      <div class="seg" role="group" aria-label="Time mode">
-        <button type="button" data-tz="local" class="active">My local time</button>
-        <button type="button" data-tz="utc">UTC</button>
-        <button type="button" data-tz="server">Server time</button>
+      <div class="seg" role="group" aria-label="Enter times in">
+        <button type="button" data-tz="local" class="active" aria-pressed="true">My local time</button>
+        <button type="button" data-tz="utc" aria-pressed="false">UTC / Server time</button>
       </div>
     </div>
 
@@ -195,14 +194,14 @@
 
     <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
 
-    <div class="form-success" id="okBox">
+    <div class="form-success" id="okBox" role="status" aria-live="polite">
       <i class="fa-solid fa-circle-check"></i>
       <div style="flex:1">
         <strong style="font-family:var(--display);color:var(--ink)">Application received — thanks!</strong>
         <div style="font-size:1rem;color:var(--muted);margin-top:2px" id="okText">Leadership will sort the title slots from here.</div>
       </div>
     </div>
-    <div class="callout bad" id="errBox" style="display:none">
+    <div class="callout bad" id="errBox" style="display:none" role="alert" aria-live="assertive">
       <strong>That didn't send</strong>
       <span id="errText">Please try again, or message your details to R4 Kadi in-game.</span>
     </div>
@@ -217,6 +216,7 @@
       <div class="rule"><i class="fa-solid fa-gem"></i></div>
       <div>Looking for the <a class="ext-link" href="index.html">Bear Trap Battle Guide</a>?</div>
       <div style="margin-top:8px">Kingshot Server #1581 · KvK title applications go to kingdom leadership only.</div>
+      <div style="margin-top:8px">Built by [BRO] Achlime</div>
     </div>
   </div>
 </footer>
@@ -256,7 +256,10 @@ function applyUnit(u) {
   const totals = {};
   TYPES.forEach(t => { totals[t.id] = rowMinutes(t.id); });
   unit = u;
-  document.querySelectorAll("[data-unit]").forEach(b => b.classList.toggle("active", b.dataset.unit === u));
+  document.querySelectorAll("[data-unit]").forEach(b => {
+    const on = b.dataset.unit === u;
+    b.classList.toggle("active", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
   document.querySelectorAll(".su-row").forEach(r => {
     r.querySelector(".su-days").style.display = (u === "days") ? "" : "none";
     r.querySelector(".su-hrs").style.display  = (u === "min") ? "none" : "";
@@ -344,12 +347,18 @@ function parseOcr(text) {
     stops.forEach(s => { if (s > from + 5 && s < end) end = s; });
     return end;
   };
+  // Duration units across the 10 supported languages (day / hour / minute).
+  // Digits are universal; only the unit word changes. CJK glyphs are single
+  // characters, so they read even when surrounding text is garbled.
+  const DAY = "days?|da?y|tage?|jours?|giorn[io]|dni|dzie\\w*|hari|日|天|일";
+  const HR  = "hours?|hrs?|stunden?|std|heures?|ore?|godz\\w*|jam|小时|時|时|시간";
+  const MIN = "minutes?|mins?|minut\\w*|menit|分钟|分|분";
+  const TOK = new RegExp("([\\d.,]+)\\s*(?:(" + DAY + ")|(" + HR + ")|(" + MIN + "))", "gi");
+  const mult = m => (m[2] ? 1440 : m[3] ? 60 : 1);
   const grab = seg => {
-    const d = seg.match(/([\d,.]+)\s*da?y/);
-    const h = seg.match(/([\d,.]+)\s*hr/);
-    const m = seg.match(/([\d,.]+)\s*min/);
-    if (!d && !h && !m) return null;
-    return (d ? num(d[1]) * 1440 : 0) + (h ? num(h[1]) * 60 : 0) + (m ? num(m[1]) : 0);
+    TOK.lastIndex = 0; let total = 0, any = false, mm;
+    while ((mm = TOK.exec(seg))) { any = true; total += num(mm[1]) * mult(mm); }
+    return any ? total : null;
   };
   const found = {};
   ORDER.forEach(id => {
@@ -358,12 +367,11 @@ function parseOcr(text) {
     if (v != null) found[id] = v;
   });
   const clusters = seg => {
-    const re = /([\d,.]+)\s*(da?y|hr|min)/g;
-    const out = []; let last = -1; let m;
-    while ((m = re.exec(seg))) {
-      const r = m[2][0] === "d" ? 0 : m[2][0] === "h" ? 1 : 2;
+    TOK.lastIndex = 0; const out = []; let last = -1; let m;
+    while ((m = TOK.exec(seg))) {
+      const r = m[2] ? 0 : m[3] ? 1 : 2;
       if (r <= last || !out.length) out.push(0);
-      out[out.length - 1] += num(m[1]) * (r === 0 ? 1440 : r === 1 ? 60 : 1);
+      out[out.length - 1] += num(m[1]) * mult(m);
       last = r;
     }
     return out;
@@ -384,7 +392,30 @@ function parseOcr(text) {
       if (idx >= 0 && cs[idx] > 0) found[id] = cs[idx];
     }
   });
+  // Language-independent fallback: if the English row labels anchored nothing
+  // (e.g. a Korean / Arabic game UI), the four rows are still in their fixed
+  // order, so map the duration clusters top-to-bottom onto the four types.
+  if (!Object.keys(found).length) {
+    const cs = clusters(t);
+    ORDER.forEach((id, i) => { if (cs[i] > 0) found[id] = cs[i]; });
+  }
   return found;
+}
+/* Pick Tesseract models from the page language so non-Latin game UIs (Korean,
+   Chinese, Arabic, Hindi) are actually legible. English is always included for
+   the universal digits. Falls back to English-only if detection is unclear. */
+const TESS = {
+  de: "deu", ko: "kor", zh: "chi_sim", "zh-cn": "chi_sim", "zh-tw": "chi_tra",
+  id: "ind", pl: "pol", ar: "ara", it: "ita", fr: "fra", hi: "hin", en: "eng"
+};
+function ocrLangs() {
+  let code = "en";
+  try {
+    const tl = new URLSearchParams(location.search).get("_x_tr_tl");
+    code = (tl || document.documentElement.lang || "en").toLowerCase();
+  } catch (e) {}
+  const extra = TESS[code] || TESS[code.split("-")[0]];
+  return (extra && extra !== "eng") ? ("eng+" + extra) : "eng";
 }
 async function runOcr(dataUrl) {
   ocrStatus("Reading your screenshot… (10–20 seconds)", true);
@@ -397,7 +428,7 @@ async function runOcr(dataUrl) {
         document.head.appendChild(s);
       });
     }
-    const { data } = await Tesseract.recognize(dataUrl, "eng");
+    const { data } = await Tesseract.recognize(dataUrl, ocrLangs());
     console.log("[speedups] OCR text:\n" + (data.text || "(empty)"));
     const found = parseOcr(data.text || "");
     const names = { general: "General", training: "Soldier Training", construction: "Construction", research: "Research" };
@@ -610,14 +641,16 @@ function applyFlexible() {
 }
 function applyTimeMode(m) {
   timeMode = m;
-  document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
+  document.querySelectorAll("[data-tz]").forEach(b => {
+    const on = b.dataset.tz === m;
+    b.classList.toggle("active", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
   document.getElementById("tzWrap").style.display = (m === "local") ? "" : "none";
   tickTz(); updateWindowsPreview();
 }
 function tzInfo() {
   if (timeMode === "local") return { mode: "local", offset: fmtOffset(tzOffset), label: tzLabel };
-  if (timeMode === "server") return { mode: "server", offset: "UTC+0:00", label: "Server time (UTC)" };
-  return { mode: "utc", offset: "UTC+0:00", label: "UTC" };
+  return { mode: "utc", offset: "UTC+0:00", label: "UTC / Server time" };
 }
 function collectAvailability() {
   if (document.getElementById("flexible").checked) {
@@ -634,7 +667,7 @@ function collectAvailability() {
   const summaryUtc = utcParts.join("; ");
   const summaryEntered = timeMode === "local"
     ? localParts.join("; ") + " (" + fmtOffset(tzOffset) + ")"
-    : utcParts.join("; ") + (timeMode === "server" ? " server time" : " UTC");
+    : utcParts.join("; ") + " UTC";
   return { flexible: false, timezone: tzInfo(), windows, summaryUtc, summaryEntered, valid: windows.length > 0 };
 }
 function updateWindowsPreview() { /* UTC preview removed — windows convert on submit */ }

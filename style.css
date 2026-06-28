@@ -1759,6 +1759,19 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 }
 .ext-link:hover { border-bottom-color: var(--gold-bright); }
 
+/* ==========================================================================
+   ACCESSIBILITY — visible keyboard focus (WCAG 2.4.7). 0-specificity :where()
+   so it never fights component styles; only adds an outline on keyboard focus.
+   ========================================================================== */
+:where(.btn, .lang-btn, .seg button, .win-del, .ext-link, .lang-menu a,
+  .info-accordion > summary, .form input, .form select, .form textarea,
+  input[type="file"]):focus-visible {
+  outline: 2px solid var(--gold-bright); outline-offset: 2px;
+}
+.title-card:focus-within, .day-chip:focus-within, .flex-line:focus-within {
+  outline: 2px solid var(--gold-bright); outline-offset: 2px;
+}
+
 /* collapsible info note (native <details>) */
 .info-accordion {
   background: var(--gold-soft); border: 1px solid var(--gold-line); border-radius: var(--radius);
