@@ -24,9 +24,16 @@
  */
 
 const FOLDER_NAME = "BRO Speedup Screenshots";
-const ALLIANCES = ["[BRO] Brotherhood", "[bra] BroAcademy", "[bro] BROacademy"];
+// Known alliances. "Other" submissions send free text instead — accepted but sanitized.
+const ALLIANCES = [
+  "[APX] Predator", "[BRO] Brotherhood", "[Jaz] JustaZoo", "[AMF] AhjinSeoul",
+  "[THC] TheHighCouncil", "[bro] BROacademy", "[fam] KingsQueens", "[jaz] JustaZoo2",
+  "[2UP] Teamwork777", "[bra] BroAcademy", "[TVB] TheVikings2b", "[apx] farmacademy"
+];
+const TITLES = ["Chief Minister", "Noble Advisor"];
 const HEADERS = [
-  "Timestamp", "Governor", "Alliance",
+  "Timestamp", "Governor", "Game ID", "Alliance", "Title",
+  "Preferred Time (UTC)", "Preferred Time (entered)", "Notes",
   "General (min)", "Soldier Training (min)", "Construction (min)", "Research (min)",
   "Total (min)",
   "General", "Soldier Training", "Construction", "Research",
@@ -39,15 +46,27 @@ function doPost(e) {
     const gov = String(data.governor || "").trim().slice(0, 60);
     if (!gov) return reply({ ok: false, error: "Missing governor name" });
 
-    // alliance must be one of the known options (defends the public endpoint)
-    let alliance = String(data.alliance || "").trim();
-    if (ALLIANCES.indexOf(alliance) === -1) alliance = "";
-    if (!alliance) return reply({ ok: false, error: "Missing or invalid alliance" });
+    const gameId = String(data.gameId || "").trim().slice(0, 30);
+
+    // alliance: a known option, OR any non-empty free text (the "Other" path)
+    let alliance = String(data.alliance || "").trim().slice(0, 60);
+    if (!alliance) return reply({ ok: false, error: "Missing alliance" });
+
+    // title must be one of the known governor titles
+    const title = String(data.title || "").trim();
+    if (TITLES.indexOf(title) === -1) return reply({ ok: false, error: "Missing or invalid title" });
+
+    // preferred time must be HH:MM (UTC, computed client-side)
+    const prefUtc = String(data.preferredUtc || "").trim();
+    if (!/^\d{1,2}:\d{2}$/.test(prefUtc)) return reply({ ok: false, error: "Missing or invalid preferred time" });
+    const prefEntered = String(data.preferredEntered || "").trim().slice(0, 80);
+    const notes = String(data.notes || "").trim().slice(0, 200);
 
     const en = data.entries || {};
     const mins = t => Math.max(0, parseInt(en[t] && en[t].minutes, 10) || 0);
     const disp = t => String((en[t] && en[t].display) || "0").slice(0, 40);
     const c = mins("construction"), r = mins("research"), tr = mins("training"), g = mins("general");
+    if (g + tr + c + r <= 0) return reply({ ok: false, error: "No speedups entered" });
 
     // save screenshot to Drive (if provided)
     let shotUrl = "";
@@ -71,7 +90,8 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
     sheet.appendRow([
-      new Date(), gov, alliance,
+      new Date(), gov, gameId, alliance, title,
+      prefUtc, prefEntered, notes,
       g, tr, c, r,
       g + tr + c + r,
       disp("general"), disp("training"), disp("construction"), disp("research"),

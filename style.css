@@ -1620,3 +1620,31 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 @media (max-width: 640px) {
   .su-cell input { width: 84px; }
 }
+
+/* ==========================================================================
+   KvK TITLE APPLICATION — section heading + selectable title cards
+   ========================================================================== */
+.form-section {
+  font-family: var(--display); font-weight: 700; font-size: 1.18rem; color: var(--gold-bright);
+  margin: 30px 0 14px; padding-top: 24px; border-top: 1px solid var(--line);
+}
+.title-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .title-cards { grid-template-columns: 1fr; } }
+.title-card {
+  position: relative; display: block; cursor: pointer;
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.title-card:hover { border-color: var(--gold-line); }
+.title-card input { position: absolute; opacity: 0; pointer-events: none; }
+.title-card.selected {
+  border-color: var(--gold); background: var(--gold-soft);
+  box-shadow: 0 0 0 1px var(--gold-line);
+}
+.tc-name { display: flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 700; font-size: 1.08rem; color: var(--ink); }
+.tc-name i { color: var(--gold); }
+.title-card.selected .tc-name { color: var(--gold-bright); }
+.tc-buff { display: block; margin-top: 7px; font-size: .96rem; color: var(--ink-dim); line-height: 1.4; }
+.tc-when { display: block; margin-top: 5px; font-size: .84rem; color: var(--muted); }
+/* preferred-time input */
+#prefTime { color-scheme: dark; }

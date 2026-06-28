@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Submit Your Speedups — Brotherhood · Kingshot #1581</title>
-<meta name="description" content="Submit your Construction, Research, Troop Training and General speedups for KvK title allocation. [BRO] Brotherhood, Server #1581." />
+<title>KvK Title Application — Kingshot #1581</title>
+<meta name="description" content="Apply for a KvK governor title (Chief Minister / Noble Advisor), tell us your preferred time, and submit your speedups. Kingshot Server #1581." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,7 +20,7 @@
       <span class="crest"><i class="fa-solid fa-chess-rook"></i></span>
       <span class="brand-text">
         <span class="brand-name">BROTHERHOOD</span>
-        <span class="brand-sub">Speedup Census · #1581</span>
+        <span class="brand-sub">KvK Titles · #1581</span>
       </span>
     </a>
     <div class="nav-right">
@@ -46,9 +46,9 @@
 
 <!-- ===================== PAGE HEADER ===================== -->
 <section class="page-header">
-  <div class="crest-lg"><i class="fa-solid fa-forward-fast"></i></div>
-  <h1>Submit Your Speedups</h1>
-  <p>We're allocating KvK titles based on who's ready to burn the most speedups. Tell us what you're holding — takes 2 minutes.</p>
+  <div class="crest-lg"><i class="fa-solid fa-crown"></i></div>
+  <h1>KvK Title Application</h1>
+  <p>Apply for a governor title for KvK — tell us who you are, the title you want and when, and your speedups so leadership can sort the slots. Takes 2 minutes.</p>
   <div class="badges" style="margin-top:22px">
     <span class="badge">KvK Prep</span>
     <span class="badge alt">Server #1581</span>
@@ -70,16 +70,82 @@
       <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required />
     </div>
 
+    <!-- GAME ID -->
+    <div class="field">
+      <label for="gameId">Game ID <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <p class="form-note" style="margin:0 0 8px">Helps us find you if you change your name. In game: tap your avatar → your ID is under your name.</p>
+      <input type="text" id="gameId" name="gameId" inputmode="numeric" placeholder="e.g. 123456789" autocomplete="off" />
+    </div>
+
     <!-- ALLIANCE -->
     <div class="field">
       <label for="alliance">Alliance <span class="req">*</span></label>
       <select id="alliance" name="alliance" required>
         <option value="" disabled selected>Choose your alliance…</option>
+        <option value="[APX] Predator">[APX] Predator</option>
         <option value="[BRO] Brotherhood">[BRO] Brotherhood</option>
-        <option value="[bra] BroAcademy">[bra] BroAcademy</option>
+        <option value="[Jaz] JustaZoo">[Jaz] JustaZoo</option>
+        <option value="[AMF] AhjinSeoul">[AMF] AhjinSeoul</option>
+        <option value="[THC] TheHighCouncil">[THC] TheHighCouncil</option>
         <option value="[bro] BROacademy">[bro] BROacademy</option>
+        <option value="[fam] KingsQueens">[fam] KingsQueens</option>
+        <option value="[jaz] JustaZoo2">[jaz] JustaZoo2</option>
+        <option value="[2UP] Teamwork777">[2UP] Teamwork777</option>
+        <option value="[bra] BroAcademy">[bra] BroAcademy</option>
+        <option value="[TVB] TheVikings2b">[TVB] TheVikings2b</option>
+        <option value="[apx] farmacademy">[apx] farmacademy</option>
+        <option value="Other">Other…</option>
       </select>
+      <input type="text" id="allianceOther" placeholder="Type your alliance (e.g. [TAG] Name)" autocomplete="off" style="display:none;margin-top:10px" />
     </div>
+
+    <!-- TITLE -->
+    <div class="field">
+      <label>Title you're applying for <span class="req">*</span></label>
+      <div class="title-cards" id="titleCards">
+        <label class="title-card">
+          <input type="radio" name="title" value="Chief Minister" />
+          <span class="tc-body">
+            <span class="tc-name"><i class="fa-solid fa-scale-balanced"></i> Chief Minister</span>
+            <span class="tc-buff">+10% Construction, Research &amp; Training speed</span>
+            <span class="tc-when">Used Day 1, 2 &amp; 5 — construction / truegold</span>
+          </span>
+        </label>
+        <label class="title-card">
+          <input type="radio" name="title" value="Noble Advisor" />
+          <span class="tc-body">
+            <span class="tc-name"><i class="fa-solid fa-chess-knight"></i> Noble Advisor</span>
+            <span class="tc-buff">+50% Training speed + 200 training capacity</span>
+            <span class="tc-when">Used Day 4 — troop training (overflow → Chief Minister)</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <!-- PREFERRED TIME -->
+    <div class="field">
+      <label for="prefTime">Preferred time <span class="req">*</span></label>
+      <p class="form-note" style="margin:0 0 10px">When would you like the title? Pick a time, and tell us if it's your local time or UTC.</p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <input type="time" id="prefTime" name="prefTime" required style="width:auto" />
+        <div class="hero-filter" style="margin:0">
+          <div class="seg" role="group" aria-label="Time zone">
+            <button type="button" data-tz="local" class="active">My local time</button>
+            <button type="button" data-tz="utc">UTC</button>
+          </div>
+        </div>
+      </div>
+      <div id="utcPreview" class="ocr-status" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="field">
+      <label for="notes">Notes <span class="text-muted" style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <input type="text" id="notes" name="notes" placeholder="e.g. prefer Day 2, or overflow CM is fine" autocomplete="off" />
+    </div>
+
+    <!-- SPEEDUPS SECTION -->
+    <h3 class="form-section">Your speedups <span class="req">*</span></h3>
 
     <!-- SCREENSHOT + OCR -->
     <div class="field">
@@ -110,13 +176,13 @@
 
     <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row blank (or zero) if you have none of that type.</p>
 
-    <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Speedups</button>
+    <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
 
     <div class="form-success" id="okBox">
       <i class="fa-solid fa-circle-check"></i>
       <div style="flex:1">
-        <strong style="font-family:var(--display);color:var(--ink)">Got it — thanks!</strong>
-        <div style="font-size:1rem;color:var(--muted);margin-top:2px" id="okText">Your speedups are logged for the KvK title list.</div>
+        <strong style="font-family:var(--display);color:var(--ink)">Application received — thanks!</strong>
+        <div style="font-size:1rem;color:var(--muted);margin-top:2px" id="okText">Leadership will sort the title slots from here.</div>
       </div>
     </div>
     <div class="callout bad" id="errBox" style="display:none">
@@ -132,7 +198,7 @@
   <div class="wrap">
     <div class="footer-bottom" style="border-top:none;padding-top:0">
       <div class="rule"><i class="fa-solid fa-gem"></i></div>
-      <div>[BRO] Brotherhood · Kingshot Server #1581 · Your data goes to alliance leadership only.</div>
+      <div>Kingshot Server #1581 · KvK title applications go to kingdom leadership only.</div>
     </div>
   </div>
 </footer>
@@ -392,22 +458,83 @@ document.getElementById("shot").addEventListener("change", async e => {
   }
 });
 
+/* ---------------- alliance "Other" ---------------- */
+function refreshAllianceOther() {
+  const sel = document.getElementById("alliance");
+  const other = document.getElementById("allianceOther");
+  const isOther = sel.value === "Other";
+  other.style.display = isOther ? "block" : "none";
+  if (!isOther) other.value = "";
+}
+function resolveAlliance() {
+  const sel = document.getElementById("alliance");
+  if (sel.value === "Other") return document.getElementById("allianceOther").value.trim();
+  return sel.value;
+}
+
+/* ---------------- preferred time (UTC / local) ---------------- */
+let timeMode = "local";
+const TZ = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } })();
+function localToUtc(hhmm) {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(hhmm || "");
+  if (!m) return "";
+  const localMin = (+m[1]) * 60 + (+m[2]);
+  const utcMin = (((localMin + new Date().getTimezoneOffset()) % 1440) + 1440) % 1440;
+  return String(Math.floor(utcMin / 60)).padStart(2, "0") + ":" + String(utcMin % 60).padStart(2, "0");
+}
+function applyTimeMode(m) {
+  timeMode = m;
+  document.querySelectorAll("[data-tz]").forEach(b => b.classList.toggle("active", b.dataset.tz === m));
+  updateUtcPreview();
+}
+function updateUtcPreview() {
+  const t = document.getElementById("prefTime").value;
+  const box = document.getElementById("utcPreview");
+  if (!t) { box.style.display = "none"; return; }
+  box.style.display = "flex";
+  if (timeMode === "utc") {
+    box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> Stored as <strong>' + t + ' UTC</strong>.';
+  } else {
+    box.innerHTML = '<i class="fa-solid fa-clock" style="color:var(--gold)"></i> ' + t + ' your time = <strong>' + localToUtc(t) + ' UTC</strong>'
+      + (TZ ? ' <span style="color:var(--muted)">(' + TZ + ')</span>' : '');
+  }
+}
+function preferredTimes() {
+  const t = document.getElementById("prefTime").value;
+  if (!t) return null;
+  if (timeMode === "utc") return { utc: t, entered: t + " UTC" };
+  return { utc: localToUtc(t), entered: t + " Local" + (TZ ? " · " + TZ : "") };
+}
+
 /* ---------------- submit ---------------- */
 document.getElementById("speedupForm").addEventListener("submit", async e => {
   e.preventDefault();
   const err = document.getElementById("errBox"), ok = document.getElementById("okBox");
+  const fail = (msg, focusId) => {
+    document.getElementById("errText").textContent = msg;
+    err.style.display = "block";
+    if (focusId) { const el = document.getElementById(focusId); if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.focus(); } }
+  };
   err.style.display = "none"; ok.classList.remove("show");
 
   const gov = document.getElementById("govName").value.trim();
-  if (!gov) { document.getElementById("govName").focus(); return; }
+  if (!gov) return fail("Please enter your Governor name.", "govName");
 
-  const alliance = document.getElementById("alliance").value;
-  if (!alliance) {
-    document.getElementById("errText").textContent = "Please choose your alliance.";
-    err.style.display = "block";
-    document.getElementById("alliance").focus();
-    return;
-  }
+  const gameId = document.getElementById("gameId").value.trim().slice(0, 30);
+
+  const allianceSel = document.getElementById("alliance").value;
+  const alliance = resolveAlliance();
+  if (!allianceSel) return fail("Please choose your alliance.", "alliance");
+  if (allianceSel === "Other" && !alliance) return fail("Please type your alliance name.", "allianceOther");
+
+  const titleEl = document.querySelector('input[name="title"]:checked');
+  const title = titleEl ? titleEl.value : "";
+  if (!title) return fail("Please choose the title you're applying for.", "titleCards");
+
+  const pt = preferredTimes();
+  if (!pt || !pt.utc) return fail("Please enter your preferred time.", "prefTime");
+
+  const notes = document.getElementById("notes").value.trim().slice(0, 200);
 
   const entries = {};
   let any = false;
@@ -431,22 +558,29 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" }, // simple request: no CORS preflight
-      body: JSON.stringify({ governor: gov, alliance, unit, entries, screenshot: shotData })
+      body: JSON.stringify({
+        governor: gov, gameId, alliance, title,
+        preferredUtc: pt.utc, preferredEntered: pt.entered, notes,
+        unit, entries, screenshot: shotData
+      })
     });
     const out = await res.json().catch(() => ({ ok: res.ok }));
     if (!out.ok) throw new Error(out.error || "Server error");
     ok.classList.add("show");
     document.getElementById("okText").textContent =
-      `Logged for ${gov} (${alliance}): ` + TYPES.map(t => `${t.label} ${entries[t.id].display}`).join(" · ");
+      `${title} at ${pt.utc} UTC — logged for ${gov} (${alliance}).`;
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
+    document.getElementById("utcPreview").style.display = "none";
+    refreshAllianceOther();
+    applyTimeMode("local");
     updateTotals();
   } catch (ex) {
-    document.getElementById("errText").textContent = "Couldn't reach the collection sheet. Try again in a minute, or message your numbers to R4 Kadi in-game.";
+    document.getElementById("errText").textContent = "Couldn't reach the collection sheet. Try again in a minute, or message your details to R4 Kadi in-game.";
     err.style.display = "block";
   } finally {
-    btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Speedups';
+    btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
   }
 });
 
@@ -481,6 +615,19 @@ window.addEventListener("unhandledrejection", e => showError((e.reason && (e.rea
 buildRows();
 applyUnit("days");
 document.querySelectorAll("[data-unit]").forEach(b => b.addEventListener("click", () => applyUnit(b.dataset.unit)));
+
+// alliance "Other" + preferred-time controls
+document.getElementById("alliance").addEventListener("change", refreshAllianceOther);
+refreshAllianceOther();
+document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", () => applyTimeMode(b.dataset.tz)));
+document.getElementById("prefTime").addEventListener("input", updateUtcPreview);
+applyTimeMode("local");
+
+// highlight the chosen title card
+document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => {
+  document.querySelectorAll(".title-card").forEach(c => c.classList.toggle("selected", c.querySelector("input").checked));
+}));
+
 if (!SCRIPT_URL) document.getElementById("setupNotice").style.display = "block";
 </script>
 </body>
