@@ -37,11 +37,11 @@
 <!-- ===================== PAGE HEADER ===================== -->
 <section class="page-header">
   <div class="crest-lg"><i class="fa-solid fa-crown"></i></div>
-  <h1>KvK Title Application</h1>
-  <p>Choose a title, add your speedups, and pick the times that suit you.</p>
-  <p style="margin-top:12px"><a class="ext-link" href="https://kingshotdata.com/events/kingdom-of-power-kvk-event/" target="_blank" rel="noopener">New to KvK? Read the full event guide <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.78em"></i></a></p>
+  <h1 data-i18n="h1">KvK Title Application</h1>
+  <p data-i18n="tagline">Choose a title, add your speedups, and pick the times that suit you.</p>
+  <p style="margin-top:12px"><a class="ext-link" href="https://kingshotdata.com/events/kingdom-of-power-kvk-event/" target="_blank" rel="noopener"><span data-i18n="guideLink">New to KvK? Read the full event guide</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.78em"></i></a></p>
   <div class="badges" style="margin-top:22px">
-    <span class="badge">KvK Prep</span>
+    <span class="badge" data-i18n="badgePrep">KvK Prep</span>
     <span class="badge alt">Server #1581</span>
   </div>
 </section>
@@ -57,23 +57,23 @@
 
     <!-- GOVERNOR NAME -->
     <div class="field">
-      <label for="govName">Governor Name <span class="req">*</span></label>
-      <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" autocomplete="nickname" required aria-describedby="err_govName" />
+      <label for="govName"><span data-i18n="govLabel">Governor Name</span> <span class="req">*</span></label>
+      <input type="text" id="govName" name="govName" placeholder="Your exact in-game name" data-i18n-ph="govPh" autocomplete="nickname" required aria-describedby="err_govName" />
       <p class="field-error" id="err_govName" role="alert"></p>
     </div>
 
     <!-- GAME ID -->
     <div class="field">
-      <label for="gameId">Game ID <span class="opt">(optional)</span></label>
-      <p class="form-note" style="margin:0 0 8px">Helps us find you if you change your name. In game: tap your avatar → your ID is under your name.</p>
-      <input type="text" id="gameId" name="gameId" inputmode="numeric" placeholder="e.g. 123456789" autocomplete="off" />
+      <label for="gameId"><span data-i18n="gameIdLabel">Game ID</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+      <p class="form-note" style="margin:0 0 8px" data-i18n="gameIdNote">Helps us find you if you change your name. In game: tap your avatar → your ID is under your name.</p>
+      <input type="text" id="gameId" name="gameId" inputmode="numeric" placeholder="e.g. 123456789" data-i18n-ph="gameIdPh" autocomplete="off" />
     </div>
 
     <!-- ALLIANCE -->
     <div class="field">
-      <label for="alliance">Alliance <span class="req">*</span></label>
+      <label for="alliance"><span data-i18n="allianceLabel">Alliance</span> <span class="req">*</span></label>
       <select id="alliance" name="alliance" required>
-        <option value="" disabled selected>Choose your alliance…</option>
+        <option value="" disabled selected data-i18n="alliancePick">Choose your alliance…</option>
         <option value="[APX] Predator">[APX] Predator</option>
         <option value="[BRO] Brotherhood">[BRO] Brotherhood</option>
         <option value="[Jaz] JustaZoo">[Jaz] JustaZoo</option>
@@ -86,18 +86,18 @@
         <option value="[bra] BroAcademy">[bra] BroAcademy</option>
         <option value="[TVB] TheVikings2b">[TVB] TheVikings2b</option>
         <option value="[apx] farmacademy">[apx] farmacademy</option>
-        <option value="Other">Other…</option>
+        <option value="Other" data-i18n="allianceOther">Other…</option>
       </select>
-      <input type="text" id="allianceOther" placeholder="Type your alliance (e.g. [TAG] Name)" autocomplete="off" style="display:none;margin-top:10px" />
+      <input type="text" id="allianceOther" placeholder="Type your alliance (e.g. [TAG] Name)" data-i18n-ph="allianceOtherPh" autocomplete="off" style="display:none;margin-top:10px" />
       <p class="field-error" id="err_alliance" role="alert"></p>
     </div>
 
     <!-- ============ YOUR SPEEDUPS ============ -->
-    <h3 class="form-section">Your speedups <span class="req">*</span></h3>
+    <h3 class="form-section"><span data-i18n="speedupsHead">Your speedups</span> <span class="req">*</span></h3>
 
     <div class="field">
-      <label for="shot">Screenshot <span class="opt">(optional)</span></label>
-      <p class="form-note" style="margin:0 0 10px">Upload your speedup screen and we will read the numbers for you. In game: <strong>Backpack → Speedups → Overview</strong>.</p>
+      <label for="shot"><span data-i18n="shotLabel">Screenshot</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+      <p class="form-note" style="margin:0 0 10px" data-i18n-html="shotNote">Upload your speedup screen and we will read the numbers for you. In game: <strong>Backpack → Speedups → Overview</strong>.</p>
       <input type="file" id="shot" accept="image/*" />
       <div id="ocrStatus" class="ocr-status" style="display:none"></div>
       <img id="shotPreview" alt="Screenshot preview" style="display:none;max-width:280px;border-radius:6px;border:1px solid var(--line);margin-top:10px" />
@@ -105,106 +105,106 @@
 
     <div class="field">
       <div class="toggle-line">
-        <span class="form-note">My numbers are in</span>
+        <span class="form-note" data-i18n="unitLead">My numbers are in</span>
         <div class="hero-filter" style="margin:0">
           <div class="seg" role="group" aria-label="Your numbers are shown in">
-            <button type="button" data-unit="days" class="active" aria-pressed="true">Day(s)</button>
-            <button type="button" data-unit="hrs" aria-pressed="false">Hrs</button>
-            <button type="button" data-unit="min" aria-pressed="false">Min</button>
+            <button type="button" data-unit="days" class="active" aria-pressed="true" data-i18n="unitDays">Day(s)</button>
+            <button type="button" data-unit="hrs" aria-pressed="false" data-i18n="unitHrs">Hrs</button>
+            <button type="button" data-unit="min" aria-pressed="false" data-i18n="unitMin">Min</button>
           </div>
         </div>
       </div>
-      <p class="form-note" style="margin:8px 0 0">Match the unit shown at the bottom of the game's Overview panel.</p>
+      <p class="form-note" style="margin:8px 0 0" data-i18n="unitNote">Match the unit shown at the bottom of the game's Overview panel.</p>
     </div>
 
     <div class="su-rows" id="suRows"><!-- rows injected by JS --></div>
-    <p class="form-note"><i class="fa-solid fa-circle-info"></i> Leave a row at zero if you have none of that type.</p>
+    <p class="form-note"><i class="fa-solid fa-circle-info"></i> <span data-i18n="zeroNote">Leave a row at zero if you have none of that type.</span></p>
     <p class="field-error" id="err_speedups" role="alert"></p>
 
     <!-- ============ TITLES ============ -->
-    <h3 class="form-section">Titles you want <span class="req">*</span></h3>
-    <p class="form-note" style="margin:0 0 14px">Pick one or both.</p>
+    <h3 class="form-section"><span data-i18n="titlesHead">Titles you want</span> <span class="req">*</span></h3>
+    <p class="form-note" style="margin:0 0 14px" data-i18n="titlesNote">Pick one or both.</p>
     <div class="title-cards" id="titleCards">
       <label class="title-card" data-title="Chief Minister">
         <input type="checkbox" name="title" value="Chief Minister" />
         <span class="tc-body">
           <span class="tc-name"><i class="fa-solid fa-scale-balanced"></i> <span class="tc-title" data-key="cm">Chief Minister</span></span>
-          <span class="tc-buff">+10% Construction, Research &amp; Training speed</span>
-          <span class="tc-when">Days 1, 2 &amp; 5 — construction / research / truegold</span>
+          <span class="tc-buff" data-i18n="cmBuff">+10% Construction, Research &amp; Training speed</span>
+          <span class="tc-when" data-i18n="cmWhen">Days 1, 2 &amp; 5 — construction / research / truegold</span>
         </span>
       </label>
       <label class="title-card" data-title="Noble Advisor">
         <input type="checkbox" name="title" value="Noble Advisor" />
         <span class="tc-body">
           <span class="tc-name"><i class="fa-solid fa-chess-knight"></i> <span class="tc-title" data-key="na">Noble Advisor</span></span>
-          <span class="tc-buff">+50% Training speed + 200 training capacity</span>
-          <span class="tc-when">Day 4 — troop training</span>
+          <span class="tc-buff" data-i18n="naBuff">+50% Training speed + 200 training capacity</span>
+          <span class="tc-when" data-i18n="naWhen">Day 4 — troop training</span>
         </span>
       </label>
     </div>
     <p class="field-error" id="err_titles" role="alert"></p>
 
     <details class="info-accordion" id="ministersHelp" style="margin:14px 0 0;display:none">
-      <summary>Not sure which is which? See them in game</summary>
+      <summary data-i18n="seeTitle">Not sure which is which? See them in game</summary>
       <div style="padding:0 16px 16px">
         <img id="ministersShot" alt="The King's title screen in game, with the two titles we need highlighted in red" style="width:100%;border-radius:8px;border:1px solid var(--line);display:block" />
-        <p class="form-note" style="margin:10px 0 0">Open the <strong>King → appoint titles</strong> screen in game. The two we need are highlighted in red.</p>
+        <p class="form-note" style="margin:10px 0 0" data-i18n-html="seeCaption">Open the <strong>King → appoint titles</strong> screen in game. The two we need are highlighted in red.</p>
       </div>
     </details>
 
     <div class="field" id="cmDaysWrap" style="display:none;margin-top:14px">
-      <label>Best days for Chief Minister</label>
-      <p class="form-note" style="margin:0 0 10px">Pick any that suit you.</p>
+      <label data-i18n="cmDaysLabel">Best days for Chief Minister</label>
+      <p class="form-note" style="margin:0 0 10px" data-i18n="cmDaysNote">Pick any that suit you.</p>
       <div class="day-chips" id="cmDays">
-        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 1"><span>Day 1 · Construction</span></label>
-        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 2"><span>Day 2 · Research</span></label>
-        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 5"><span>Day 5 · Power Boost</span></label>
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 1"><span data-i18n="day1">Day 1 · Construction</span></label>
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 2"><span data-i18n="day2">Day 2 · Research</span></label>
+        <label class="day-chip"><input type="checkbox" name="cmDay" value="Day 5"><span data-i18n="day5">Day 5 · Power Boost</span></label>
       </div>
     </div>
 
     <!-- ============ AVAILABILITY ============ -->
-    <h3 class="form-section">Preferred time <span class="req">*</span></h3>
+    <h3 class="form-section"><span data-i18n="timeHead">Preferred time</span> <span class="req">*</span></h3>
     <details class="info-accordion" style="margin:0 0 18px">
-      <summary>This is a request, not a guaranteed slot</summary>
-      <p>Title slots are limited. We give priority to the highest speedups so the kingdom scores the most points, then place everyone else where we can. The more speedups you have, the better your chance of a slot.</p>
+      <summary data-i18n="accTitle">This is a request, not a guaranteed slot</summary>
+      <p data-i18n="accBody">Title slots are limited. We give priority to the highest speedups so the kingdom scores the most points, then place everyone else where we can. The more speedups you have, the better your chance of a slot.</p>
     </details>
 
     <div class="hero-filter" style="margin:0 0 14px">
       <div class="seg" role="group" aria-label="Enter times in">
-        <button type="button" data-tz="local" class="active" aria-pressed="true">My local time</button>
-        <button type="button" data-tz="utc" aria-pressed="false">UTC / Server time</button>
+        <button type="button" data-tz="local" class="active" aria-pressed="true" data-i18n="modeLocal">My local time</button>
+        <button type="button" data-tz="utc" aria-pressed="false" data-i18n="modeUtc">UTC / Server time</button>
       </div>
     </div>
 
     <div class="field" id="tzWrap">
-      <label for="tz">Your timezone</label>
+      <label for="tz" data-i18n="tzLabel">Your timezone</label>
       <select id="tz" name="tz"></select>
-      <p class="form-note" style="margin:8px 0 0">It is <strong id="tzNow">…</strong> right now in this timezone. If that is wrong, pick the closest match.</p>
+      <p class="form-note" style="margin:8px 0 0" id="tzNowLine">It is <strong id="tzNow">…</strong> right now in this timezone. If that is wrong, pick the closest match.</p>
     </div>
 
-    <label class="flex-line" style="margin-top:4px"><input type="checkbox" id="flexible"> <span>I am flexible — any time works</span></label>
+    <label class="flex-line" style="margin-top:4px"><input type="checkbox" id="flexible"> <span data-i18n="flexible">I am flexible — any time works</span></label>
 
     <div id="windows"><!-- window rows injected by JS --></div>
-    <button type="button" class="btn btn-ghost btn-sm" id="addWindow" style="margin-top:2px"><i class="fa-solid fa-plus"></i> Add another window</button>
+    <button type="button" class="btn btn-ghost btn-sm" id="addWindow" style="margin-top:2px"><i class="fa-solid fa-plus"></i> <span data-i18n="addWindow">Add another window</span></button>
     <p class="field-error" id="err_availability" role="alert"></p>
 
     <!-- ============ NOTES ============ -->
     <div class="field" style="margin-top:26px">
-      <label for="notes">Notes <span class="opt">(optional)</span></label>
-      <input type="text" id="notes" name="notes" placeholder="Anything leadership should know" autocomplete="off" />
+      <label for="notes"><span data-i18n="notesLabel">Notes</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+      <input type="text" id="notes" name="notes" placeholder="Anything leadership should know" data-i18n-ph="notesPh" autocomplete="off" />
     </div>
 
-    <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+    <button type="submit" class="btn btn-gold" id="submitBtn" style="width:100%"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="submit">Submit Application</span></button>
 
     <div class="form-success" id="okBox" role="status" aria-live="polite">
       <i class="fa-solid fa-circle-check"></i>
       <div style="flex:1">
-        <strong style="font-family:var(--display);color:var(--ink)">Application received — thanks!</strong>
+        <strong style="font-family:var(--display);color:var(--ink)" data-i18n="okTitle">Application received — thanks!</strong>
         <div style="font-size:1rem;color:var(--muted);margin-top:2px" id="okText">Leadership will sort the title slots from here.</div>
       </div>
     </div>
     <div class="callout bad" id="errBox" style="display:none" role="alert" aria-live="assertive">
-      <strong>That didn't send</strong>
+      <strong data-i18n="errTitle">That didn't send</strong>
       <span id="errText">Please try again, or message your details to R4 Kadi in-game.</span>
     </div>
   </form>
@@ -216,13 +216,14 @@
   <div class="wrap">
     <div class="footer-bottom" style="border-top:none;padding-top:0">
       <div class="rule"><i class="fa-solid fa-gem"></i></div>
-      <div>Looking for the <a class="ext-link" href="index.html">Bear Trap Battle Guide</a>?</div>
-      <div style="margin-top:8px">Kingshot Server #1581 · KvK title applications go to kingdom leadership only.</div>
-      <div style="margin-top:8px">Built by [BRO] Achlime</div>
+      <div><a class="ext-link" href="index.html" data-i18n="footGuide">Looking for the Bear Trap Battle Guide?</a></div>
+      <div style="margin-top:8px" data-i18n="footLine">Kingshot Server #1581 · KvK title applications go to kingdom leadership only.</div>
+      <div style="margin-top:8px" translate="no">Built by [BRO] Achlime</div>
     </div>
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script src="speedups.js"></script>
 </body>
 </html>
