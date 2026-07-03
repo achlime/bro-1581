@@ -589,8 +589,11 @@ window.addEventListener("unhandledrejection", e => showError((e.reason && (e.rea
 const TITLES_I18N = {
   en: { cm: "Chief Minister", na: "Noble Advisor" },
   fr: { cm: "Premier Ministre", na: "Noble Conseiller" },
-  zh: { cm: "总理大臣", na: "参谋长" }
-  // de, ko, id, pl, ar, it, hi — added as the in-game screenshots arrive
+  zh: { cm: "总理大臣", na: "参谋长" },
+  ko: { cm: "총리대신", na: "참모장" },
+  it: { cm: "Ministro capo", na: "Consulente Nobile" },
+  id: { cm: "Perdana Menteri", na: "Penasihat Kerajaan" }
+  // still need: de, pl, ar, hi
 };
 function pageLang() {
   let l = "";
