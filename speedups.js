@@ -653,8 +653,13 @@ function applyPageLang() {
   // in-game reference screenshot for this language (shown only if the file exists)
   const help = document.getElementById("ministersHelp"), shot = document.getElementById("ministersShot");
   if (help && shot) {
+    const fallback = "img/ministers/en.jpg";
     shot.onload = () => { help.style.display = ""; };
-    shot.onerror = () => { help.style.display = "none"; };
+    shot.onerror = () => {
+      // no screenshot for this language (e.g. Hindi) → fall back to English
+      if (shot.getAttribute("src") !== fallback) shot.src = fallback;
+      else help.style.display = "none";
+    };
     shot.src = "img/ministers/" + lang + ".jpg";
   }
 }
