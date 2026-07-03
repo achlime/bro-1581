@@ -592,8 +592,11 @@ const TITLES_I18N = {
   zh: { cm: "总理大臣", na: "参谋长" },
   ko: { cm: "총리대신", na: "참모장" },
   it: { cm: "Ministro capo", na: "Consulente Nobile" },
-  id: { cm: "Perdana Menteri", na: "Penasihat Kerajaan" }
-  // still need: de, pl, ar, hi
+  id: { cm: "Perdana Menteri", na: "Penasihat Kerajaan" },
+  de: { cm: "Höchster Minister", na: "Nobler Berater" },
+  pl: { cm: "Premier", na: "Szlachetny Doradca" },
+  ar: { cm: "رئيس الوزراء", na: "مستشار نبيل" }
+  // still need: hi (Hindi) — not included in the screenshots provided
 };
 function pageLang() {
   let l = "";
