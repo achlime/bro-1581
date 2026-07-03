@@ -588,16 +588,54 @@ window.addEventListener("unhandledrejection", e => showError((e.reason && (e.rea
    cm = top-left card (our "Chief Minister"); na = bottom-right ("Noble Advisor"). */
 const TITLES_I18N = {
   en: { cm: "Chief Minister", na: "Noble Advisor" },
-  fr: { cm: "Premier Ministre", na: "Noble Conseiller" },
+  ar: { cm: "رئيس الوزراء", na: "مستشار نبيل" },
   zh: { cm: "总理大臣", na: "参谋长" },
-  ko: { cm: "총리대신", na: "참모장" },
-  it: { cm: "Ministro capo", na: "Consulente Nobile" },
-  id: { cm: "Perdana Menteri", na: "Penasihat Kerajaan" },
+  "zh-tw": { cm: "總理大臣", na: "參謀長" },
+  fr: { cm: "Premier Ministre", na: "Noble Conseiller" },
   de: { cm: "Höchster Minister", na: "Nobler Berater" },
+  id: { cm: "Perdana Menteri", na: "Penasihat Kerajaan" },
+  it: { cm: "Ministro capo", na: "Consulente Nobile" },
+  ja: { cm: "総理大臣", na: "参謀長" },
+  ko: { cm: "총리대신", na: "참모장" },
   pl: { cm: "Premier", na: "Szlachetny Doradca" },
-  ar: { cm: "رئيس الوزراء", na: "مستشار نبيل" }
-  // still need: hi (Hindi) — not included in the screenshots provided
+  pt: { cm: "Primeiro-ministro", na: "Conselheiro Nobre" },
+  es: { cm: "Ministro principal", na: "Noble asesor" },
+  th: { cm: "อัครเสนาบดี", na: "ขุนนางที่ปรึกษา" },
+  tr: { cm: "Başbakan", na: "Asil Danışman" }
+  // hi (Hindi) still needed — was not among the screenshots provided
 };
+/* Language switcher — one list, rendered into the nav menu. English links to
+   the plain page; the rest go through the Google Translate proxy (the in-game
+   title names are translate="no", so they survive). */
+const LANGS = [
+  { code: "en",    flag: "🇬🇧", label: "English" },
+  { code: "ar",    flag: "🇸🇦", label: "العربية (Arabic)" },
+  { code: "zh-CN", flag: "🇨🇳", label: "中文 (Chinese)" },
+  { code: "zh-TW", flag: "🇹🇼", label: "繁體中文 (Chinese, Traditional)" },
+  { code: "fr",    flag: "🇫🇷", label: "Français (French)" },
+  { code: "de",    flag: "🇩🇪", label: "Deutsch (German)" },
+  { code: "hi",    flag: "🇮🇳", label: "हिन्दी (Hindi)" },
+  { code: "id",    flag: "🇮🇩", label: "Bahasa (Indonesian)" },
+  { code: "it",    flag: "🇮🇹", label: "Italiano (Italian)" },
+  { code: "ja",    flag: "🇯🇵", label: "日本語 (Japanese)" },
+  { code: "ko",    flag: "🇰🇷", label: "한국어 (Korean)" },
+  { code: "pl",    flag: "🇵🇱", label: "Polski (Polish)" },
+  { code: "pt",    flag: "🇵🇹", label: "Português (Portuguese)" },
+  { code: "es",    flag: "🇪🇸", label: "Español (Spanish)" },
+  { code: "th",    flag: "🇹🇭", label: "ไทย (Thai)" },
+  { code: "tr",    flag: "🇹🇷", label: "Türkçe (Turkish)" }
+];
+function renderLangMenu() {
+  const menu = document.querySelector(".lang-menu");
+  if (!menu) return;
+  const base = "bro-1581/speedups.html";
+  menu.innerHTML = LANGS.map(l => {
+    const href = l.code === "en"
+      ? "https://achlime.github.io/" + base
+      : "https://achlime-github-io.translate.goog/" + base + "?_x_tr_sl=en&_x_tr_tl=" + l.code + "&_x_tr_hl=en";
+    return '<a href="' + href + '"><span class="flag">' + l.flag + "</span> " + l.label + "</a>";
+  }).join("");
+}
 function pageLang() {
   let l = "";
   try { l = new URLSearchParams(location.search).get("_x_tr_tl") || ""; } catch (e) {}
@@ -617,11 +655,12 @@ function applyPageLang() {
   if (help && shot) {
     shot.onload = () => { help.style.display = ""; };
     shot.onerror = () => { help.style.display = "none"; };
-    shot.src = "images/ministers/" + lang + ".jpg";
+    shot.src = "img/ministers/" + lang + ".jpg";
   }
 }
 
 /* ---------------- boot ---------------- */
+renderLangMenu();
 applyPageLang();
 buildRows();
 applyUnit("days");
