@@ -103,12 +103,15 @@ function ocrStatus(msg, spin) {
   el.style.display = "flex";
   el.innerHTML = (spin ? '<i class="fa-solid fa-spinner fa-spin"></i> ' : "") + msg;
 }
-async function compressImage(file) {
-  const img = await new Promise((res, rej) => {
+function loadImage(file) {
+  return new Promise((res, rej) => {
     const i = new Image();
     i.onload = () => res(i); i.onerror = rej;
     i.src = URL.createObjectURL(file);
   });
+}
+async function compressImage(file) {
+  const img = await loadImage(file);
   const scale = Math.min(1, 1600 / img.width);
   const c = document.createElement("canvas");
   c.width = Math.round(img.width * scale);
@@ -116,9 +119,46 @@ async function compressImage(file) {
   c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
   return c.toDataURL("image/jpeg", 0.85);
 }
+/* OCR-only version of the image: upscale small screenshots, grayscale, and
+   stretch contrast so the game's brown-on-parchment digits read cleanly.
+   (The uploaded/attached copy stays the normal JPEG above.) */
+async function preprocessForOcr(file) {
+  const img = await loadImage(file);
+  const targetW = Math.min(2000, Math.max(1200, img.width));
+  const scale = targetW / img.width;
+  const c = document.createElement("canvas");
+  c.width = Math.round(img.width * scale);
+  c.height = Math.round(img.height * scale);
+  const g = c.getContext("2d");
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
+  g.drawImage(img, 0, 0, c.width, c.height);
+  const d = g.getImageData(0, 0, c.width, c.height), p = d.data;
+  const hist = new Uint32Array(256);
+  for (let i = 0; i < p.length; i += 4) {
+    const y = (p[i] * 299 + p[i + 1] * 587 + p[i + 2] * 114) / 1000 | 0;
+    p[i] = p[i + 1] = p[i + 2] = y; hist[y]++;
+  }
+  // stretch between the 2nd and 98th percentile so faint text goes full-range
+  const total = c.width * c.height;
+  let lo = 0, hi = 255, acc = 0;
+  for (let v = 0; v < 256; v++) { acc += hist[v]; if (acc >= total * 0.02) { lo = v; break; } }
+  acc = 0;
+  for (let v = 255; v >= 0; v--) { acc += hist[v]; if (acc >= total * 0.02) { hi = v; break; } }
+  const range = Math.max(1, hi - lo);
+  for (let i = 0; i < p.length; i += 4) {
+    const y = Math.max(0, Math.min(255, (p[i] - lo) * 255 / range | 0));
+    p[i] = p[i + 1] = p[i + 2] = y;
+  }
+  g.putImageData(d, 0, 0);
+  return c.toDataURL("image/png"); // lossless for OCR — JPEG artifacts blur glyph edges
+}
 /* parse OCR text → minutes per type (handles two-line + garbled labels). */
 function parseOcr(text) {
-  const t = (text || "").toLowerCase();
+  const t = (text || "").toLowerCase()
+    // common OCR digit confusions, only when glued to a digit: 5o1→501, 5o →50, 2l→21
+    .replace(/(\d)[oó](?![a-z])/g, "$10")
+    .replace(/(\d)[li!|](?![a-z])/g, "$11")
+    .replace(/(\d)s(?=\d)/g, "$15");
   const num = s => parseInt(s.replace(/[^\d]/g, ""), 10) || 0;
   const ORDER = ["general", "training", "construction", "research"];
   // Row labels across the game's languages (matched against lowercased OCR text)
@@ -224,7 +264,13 @@ async function runOcr(dataUrl) {
         document.head.appendChild(s);
       });
     }
-    const { data } = await Tesseract.recognize(dataUrl, ocrLangs());
+    const { data } = await Tesseract.recognize(dataUrl, ocrLangs(), {
+      logger: m => {
+        if (m.status === "recognizing text" && m.progress > 0) {
+          ocrStatus(t("ocrReading") + " " + Math.round(m.progress * 100) + "%", true);
+        }
+      }
+    });
     console.log("[speedups] OCR text:\n" + (data.text || "(empty)"));
     const found = parseOcr(data.text || "");
     const got = TYPES.filter(tp => tp.id in found).map(tp => rowName(tp.id));
@@ -250,7 +296,9 @@ document.getElementById("shot").addEventListener("change", async e => {
     const dataUrl = await compressImage(file);
     shotData = { name: file.name, type: "image/jpeg", b64: dataUrl.split(",")[1] };
     prev.src = dataUrl; prev.style.display = "block";
-    runOcr(dataUrl);
+    let ocrUrl = dataUrl;
+    try { ocrUrl = await preprocessForOcr(file); } catch (e) { /* fall back to the plain JPEG */ }
+    runOcr(ocrUrl);
   } catch (ex) {
     prev.style.display = "none";
     try {

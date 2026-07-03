@@ -1748,6 +1748,11 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
    one reusable "(optional)" badge — replaces ad-hoc inline styling.
    ========================================================================== */
 .toggle-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* RTL (Arabic): anchor the language dropdown inward so it can't push the page
+   wider, and keep numeric time selects reading naturally */
+[dir="rtl"] .lang-menu { right: auto; left: 0; }
+[dir="rtl"] .win-row select, [dir="rtl"] .su-cell input { direction: ltr; }
 .toggle-line > .form-note { margin: 0; }
 .form label .opt {
   font-weight: 400; text-transform: none; letter-spacing: 0;
