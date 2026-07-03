@@ -183,7 +183,7 @@ function parseOcr(text) {
    the universal digits. Falls back to English-only if detection is unclear. */
 const TESS = {
   de: "deu", ko: "kor", zh: "chi_sim", "zh-cn": "chi_sim", "zh-tw": "chi_tra",
-  id: "ind", pl: "pol", ar: "ara", it: "ita", fr: "fra", hi: "hin", en: "eng"
+  id: "ind", pl: "pol", ar: "ara", it: "ita", fr: "fra", en: "eng"
 };
 function ocrLangs() {
   let code = "en";
@@ -614,7 +614,6 @@ const LANGS = [
   { code: "zh-TW", flag: "🇹🇼", label: "繁體中文 (Chinese, Traditional)" },
   { code: "fr",    flag: "🇫🇷", label: "Français (French)" },
   { code: "de",    flag: "🇩🇪", label: "Deutsch (German)" },
-  { code: "hi",    flag: "🇮🇳", label: "हिन्दी (Hindi)" },
   { code: "id",    flag: "🇮🇩", label: "Bahasa (Indonesian)" },
   { code: "it",    flag: "🇮🇹", label: "Italiano (Italian)" },
   { code: "ja",    flag: "🇯🇵", label: "日本語 (Japanese)" },

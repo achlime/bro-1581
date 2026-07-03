@@ -26,7 +26,6 @@ Use the full ministers screen with the two titles we care about highlighted
 | `th.jpg` | Thai |
 | `tr.jpg` | Turkish |
 
-**Hindi** has no screenshot, so it automatically falls back to `en.jpg`.
-More generally: if a language's file is missing it uses `en.jpg`; if that's
-also missing, the accordion just stays hidden — no broken image. Filenames
-must match exactly (lowercase).
+If a language's file is missing it falls back to `en.jpg`; if that's also
+missing, the accordion just stays hidden — no broken image. Filenames must
+match exactly (lowercase).
