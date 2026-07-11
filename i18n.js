@@ -762,3 +762,25 @@ th: {
   };
   Object.keys(A).forEach(k => { if (I18N[k]) I18N[k].aboutHead = A[k]; });
 })();
+
+/* Chief Minister is applied for on Day 1 only; Days 2 & 5 the title is opened
+   to everyone without applying. Overrides the older cmWhen strings above. */
+(function () {
+  const W = {
+    id: "Hari 1 — konstruksi. Hari 2 & 5: terbuka untuk semua, tidak perlu mendaftar.",
+    de: "Tag 1 — Bau. Tag 2 & 5: offen für alle, keine Bewerbung nötig.",
+    fr: "Jour 1 — construction. Jours 2 & 5 : ouvert à tous, pas besoin de candidater.",
+    it: "Giorno 1 — costruzione. Giorni 2 e 5: aperto a tutti, senza candidatura.",
+    es: "Día 1 — construcción. Días 2 y 5: abierto a todos, sin solicitud.",
+    pt: "Dia 1 — construção. Dias 2 e 5: aberto a todos, sem inscrição.",
+    pl: "Dzień 1 — budowa. Dni 2 i 5: otwarte dla wszystkich, bez zgłoszenia.",
+    tr: "1. gün — inşaat. 2. ve 5. günler: herkese açık, başvuru gerekmez.",
+    ar: "اليوم 1 — البناء. اليومان 2 و5: متاح للجميع دون طلب.",
+    ko: "1일차 — 건설. 2·5일차: 신청 없이 모두에게 개방.",
+    ja: "1日目 — 建設。2・5日目は申請不要で全員に開放。",
+    zh: "第1天 — 建造。第2、5天：向所有人开放，无需申请。",
+    "zh-tw": "第1天 — 建造。第2、5天：向所有人開放，無需申請。",
+    th: "วันที่ 1 — ก่อสร้าง วันที่ 2 และ 5: เปิดให้ทุกคน ไม่ต้องสมัคร"
+  };
+  Object.keys(W).forEach(k => { if (I18N[k]) I18N[k].cmWhen = W[k]; });
+})();
