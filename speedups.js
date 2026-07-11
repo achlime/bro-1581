@@ -79,8 +79,7 @@ function updateTotals() {
     const mins = rowMinutes(t.id);
     document.getElementById(t.id + "_total").textContent = mins ? "= " + pretty(mins) : "";
   });
-  inferTitles(); // suggest titles from the speedups (until the user overrides)
-  revalidate("speedups"); revalidate("titles");
+  revalidate("speedups");
 }
 function setRow(t, mins) {
   const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
@@ -332,30 +331,16 @@ function resolveAlliance() {
   return sel.value;
 }
 
-/* ---------------- titles + inference ---------------- */
-let titlesTouched = false, cmDaysTouched = false;
+/* ---------------- titles (picked manually — no auto-selection) ---------------- */
 function titleInput(value) { return [...document.querySelectorAll('input[name="title"]')].find(i => i.value === value); }
 function selectedTitles() { return [...document.querySelectorAll('input[name="title"]:checked')].map(i => i.value); }
 function selectedCmDays() { return [...document.querySelectorAll('input[name="cmDay"]:checked')].map(i => i.value); }
-function setCmDay(v, on) { const el = [...document.querySelectorAll('input[name="cmDay"]')].find(i => i.value === v); if (el) el.checked = on; refreshDayChips(); }
 function refreshDayChips() {
   document.querySelectorAll(".day-chip").forEach(c => c.classList.toggle("on", c.querySelector("input").checked));
 }
 function refreshTitleCards() {
   document.querySelectorAll(".title-card").forEach(c => c.classList.toggle("selected", c.querySelector("input").checked));
   document.getElementById("cmDaysWrap").style.display = titleInput("Chief Minister").checked ? "" : "none";
-}
-function inferTitles() {
-  if (titlesTouched) return;
-  const c = rowMinutes("construction"), r = rowMinutes("research"), tr = rowMinutes("training"), g = rowMinutes("general");
-  titleInput("Chief Minister").checked = (c + r + g) > 0;
-  titleInput("Noble Advisor").checked = tr > 0;
-  if (!cmDaysTouched) {
-    setCmDay("Day 1", c > 0);
-    setCmDay("Day 2", r > 0);
-    setCmDay("Day 5", (c > 0 || r > 0 || g > 0));
-  }
-  refreshTitleCards();
 }
 
 /* ---------------- availability (windows, timezone, flexible) ---------------- */
@@ -614,7 +599,6 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
     attempted = false; VKEYS.forEach(clearFieldError);
-    titlesTouched = false; cmDaysTouched = false;
     refreshAllianceOther(); refreshTitleCards(); refreshDayChips();
     document.getElementById("windows").innerHTML = ""; addWindow();
     const tzSel = document.getElementById("tz");
@@ -754,8 +738,8 @@ document.getElementById("alliance").addEventListener("change", () => { refreshAl
 document.getElementById("allianceOther").addEventListener("input", () => revalidate("alliance"));
 refreshAllianceOther();
 
-document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { titlesTouched = true; refreshTitleCards(); revalidate("titles"); }));
-document.querySelectorAll('input[name="cmDay"]').forEach(r => r.addEventListener("change", () => { cmDaysTouched = true; refreshDayChips(); }));
+document.querySelectorAll('input[name="title"]').forEach(r => r.addEventListener("change", () => { refreshTitleCards(); revalidate("titles"); }));
+document.querySelectorAll('input[name="cmDay"]').forEach(r => r.addEventListener("change", refreshDayChips));
 
 buildTzSelect();
 document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", () => applyTimeMode(b.dataset.tz)));

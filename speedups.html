@@ -124,6 +124,12 @@
     <!-- ============ TITLES ============ -->
     <h3 class="form-section"><span data-i18n="titlesHead">Titles you want</span> <span class="req">*</span></h3>
     <p class="form-note" style="margin:0 0 14px" data-i18n="titlesNote">Pick one or both.</p>
+
+    <div id="ministersHelp" style="display:none;margin:0 0 16px">
+      <img id="ministersShot" alt="The King's title screen in game, with the two titles we need highlighted in red" style="width:100%;max-width:520px;border-radius:8px;border:1px solid var(--line);display:block" />
+      <p class="form-note" style="margin:10px 0 0" data-i18n-html="seeCaption">Open the <strong>King → appoint titles</strong> screen in game. The two we need are highlighted in red.</p>
+    </div>
+
     <div class="title-cards" id="titleCards">
       <label class="title-card" data-title="Chief Minister">
         <input type="checkbox" name="title" value="Chief Minister" />
@@ -143,14 +149,6 @@
       </label>
     </div>
     <p class="field-error" id="err_titles" role="alert"></p>
-
-    <details class="info-accordion" id="ministersHelp" style="margin:14px 0 0;display:none">
-      <summary data-i18n="seeTitle">Not sure which is which? See them in game</summary>
-      <div style="padding:0 16px 16px">
-        <img id="ministersShot" alt="The King's title screen in game, with the two titles we need highlighted in red" style="width:100%;border-radius:8px;border:1px solid var(--line);display:block" />
-        <p class="form-note" style="margin:10px 0 0" data-i18n-html="seeCaption">Open the <strong>King → appoint titles</strong> screen in game. The two we need are highlighted in red.</p>
-      </div>
-    </details>
 
     <div class="field" id="cmDaysWrap" style="display:none;margin-top:14px">
       <label data-i18n="cmDaysLabel">Best days for Chief Minister</label>
