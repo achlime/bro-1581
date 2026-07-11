@@ -113,9 +113,10 @@ function doPost(e) {
   }
 }
 
-/** quick health check: open the /exec URL in a browser, should say OK */
+/** quick health check: open the /exec URL in a browser. The version marker
+ *  tells you which code is actually deployed — bump it on every edit. */
 function doGet() {
-  return ContentService.createTextOutput("BRO Speedups endpoint OK");
+  return ContentService.createTextOutput("BRO Speedups endpoint OK — v3 (no CM Days column)");
 }
 
 function getFolder_() {
