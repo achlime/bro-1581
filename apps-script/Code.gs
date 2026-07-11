@@ -33,7 +33,7 @@ const ALLIANCES = [
 const TITLES = ["Chief Minister", "Noble Advisor"];
 const HEADERS = [
   "Timestamp", "Governor", "Game ID", "Alliance",
-  "Titles", "CM Days", "Availability (UTC)", "Availability (entered)", "Timezone", "Notes",
+  "Titles", "Availability (UTC)", "Availability (entered)", "Timezone", "Notes",
   "General (min)", "Soldier Training (min)", "Construction (min)", "Research (min)",
   "Total (min)",
   "General", "Soldier Training", "Construction", "Research",
@@ -58,10 +58,6 @@ function doPost(e) {
       .filter(t => TITLES.indexOf(t) !== -1);
     if (!titles.length) return reply({ ok: false, error: "Missing or invalid title" });
     const titlesStr = titles.join("; ");
-
-    // Chief Minister day preferences (free order, validated lightly)
-    const cmDays = (Array.isArray(data.cmDays) ? data.cmDays : [])
-      .map(d => String(d).trim()).filter(d => /^Day [1-6]$/.test(d)).join(", ");
 
     // availability: { flexible, summaryUtc, summaryEntered }
     const av = data.availability || {};
@@ -104,7 +100,7 @@ function doPost(e) {
     }
     sheet.appendRow([
       new Date(), gov, gameId, alliance,
-      titlesStr, cmDays, availUtc, availEntered, timezone, notes,
+      titlesStr, availUtc, availEntered, timezone, notes,
       g, tr, c, r,
       g + tr + c + r,
       disp("general"), disp("training"), disp("construction"), disp("research"),
