@@ -1824,3 +1824,52 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
   .win-del { min-height: 44px; }
   .info-accordion > summary { padding: 15px 16px; }
 }
+
+/* ==========================================================================
+   FORM LAYOUT V2 — numbered section steps + evenly balanced mobile rows
+   ========================================================================== */
+/* numbered step badges on section headers (1 About you … 4 Preferred time) */
+.form { counter-reset: fsec; }
+.form-section { counter-increment: fsec; display: flex; align-items: center; gap: 11px; }
+.form-section::before {
+  content: counter(fsec);
+  flex: none; width: 27px; height: 27px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold-soft); border: 1px solid var(--gold-line);
+  color: var(--gold-bright); font-family: var(--body); font-size: .88rem; font-weight: 700;
+}
+.form h3.form-section:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+@media (max-width: 640px) {
+  /* speedup rows: name + running total on one line, three equal inputs below */
+  .su-row {
+    display: grid; grid-template-columns: 1fr auto;
+    grid-template-areas: "label total" "inputs inputs";
+    gap: 10px 8px; padding: 13px 14px;
+  }
+  .su-label { grid-area: label; }
+  .su-total { grid-area: total; align-self: center; text-align: right; min-width: 0; }
+  .su-inputs { grid-area: inputs; gap: 8px; flex-wrap: nowrap; }
+  .su-cell { flex: 1; min-width: 0; }
+  .su-cell input { width: 100%; min-width: 0; min-height: 46px; }
+}
+
+@media (max-width: 560px) {
+  /* day chips become full-width stacked rows — no adjacent mis-taps */
+  .day-chips { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .form .day-chip { display: flex; width: 100%; }
+  /* screenshot upload reads as the primary, tappable path */
+  input[type="file"] { padding: 18px 14px; }
+  /* time window selects: comfortable height */
+  .win-row select { min-height: 48px; }
+  /* consistent vertical rhythm */
+  .form .field { margin-bottom: 18px; }
+}
+
+/* 320px safety: segmented buttons shrink instead of overflowing */
+@media (max-width: 374px) {
+  .hero-filter .seg { width: 100%; }
+  .hero-filter .seg button { flex: 1; padding: 8px 8px; font-size: .7rem; }
+  .su-cell label { font-size: .8rem; }
+  .form { padding: 20px 12px; }
+}

@@ -751,3 +751,14 @@ th: {
 }
 
 };
+
+/* "About you" section header (added with the numbered-steps layout) */
+(function () {
+  const A = {
+    id: "Tentang kamu", de: "Über dich", fr: "À propos de toi", it: "Su di te",
+    es: "Sobre ti", pt: "Sobre você", pl: "O tobie", tr: "Bilgilerin",
+    ar: "معلوماتك", ko: "기본 정보", ja: "基本情報", zh: "基本信息",
+    "zh-tw": "基本資訊", th: "ข้อมูลของคุณ"
+  };
+  Object.keys(A).forEach(k => { if (I18N[k]) I18N[k].aboutHead = A[k]; });
+})();

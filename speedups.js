@@ -595,6 +595,7 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     ok.classList.add("show");
     document.getElementById("okText").textContent = fmt("okBody", { titles: titles.join(" + "), gov: gov, alliance: alliance });
     // reset
+    clearDraft();
     e.target.reset(); shotData = null;
     document.getElementById("shotPreview").style.display = "none";
     document.getElementById("ocrStatus").style.display = "none";
@@ -726,6 +727,47 @@ function applyPageLang() {
   }
 }
 
+/* ---------------- draft autosave ----------------
+   Members fill this in mid-game: they tab away to check their numbers and the
+   mobile browser may discard the page. Persist everything (except the
+   screenshot) to localStorage; restore on return; clear on successful submit. */
+const DRAFT_KEY = "bro1581.titleForm.v1";
+const DRAFT_FIELDS = ["govName", "gameId", "alliance", "allianceOther", "notes", "flexible", "tz"];
+function draftData() {
+  const d = { unit, timeMode, fields: {}, su: {}, titles: selectedTitles(), cmDays: selectedCmDays(), windows: [] };
+  DRAFT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) d.fields[id] = el.type === "checkbox" ? el.checked : el.value; });
+  TYPES.forEach(tp => ["d", "h", "m"].forEach(s => { const el = document.getElementById(tp.id + "_" + s); if (el && el.value) d.su[tp.id + "_" + s] = el.value; }));
+  document.querySelectorAll(".win-row").forEach(r => d.windows.push([r.querySelector(".win-from").value, r.querySelector(".win-to").value]));
+  return d;
+}
+let draftTimer = null;
+function saveDraft() {
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(() => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draftData())); } catch (e) {} }, 400);
+}
+function clearDraft() { clearTimeout(draftTimer); try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+function restoreDraft() {
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(DRAFT_KEY)); } catch (e) {}
+  if (!d) return;
+  if (d.unit) applyUnit(d.unit);
+  Object.entries(d.su || {}).forEach(([id, v]) => { const el = document.getElementById(id); if (el) el.value = v; });
+  Object.entries(d.fields || {}).forEach(([id, v]) => {
+    const el = document.getElementById(id); if (!el) return;
+    if (el.type === "checkbox") el.checked = !!v; else el.value = v;
+  });
+  (d.titles || []).forEach(v => { const el = titleInput(v); if (el) el.checked = true; });
+  (d.cmDays || []).forEach(v => { const el = [...document.querySelectorAll('input[name="cmDay"]')].find(i => i.value === v); if (el) el.checked = true; });
+  if (Array.isArray(d.windows) && d.windows.length) {
+    document.getElementById("windows").innerHTML = "";
+    d.windows.forEach(w => addWindow(w[0] || undefined, w[1] || undefined));
+  }
+  const tzSel = document.getElementById("tz");
+  if (d.fields && d.fields.tz != null && tzSel.value) { tzOffset = parseInt(tzSel.value, 10) || 0; tzLabel = labelFor(tzSel); }
+  if (d.timeMode) applyTimeMode(d.timeMode);
+  refreshAllianceOther(); refreshTitleCards(); refreshDayChips(); applyFlexible(); updateTotals(); tickTz();
+}
+
 /* ---------------- boot ---------------- */
 renderLangMenu();
 applyPageLang();
@@ -749,5 +791,9 @@ addWindow();
 applyTimeMode("local");
 applyFlexible();
 tickTz(); setInterval(tickTz, 30000);
+
+restoreDraft();
+document.getElementById("speedupForm").addEventListener("input", saveDraft);
+document.getElementById("speedupForm").addEventListener("change", saveDraft);
 
 if (!SCRIPT_URL) document.getElementById("setupNotice").style.display = "block";
