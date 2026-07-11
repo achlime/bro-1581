@@ -193,17 +193,8 @@ function parseOcr(text) {
   else if (lang === "tr") { DAY += "|g[uü]n\\w*"; HR += "|saat\\w*|sa(?![a-z])"; MIN += "|dk(?![a-z])"; }
   const TOK = new RegExp("([\\d.,]+)\\s*(?:(" + DAY + ")|(" + HR + ")|(" + MIN + "))", "gi");
   const mult = m => (m[2] ? 1440 : m[3] ? 60 : 1);
-  const grab = seg => {
-    TOK.lastIndex = 0; let total = 0, any = false, mm;
-    while ((mm = TOK.exec(seg))) { any = true; total += num(mm[1]) * mult(mm); }
-    return any ? total : null;
-  };
-  const found = {};
-  ORDER.forEach(id => {
-    if (marks[id] == null) return;
-    const v = grab(t.slice(marks[id], Math.min(endAt(marks[id]), marks[id] + 200)));
-    if (v != null) found[id] = v;
-  });
+  /* split a segment into per-row value clusters: units run day→hr→min within
+     one row, so a token whose rank doesn't increase starts the next row */
   const clusters = seg => {
     TOK.lastIndex = 0; const out = []; let last = -1; let m;
     while ((m = TOK.exec(seg))) {
@@ -214,6 +205,19 @@ function parseOcr(text) {
     }
     return out;
   };
+  /* a label's own value is the FIRST cluster after it — never the sum of the
+     whole segment. (If the next row's label is garbled, the segment spans
+     several rows; summing them inflated e.g. General to 218d.) */
+  const grab = seg => {
+    const cs = clusters(seg);
+    return cs.length ? cs[0] : null;
+  };
+  const found = {};
+  ORDER.forEach(id => {
+    if (marks[id] == null) return;
+    const v = grab(t.slice(marks[id], Math.min(endAt(marks[id]), marks[id] + 200)));
+    if (v != null) found[id] = v;
+  });
   ORDER.forEach((id, i) => {
     if (found[id] != null) return;
     let pi = i - 1; while (pi >= 0 && marks[ORDER[pi]] == null) pi--;
