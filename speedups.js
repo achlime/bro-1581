@@ -1,7 +1,7 @@
 /* =====================================================================
    CONFIG — Google Apps Script Web App URL (see apps-script/Code.gs).
 ===================================================================== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQBY5vDDCGUFo3H8CzjJWwcDScda3IqlIdGeGGwr2j8KFbm6ioS9SNgWIWRHN8FTnE/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSb1yrnIdRo3nsDvhuVMbU3zQmG_WRLCG98TgYZ_Tz0N8RhxMaWwsAqgrm40oJzPc/exec";
 
 /* ---------------- the four speedup types (game order) ---------------- */
 const TYPES = [
