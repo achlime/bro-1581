@@ -19,6 +19,7 @@ en: {
   rowGeneral: "General", rowTraining: "Soldier Training", rowConstruction: "Construction", rowResearch: "Research",
   cellDay: "day", cellHr: "hr", cellMin: "min", to: "to",
   tzNow: "It is {time} right now in this timezone. If that is wrong, pick the closest match.",
+  serverNowLabel: "Server time now", localNowLabel: "Time in this timezone",
   submit: "Submit Application", sending: "Sending…",
   okBody: "{titles} — application logged for {gov} ({alliance}).",
   errNet: "Couldn't reach the collection sheet. Try again in a minute, or message your details to R4 Kadi in-game.",
@@ -783,4 +784,31 @@ th: {
     th: "วันที่ 1 — ก่อสร้าง วันที่ 2 และ 5: เปิดให้ทุกคน ไม่ต้องสมัคร"
   };
   Object.keys(W).forEach(k => { if (I18N[k]) I18N[k].cmWhen = W[k]; });
+})();
+
+/* Always-visible clock labels + shorter timezone-picker note (server-time-
+   first layout). Adds serverNowLabel / localNowLabel / tzWrong per language. */
+(function () {
+  const C = {
+    id:      ["Waktu server sekarang", "Waktu di zona ini sekarang", "Jika waktunya salah, pilih yang paling mendekati."],
+    de:      ["Serverzeit jetzt", "Zeit in dieser Zone jetzt", "Falls die Zeit oben falsch ist, wähle die passendste."],
+    fr:      ["Heure serveur actuelle", "Heure dans ce fuseau", "Si l'heure ci-dessus est fausse, choisis le plus proche."],
+    it:      ["Ora del server adesso", "Ora in questo fuso", "Se l'ora sopra è sbagliata, scegli il più vicino."],
+    es:      ["Hora del servidor ahora", "Hora en esta zona", "Si la hora de arriba no coincide, elige la más cercana."],
+    pt:      ["Hora do servidor agora", "Hora neste fuso agora", "Se a hora acima estiver errada, escolha o mais próximo."],
+    pl:      ["Czas serwera teraz", "Czas w tej strefie", "Jeśli czas powyżej się nie zgadza, wybierz najbliższą."],
+    tr:      ["Sunucu saati şu an", "Bu dilimde saat", "Yukarıdaki saat yanlışsa en yakınını seç."],
+    ar:      ["توقيت الخادم الآن", "الوقت في هذه المنطقة الآن", "إن كان الوقت أعلاه خاطئًا فاختر الأقرب."],
+    ko:      ["현재 서버 시간", "이 시간대의 현재 시간", "위 시간이 다르면 가장 가까운 것을 선택하세요."],
+    ja:      ["現在のサーバー時間", "このタイムゾーンの現在時刻", "上の時刻が違う場合は近いものを選んでください。"],
+    zh:      ["当前服务器时间", "该时区当前时间", "如果上面的时间不对，请选最接近的。"],
+    "zh-tw": ["目前伺服器時間", "該時區目前時間", "如果上面的時間不對，請選最接近的。"],
+    th:      ["เวลาเซิร์ฟเวอร์ตอนนี้", "เวลาในเขตนี้ตอนนี้", "ถ้าเวลาด้านบนไม่ถูกต้อง เลือกอันที่ใกล้เคียงที่สุด"]
+  };
+  Object.keys(C).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].serverNowLabel = C[k][0];
+    I18N[k].localNowLabel = C[k][1];
+    I18N[k].tzWrong = C[k][2];
+  });
 })();

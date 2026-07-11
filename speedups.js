@@ -386,7 +386,7 @@ function zoneOffset(zone, date) {
 }
 function cityFromZone(z) { return ((z || "").split("/").pop() || z).replace(/_/g, " "); }
 const DETECTED_ZONE = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { return ""; } })();
-let timeMode = "local", tzOffset = 0, tzLabel = "", defaultOffset = 0;
+let timeMode = "utc", tzOffset = 0, tzLabel = "", defaultOffset = 0;
 /* One entry per UTC offset, with example cities. Cities are bucketed by their
    CURRENT offset, so the examples stay accurate through DST. */
 function buildTzSelect() {
@@ -454,14 +454,16 @@ function refreshWinDels() {
   const rows = [...document.querySelectorAll(".win-row")];
   rows.forEach(r => { r.querySelector(".win-del").style.display = rows.length > 1 ? "" : "none"; });
 }
+/* the always-visible clock: server (UTC) time in server mode, the selected
+   timezone's time in local mode — so people can sanity-check at a glance */
 function tickTz() {
-  const line = document.getElementById("tzNowLine");
-  if (!line) return;
+  const label = document.getElementById("clockLabel"), time = document.getElementById("clockTime");
+  if (!label || !time) return;
   const now = new Date();
   const utcMin = now.getUTCHours() * 60 + now.getUTCMinutes();
-  const localMin = (((utcMin + tzOffset) % 1440) + 1440) % 1440;
-  const hhmm = String(Math.floor(localMin / 60)).padStart(2, "0") + ":" + String(localMin % 60).padStart(2, "0");
-  line.innerHTML = fmt("tzNow", { time: "<strong>" + hhmm + "</strong>" });
+  const shownMin = (((utcMin + effOffset()) % 1440) + 1440) % 1440;
+  label.textContent = t(timeMode === "local" ? "localNowLabel" : "serverNowLabel");
+  time.textContent = String(Math.floor(shownMin / 60)).padStart(2, "0") + ":" + String(shownMin % 60).padStart(2, "0");
 }
 function applyFlexible() {
   const flex = document.getElementById("flexible").checked;
@@ -605,7 +607,7 @@ document.getElementById("speedupForm").addEventListener("submit", async e => {
     document.getElementById("windows").innerHTML = ""; addWindow();
     const tzSel = document.getElementById("tz");
     tzSel.value = String(defaultOffset); tzOffset = defaultOffset; tzLabel = labelFor(tzSel);
-    applyTimeMode("local"); applyFlexible(); updateTotals();
+    applyTimeMode("utc"); applyFlexible(); updateTotals();
     ok.scrollIntoView({ behavior: "smooth", block: "center" });
   } catch (ex) {
     fail(t("errNet"));
@@ -787,7 +789,7 @@ document.querySelectorAll("[data-tz]").forEach(b => b.addEventListener("click", 
 document.getElementById("flexible").addEventListener("change", applyFlexible);
 document.getElementById("addWindow").addEventListener("click", () => addWindow());
 addWindow();
-applyTimeMode("local");
+applyTimeMode("utc"); // server time first — switch to local if you prefer
 applyFlexible();
 tickTz(); setInterval(tickTz, 30000);
 

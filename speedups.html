@@ -162,15 +162,21 @@
 
     <div class="hero-filter" style="margin:0 0 14px">
       <div class="seg" role="group" aria-label="Enter times in">
-        <button type="button" data-tz="local" class="active" aria-pressed="true" data-i18n="modeLocal">My local time</button>
-        <button type="button" data-tz="utc" aria-pressed="false" data-i18n="modeUtc">UTC / Server time</button>
+        <button type="button" data-tz="utc" class="active" aria-pressed="true" data-i18n="modeUtc">UTC / Server time</button>
+        <button type="button" data-tz="local" aria-pressed="false" data-i18n="modeLocal">My local time</button>
       </div>
+    </div>
+
+    <div class="tz-clock" role="status">
+      <i class="fa-regular fa-clock"></i>
+      <span id="clockLabel" data-i18n="serverNowLabel">Server time now</span>
+      <strong id="clockTime">--:--</strong>
     </div>
 
     <div class="field" id="tzWrap">
       <label for="tz" data-i18n="tzLabel">Your timezone</label>
       <select id="tz" name="tz"></select>
-      <p class="form-note" style="margin:8px 0 0" id="tzNowLine">It is <strong id="tzNow">…</strong> right now in this timezone. If that is wrong, pick the closest match.</p>
+      <p class="form-note" style="margin:8px 0 0" data-i18n="tzWrong">If the time above is wrong, pick the closest match.</p>
     </div>
 
     <label class="flex-line" style="margin-top:4px"><input type="checkbox" id="flexible"> <span data-i18n="flexible">I am flexible — any time works</span></label>

@@ -1866,6 +1866,20 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
   .form .field { margin-bottom: 18px; }
 }
 
+/* prominent current-time readout for the availability section */
+.tz-clock {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-2); border: 1px solid var(--gold-line); border-radius: var(--radius);
+  padding: 12px 16px; margin: 0 0 14px; color: var(--ink-dim); font-size: 1rem;
+}
+.tz-clock i { color: var(--gold); flex: none; }
+.tz-clock strong {
+  margin-left: auto; color: var(--gold-bright);
+  font-family: var(--display); font-weight: 800; font-size: 1.45rem; letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+}
+[dir="rtl"] .tz-clock strong { margin-left: 0; margin-right: auto; }
+
 /* 320px safety: segmented buttons shrink instead of overflowing */
 @media (max-width: 374px) {
   .hero-filter .seg { width: 100%; }
