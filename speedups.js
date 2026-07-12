@@ -759,7 +759,7 @@ function restoreDraft() {
     const el = document.getElementById(id); if (!el) return;
     if (el.type === "checkbox") el.checked = !!v; else el.value = v;
   });
-  (d.titles || []).forEach(v => { const el = titleInput(v); if (el) el.checked = true; });
+  (d.titles || []).forEach(v => { const el = titleInput(v); if (el && !el.disabled) el.checked = true; });
   if (Array.isArray(d.windows) && d.windows.length) {
     document.getElementById("windows").innerHTML = "";
     d.windows.forEach(w => addWindow(w[0] || undefined, w[1] || undefined));

@@ -866,3 +866,13 @@ th: {
     I18N[k].tabRoster = T[k][1];
   });
 })();
+
+/* "Closed" badge on titles that no longer take applications */
+(function () {
+  const B = {
+    id: "Ditutup", de: "Geschlossen", fr: "Clôturé", it: "Chiuso", es: "Cerrado",
+    pt: "Encerrado", pl: "Zamknięte", tr: "Kapandı", ar: "مغلق", ko: "마감",
+    ja: "締切", zh: "已截止", "zh-tw": "已截止", th: "ปิดแล้ว"
+  };
+  Object.keys(B).forEach(k => { if (I18N[k]) I18N[k].closedBadge = B[k]; });
+})();

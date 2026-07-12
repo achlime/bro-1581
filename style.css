@@ -1880,6 +1880,22 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 }
 [dir="rtl"] .tz-clock strong { margin-left: 0; margin-right: auto; }
 
+/* closed title option: still visible, clearly not selectable */
+.title-card.closed { cursor: default; }
+.title-card.closed:hover { border-color: var(--line); }
+.title-card.closed input,
+.title-card.closed .tc-name i,
+.title-card.closed .tc-title,
+.title-card.closed .tc-buff,
+.title-card.closed .tc-when { opacity: .55; }
+.tc-closed {
+  display: inline-block; margin-left: 8px; padding: 3px 10px; border-radius: 999px;
+  background: rgba(214, 77, 77, .14); border: 1px solid rgba(214, 77, 77, .45);
+  color: var(--crimson-bright); font-family: var(--body); font-size: .7rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; white-space: nowrap;
+}
+[dir="rtl"] .tc-closed { margin-left: 0; margin-right: 8px; }
+
 /* top view tabs: submit form vs title roster */
 .view-tabs {
   display: flex; gap: 5px; padding: 5px; margin: 0 0 28px;
