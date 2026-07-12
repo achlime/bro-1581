@@ -841,3 +841,28 @@ th: {
     I18N[k].colGov = S[k][4];
   });
 })();
+
+/* Top view tabs. Order: tabForm, tabRoster */
+(function () {
+  const T = {
+    id: ["Kirim pendaftaran", "Daftar gelar"],
+    de: ["Bewerbung", "Titel-Plan"],
+    fr: ["Candidature", "Planning des titres"],
+    it: ["Candidatura", "Elenco titoli"],
+    es: ["Solicitud", "Lista de títulos"],
+    pt: ["Inscrição", "Lista de títulos"],
+    pl: ["Zgłoszenie", "Lista tytułów"],
+    tr: ["Başvuru", "Unvan listesi"],
+    ar: ["تقديم طلب", "قائمة الألقاب"],
+    ko: ["신청하기", "칭호 명단"],
+    ja: ["申請", "称号一覧"],
+    zh: ["提交申请", "称号名单"],
+    "zh-tw": ["提交申請", "稱號名單"],
+    th: ["ส่งใบสมัคร", "รายชื่อตำแหน่ง"]
+  };
+  Object.keys(T).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].tabForm = T[k][0];
+    I18N[k].tabRoster = T[k][1];
+  });
+})();

@@ -48,6 +48,13 @@
 
 <main class="wrap prose" style="padding-top:40px;max-width:880px">
 
+  <div class="view-tabs" role="tablist">
+    <button type="button" data-view="form" class="active" role="tab" aria-selected="true" data-i18n="tabForm">Submit application</button>
+    <button type="button" data-view="roster" role="tab" aria-selected="false" data-i18n="tabRoster">Title roster</button>
+  </div>
+
+  <div id="viewForm">
+
   <div class="callout info" id="setupNotice" style="display:none">
     <strong>Submissions aren't open yet</strong>
     The collection backend hasn't been connected. R4/R5: see the setup notes in the repo.
@@ -127,7 +134,7 @@
     <!-- ============ TITLES ============ -->
     <h3 class="form-section"><span data-i18n="titlesHead">Titles you want</span> <span class="req">*</span></h3>
 
-    <p class="form-note" style="margin:0 0 14px"><a class="ext-link" href="#cmSchedule" data-i18n="cmClosed">Chief Minister applications have closed — see the Day 1 schedule below.</a></p>
+    <p class="form-note" style="margin:0 0 14px"><a class="ext-link" href="#roster" data-i18n="cmClosed">Chief Minister applications have closed — see the Day 1 schedule below.</a></p>
 
     <div id="ministersHelp" style="display:none;margin:0 0 16px">
       <img id="ministersShot" alt="The King's title screen in game, with the two titles we need highlighted in red" style="width:100%;max-width:520px;border-radius:8px;border:1px solid var(--line);display:block" />
@@ -199,8 +206,10 @@
     </div>
   </form>
 
-  <!-- ============ CHIEF MINISTER DAY 1 SCHEDULE ============ -->
-  <section id="cmSchedule" style="margin-top:44px">
+  </div><!-- /viewForm -->
+
+  <!-- ============ CHIEF MINISTER DAY 1 SCHEDULE (roster tab) ============ -->
+  <section id="cmSchedule" style="display:none">
     <h2 class="sched-head"><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="schedHead">Chief Minister — Day 1 schedule</span></h2>
     <p class="form-note" style="margin:6px 0 14px" data-i18n="schedNote">Times are in UTC and your local time. Be online 5 minutes before your slot.</p>
     <div class="sched-wrap">

@@ -836,6 +836,21 @@ function renderSchedule() {
   }).join("");
 }
 
+/* ---------------- view tabs: submit form vs title roster ---------------- */
+function applyView(v, scroll) {
+  const roster = v === "roster";
+  const formView = document.getElementById("viewForm"), rosterView = document.getElementById("cmSchedule");
+  if (!formView || !rosterView) return;
+  formView.style.display = roster ? "none" : "";
+  rosterView.style.display = roster ? "" : "none";
+  document.querySelectorAll("[data-view]").forEach(b => {
+    const on = b.dataset.view === v;
+    b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  try { history.replaceState(null, "", roster ? "#roster" : location.pathname + location.search); } catch (e) {}
+  if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 /* ---------------- boot ---------------- */
 renderLangMenu();
 applyPageLang();
@@ -861,6 +876,9 @@ tickTz(); setInterval(tickTz, 30000);
 
 restoreDraft();
 renderSchedule();
+document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => applyView(b.dataset.view, true)));
+window.addEventListener("hashchange", () => applyView(location.hash === "#roster" ? "roster" : "form", true));
+applyView(location.hash === "#roster" ? "roster" : "form");
 document.getElementById("speedupForm").addEventListener("input", saveDraft);
 document.getElementById("speedupForm").addEventListener("change", saveDraft);
 
