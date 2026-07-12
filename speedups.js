@@ -770,6 +770,72 @@ function restoreDraft() {
   refreshAllianceOther(); refreshTitleCards(); applyFlexible(); updateTotals(); tickTz();
 }
 
+/* ---------------- Chief Minister Day 1 schedule ----------------
+   Final Day 1 slots (30 min each, UTC start). Rendered with the viewer's
+   local time computed from their device clock. */
+const CM_SCHEDULE = [
+  ["00:00", "CloudyMoon", "[BRO] Brotherhood"],
+  ["00:30", "Jamestheazn", "[APX] Predator"],
+  ["01:00", "Achlime", "[BRO] Brotherhood"],
+  ["01:30", "Trick", "[BRO] Brotherhood"],
+  ["02:00", "聖凱撒", "[APX] Predator"],
+  ["02:30", "Am200001", "[Jaz] JustaZoo"],
+  ["03:00", "Onetondildo", "[APX] Predator"],
+  ["03:30", "Drusid", "[APX] Predator"],
+  ["04:00", "konsumi", "[APX] Predator"],
+  ["04:30", "千萬haoyun", "[BRO] Brotherhood"],
+  ["05:00", "Jordan", "[BRO] Brotherhood"],
+  ["05:30", "Mitch23", "[BRO] Brotherhood"],
+  ["06:00", "中华英雄", "[APX] Predator"],
+  ["06:30", "Chris2026", "[BRO] Brotherhood"],
+  ["07:00", "dream city", "[APX] Predator"],
+  ["07:30", "Delhilite", "[AMF] AhjinSeoul"],
+  ["08:00", "Febby", "[APX] Predator"],
+  ["08:30", "~BoredRedZora~", "[BRO] Brotherhood"],
+  ["09:00", "KingC", "[BRO] Brotherhood"],
+  ["09:30", "Slayer", "[Jaz] JustaZoo"],
+  ["10:00", "BoredLunaticOne", "[BRO] Brotherhood"],
+  ["10:30", "MARU MARU", "[BRO] Brotherhood"],
+  ["11:00", "MUTO MUTO", "[bra] BroAcademy"],
+  ["11:30", "Silene", "[APX] Predator"],
+  ["12:00", "NaiSirk", "[BRO] Brotherhood"],
+  ["12:30", "Flash", "[THC] TheHighCouncil"],
+  ["13:00", "Duvdev", "[BRO] Brotherhood"],
+  ["13:30", "Kavalier Knight", "[Jaz] JustaZoo"],
+  ["14:00", "Cwazy", "[THC] TheHighCouncil"],
+  ["14:30", "Kayano", "[APX] Predator"],
+  ["15:00", "吉村櫻櫻", "[APX] Predator"],
+  ["15:30", "Sylv", "[BRO] Brotherhood"],
+  ["16:00", "Lafago", "[APX] Predator"],
+  ["16:30", "ᮘίᏦ廾ίㄥ", "[BRO] Brotherhood"],
+  ["17:00", "Betty123", "[AMF] AhjinSeoul"],
+  ["17:30", "AKP", "[BRO] Brotherhood"],
+  ["18:00", "Klein Zora", "[BRO] Brotherhood"],
+  ["18:30", "Kashyap", "[BRO] Brotherhood"],
+  ["19:00", "Boltu", "[Jaz] JustaZoo"],
+  ["19:30", "NightWolfUA", "[BRO] Brotherhood"],
+  ["20:00", "BoredLulaticOne", "[BRO] Brotherhood"],
+  ["20:30", "Avangardia", "[BRO] Brotherhood"],
+  ["21:00", "Ghost 999", "[BRO] Brotherhood"],
+  ["21:30", "LittleViolet", "[APX] Predator"],
+  ["22:00", "mine", "[Jaz] JustaZoo"],
+  ["22:30", "Control", "[APX] Predator"],
+  ["23:00", "Abby", "[BRO] Brotherhood"],
+  ["23:30", "NOEL", "[Jaz] JustaZoo"]
+];
+function renderSchedule() {
+  const tb = document.getElementById("schedBody");
+  if (!tb) return;
+  const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const off = -new Date().getTimezoneOffset(); // viewer's device offset, DST included
+  const fm = m => { m = ((m % 1440) + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); };
+  tb.innerHTML = CM_SCHEDULE.map(r => {
+    const p = r[0].split(":");
+    const s = (+p[0]) * 60 + (+p[1]), e = s + 30;
+    return "<tr><td>" + fm(s) + "-" + fm(e) + "</td><td>" + fm(s + off) + "-" + fm(e + off) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>";
+  }).join("");
+}
+
 /* ---------------- boot ---------------- */
 renderLangMenu();
 applyPageLang();
@@ -794,6 +860,7 @@ applyFlexible();
 tickTz(); setInterval(tickTz, 30000);
 
 restoreDraft();
+renderSchedule();
 document.getElementById("speedupForm").addEventListener("input", saveDraft);
 document.getElementById("speedupForm").addEventListener("change", saveDraft);
 

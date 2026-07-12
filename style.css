@@ -1880,6 +1880,33 @@ input[type="file"]::file-selector-button { font-size: .9rem; }
 }
 [dir="rtl"] .tz-clock strong { margin-left: 0; margin-right: auto; }
 
+/* Chief Minister Day 1 schedule table */
+.sched-head {
+  font-family: var(--display); font-weight: 700; font-size: 1.35rem; color: var(--gold-bright);
+  margin: 0 0 4px; display: flex; align-items: center; gap: 10px;
+}
+.sched-head i { color: var(--gold); font-size: 1.05rem; }
+.sched-wrap {
+  overflow-x: auto; background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.sched { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.sched th {
+  font-family: var(--display); font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gold); text-align: left;
+  padding: 11px 14px; border-bottom: 1px solid var(--gold-line); white-space: nowrap;
+}
+.sched td { padding: 9px 14px; border-bottom: 1px solid var(--line-soft); color: var(--ink-dim); white-space: nowrap; }
+.sched tr:last-child td { border-bottom: none; }
+.sched tbody tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.sched td:nth-child(2) { color: var(--gold-bright); font-weight: 600; font-variant-numeric: tabular-nums; }
+.sched td:first-child { font-variant-numeric: tabular-nums; }
+[dir="rtl"] .sched th, [dir="rtl"] .sched td { text-align: right; }
+@media (max-width: 560px) {
+  .sched { font-size: .88rem; }
+  .sched th, .sched td { padding: 8px 10px; }
+}
+
 /* 320px safety: segmented buttons shrink instead of overflowing */
 @media (max-width: 374px) {
   .hero-filter .seg { width: 100%; }

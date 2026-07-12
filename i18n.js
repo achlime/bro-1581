@@ -812,3 +812,32 @@ th: {
     I18N[k].tzWrong = C[k][2];
   });
 })();
+
+/* Chief Minister closed + Day 1 schedule table.
+   Order: cmClosed, schedHead, schedNote, colLocal, colGov */
+(function () {
+  const S = {
+    id: ["Pendaftaran Perdana Menteri sudah ditutup — lihat jadwal Hari 1 di bawah.", "Perdana Menteri — Jadwal Hari 1", "Waktu dalam UTC dan waktu lokalmu. Online 5 menit sebelum slotmu.", "Waktumu", "Gubernur"],
+    de: ["Bewerbungen für den Höchsten Minister sind geschlossen — siehe den Tag-1-Plan unten.", "Höchster Minister — Plan für Tag 1", "Zeiten in UTC und deiner Ortszeit. Sei 5 Minuten vor deinem Slot online.", "Deine Zeit", "Gouverneur"],
+    fr: ["Les candidatures Premier Ministre sont closes — voir le planning du Jour 1 ci-dessous.", "Premier Ministre — Planning du Jour 1", "Heures en UTC et en heure locale. Sois en ligne 5 minutes avant ton créneau.", "Ton heure", "Gouverneur"],
+    it: ["Le candidature per Ministro capo sono chiuse — vedi il programma del Giorno 1 qui sotto.", "Ministro capo — Programma Giorno 1", "Orari in UTC e nella tua ora locale. Collegati 5 minuti prima del tuo slot.", "La tua ora", "Governatore"],
+    es: ["Las solicitudes de Ministro principal están cerradas — mira el horario del Día 1 abajo.", "Ministro principal — Horario del Día 1", "Horas en UTC y en tu hora local. Conéctate 5 minutos antes de tu turno.", "Tu hora", "Gobernador"],
+    pt: ["As inscrições para Primeiro-ministro encerraram — veja a agenda do Dia 1 abaixo.", "Primeiro-ministro — Agenda do Dia 1", "Horários em UTC e no seu horário local. Fique online 5 minutos antes do seu horário.", "Seu horário", "Governador"],
+    pl: ["Zgłoszenia na Premiera są zamknięte — harmonogram Dnia 1 poniżej.", "Premier — Harmonogram Dnia 1", "Czasy w UTC i twoim czasie lokalnym. Bądź online 5 minut przed swoim slotem.", "Twój czas", "Gubernator"],
+    tr: ["Başbakan başvuruları kapandı — 1. gün programı aşağıda.", "Başbakan — 1. Gün Programı", "Saatler UTC ve yerel saatinde. Slotundan 5 dakika önce çevrimiçi ol.", "Senin saatin", "Vali"],
+    ar: ["أُغلقت طلبات رئيس الوزراء — جدول اليوم 1 أدناه.", "رئيس الوزراء — جدول اليوم 1", "الأوقات بتوقيت UTC وتوقيتك المحلي. كن متصلاً قبل موعدك بخمس دقائق.", "توقيتك", "الحاكم"],
+    ko: ["총리대신 신청이 마감되었습니다 — 아래 1일차 일정표를 확인하세요.", "총리대신 — 1일차 일정", "시간은 UTC와 현지 시간으로 표시됩니다. 슬롯 5분 전에 접속하세요.", "내 시간", "영주"],
+    ja: ["総理大臣の申請は締め切りました — 下の1日目スケジュールをご覧ください。", "総理大臣 — 1日目スケジュール", "時間はUTCと現地時間で表示。枠の5分前にはオンラインで。", "現地時間", "領主"],
+    zh: ["总理大臣申请已截止 — 请看下方第1天日程表。", "总理大臣 — 第1天日程", "时间以UTC和你的当地时间显示。请提前5分钟上线。", "你的时间", "领主"],
+    "zh-tw": ["總理大臣申請已截止 — 請看下方第1天日程表。", "總理大臣 — 第1天日程", "時間以UTC和你的當地時間顯示。請提前5分鐘上線。", "你的時間", "領主"],
+    th: ["ปิดรับสมัครอัครเสนาบดีแล้ว — ดูตารางวันที่ 1 ด้านล่าง", "อัครเสนาบดี — ตารางวันที่ 1", "เวลาเป็น UTC และเวลาท้องถิ่นของคุณ ออนไลน์ก่อนช่วงของคุณ 5 นาที", "เวลาของคุณ", "ผู้ปกครอง"]
+  };
+  Object.keys(S).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].cmClosed = S[k][0];
+    I18N[k].schedHead = S[k][1];
+    I18N[k].schedNote = S[k][2];
+    I18N[k].colLocal = S[k][3];
+    I18N[k].colGov = S[k][4];
+  });
+})();
