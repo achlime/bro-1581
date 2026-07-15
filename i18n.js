@@ -901,3 +901,28 @@ th: {
     I18N[k].naSchedHead = R[k][1];
   });
 })();
+
+/* Roster day tabs. Order: tabNa (Day 4), tabCm (Day 1) */
+(function () {
+  const D = {
+    id: ["Hari 4 · Penasihat Kerajaan", "Hari 1 · Perdana Menteri"],
+    de: ["Tag 4 · Nobler Berater", "Tag 1 · Höchster Minister"],
+    fr: ["Jour 4 · Noble Conseiller", "Jour 1 · Premier Ministre"],
+    it: ["Giorno 4 · Consulente Nobile", "Giorno 1 · Ministro capo"],
+    es: ["Día 4 · Noble asesor", "Día 1 · Ministro principal"],
+    pt: ["Dia 4 · Conselheiro Nobre", "Dia 1 · Primeiro-ministro"],
+    pl: ["Dzień 4 · Szlachetny Doradca", "Dzień 1 · Premier"],
+    tr: ["4. Gün · Asil Danışman", "1. Gün · Başbakan"],
+    ar: ["اليوم 4 · مستشار نبيل", "اليوم 1 · رئيس الوزراء"],
+    ko: ["4일차 · 참모장", "1일차 · 총리대신"],
+    ja: ["4日目 · 参謀長", "1日目 · 総理大臣"],
+    zh: ["第4天 · 参谋长", "第1天 · 总理大臣"],
+    "zh-tw": ["第4天 · 參謀長", "第1天 · 總理大臣"],
+    th: ["วันที่ 4 · ขุนนางที่ปรึกษา", "วันที่ 1 · อัครเสนาบดี"]
+  };
+  Object.keys(D).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].tabNa = D[k][0];
+    I18N[k].tabCm = D[k][1];
+  });
+})();

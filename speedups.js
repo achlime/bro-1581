@@ -850,7 +850,7 @@ const NA_SCHEDULE = [
   ["09:00", "Febby", "[APX] Predator"],
   ["09:30", "Onetondildo", "[APX] Predator"],
   ["10:00", "Slayer", "[Jaz] JustaZoo"],
-  ["10:30", "PrincessMellos", "[BRO] Brotherhood"],
+  ["10:30", "CloudyMoon", "[BRO] Brotherhood"],
   ["11:00", "AKP", "[BRO] Brotherhood"],
   ["11:30", "KingC", "[BRO] Brotherhood"],
   ["12:00", "MICHI MICHI", "[bra] BroAcademy"],
@@ -893,6 +893,18 @@ function renderScheduleInto(tbodyId, data) {
 function renderSchedule() {
   renderScheduleInto("naSchedBody", NA_SCHEDULE);
   renderScheduleInto("schedBody", CM_SCHEDULE);
+}
+/* switch between the per-day roster tables (Day 4 is the default — Day 1 is done) */
+function applyRoster(v) {
+  const na = v !== "cm";
+  const rNa = document.getElementById("rosterNa"), rCm = document.getElementById("rosterCm");
+  if (!rNa || !rCm) return;
+  rNa.style.display = na ? "" : "none";
+  rCm.style.display = na ? "none" : "";
+  document.querySelectorAll("[data-roster]").forEach(b => {
+    const on = b.dataset.roster === (na ? "na" : "cm");
+    b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false");
+  });
 }
 
 /* ---------------- view tabs: submit form vs title roster ---------------- */
@@ -939,9 +951,10 @@ tickTz(); setInterval(tickTz, 30000);
 restoreDraft();
 renderSchedule();
 document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => applyView(b.dataset.view, true)));
+document.querySelectorAll("[data-roster]").forEach(b => b.addEventListener("click", () => applyRoster(b.dataset.roster)));
 window.addEventListener("hashchange", () => applyView(location.hash === "#roster" ? "roster" : "form", true));
 if (!FORM_OPEN) {
-  const tabs = document.querySelector(".view-tabs");
+  const tabs = document.querySelector("main > .view-tabs"); // the form/roster bar, not the roster day tabs
   if (tabs) tabs.style.display = "none";
   const closedNote = document.getElementById("formsClosedNote");
   if (closedNote) closedNote.style.display = "";

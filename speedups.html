@@ -219,38 +219,48 @@
   <!-- ============ TITLE ROSTERS (roster tab) ============ -->
   <section id="cmSchedule" style="display:none">
     <p class="form-note" id="formsClosedNote" style="display:none;margin:0 0 18px" data-i18n="formsClosed">Applications have closed — schedules below.</p>
-    <p class="form-note" style="margin:0 0 18px" data-i18n="schedNote">Times are in UTC and your local time. Be online 5 minutes before your slot.</p>
 
-    <h2 class="sched-head"><i class="fa-solid fa-chess-knight"></i> <span data-i18n="naSchedHead">Noble Advisor — Day 4 schedule</span></h2>
-    <div class="sched-wrap" style="margin-top:10px">
-      <table class="sched">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>UTC</th>
-            <th data-i18n="colLocal">Your time</th>
-            <th data-i18n="colGov">Governor</th>
-            <th data-i18n="allianceLabel">Alliance</th>
-          </tr>
-        </thead>
-        <tbody id="naSchedBody"><!-- rows rendered by speedups.js --></tbody>
-      </table>
+    <div class="view-tabs" role="tablist">
+      <button type="button" data-roster="na" class="active" role="tab" aria-selected="true" data-i18n="tabNa">Day 4 · Noble Advisor</button>
+      <button type="button" data-roster="cm" role="tab" aria-selected="false" data-i18n="tabCm">Day 1 · Chief Minister</button>
     </div>
 
-    <h2 class="sched-head" style="margin-top:38px"><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="schedHead">Chief Minister — Day 1 schedule</span></h2>
-    <div class="sched-wrap" style="margin-top:10px">
-      <table class="sched">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>UTC</th>
-            <th data-i18n="colLocal">Your time</th>
-            <th data-i18n="colGov">Governor</th>
-            <th data-i18n="allianceLabel">Alliance</th>
-          </tr>
-        </thead>
-        <tbody id="schedBody"><!-- rows rendered by speedups.js --></tbody>
-      </table>
+    <p class="form-note" style="margin:0 0 18px" data-i18n="schedNote">Times are in UTC and your local time. Be online 5 minutes before your slot.</p>
+
+    <div id="rosterNa">
+      <h2 class="sched-head"><i class="fa-solid fa-chess-knight"></i> <span data-i18n="naSchedHead">Noble Advisor — Day 4 schedule</span></h2>
+      <div class="sched-wrap" style="margin-top:10px">
+        <table class="sched">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>UTC</th>
+              <th data-i18n="colLocal">Your time</th>
+              <th data-i18n="colGov">Governor</th>
+              <th data-i18n="allianceLabel">Alliance</th>
+            </tr>
+          </thead>
+          <tbody id="naSchedBody"><!-- rows rendered by speedups.js --></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="rosterCm" style="display:none">
+      <h2 class="sched-head"><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="schedHead">Chief Minister — Day 1 schedule</span></h2>
+      <div class="sched-wrap" style="margin-top:10px">
+        <table class="sched">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>UTC</th>
+              <th data-i18n="colLocal">Your time</th>
+              <th data-i18n="colGov">Governor</th>
+              <th data-i18n="allianceLabel">Alliance</th>
+            </tr>
+          </thead>
+          <tbody id="schedBody"><!-- rows rendered by speedups.js --></tbody>
+        </table>
+      </div>
     </div>
   </section>
 
