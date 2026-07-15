@@ -3,6 +3,10 @@
 ===================================================================== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyubRVe35_FV1C3Gc3q75uVTUJOwd7Hj9A4Y9mbuqhVM4tCP6ShbzfeIZ3EncSloiO3/exec";
 
+/* Applications are closed — the roster is the only view. Set true to bring
+   the form (and the view tabs) back for the next KvK. */
+const FORM_OPEN = false;
+
 /* ---------------- the four speedup types (game order) ---------------- */
 const TYPES = [
   { id: "general",      key: "rowGeneral",      icon: "fa-forward-fast" },
@@ -823,21 +827,77 @@ const CM_SCHEDULE = [
   ["23:00", "Abby", "[BRO] Brotherhood"],
   ["23:30", "NOEL", "[Jaz] JustaZoo"]
 ];
-function renderSchedule() {
-  const tb = document.getElementById("schedBody");
+/* Noble Advisor Day 4 slots — same shape: UTC start, governor, alliance. */
+const NA_SCHEDULE = [
+  ["00:00", "Achlime", "[BRO] Brotherhood"],
+  ["00:30", "BoredLunaticOne", "[BRO] Brotherhood"],
+  ["01:00", "Abby", "[BRO] Brotherhood"],
+  ["01:30", "Zero Hour", "[bro] BROacademy"],
+  ["02:00", "LittleViolet", "[APX] Predator"],
+  ["02:30", "Am200001", "[Jaz] JustaZoo"],
+  ["03:00", "CloudyMoo", "[BRO] Brotherhood"],
+  ["03:30", "Damian", "[APX] Predator"],
+  ["04:00", "Mitch23", "[BRO] Brotherhood"],
+  ["04:30", "Trick", "[BRO] Brotherhood"],
+  ["05:00", "Jackal", "[APX] Predator"],
+  ["05:30", "༒乂PRAY4ME乂༒", "[Jaz] JustaZoo"],
+  ["06:00", "NOEL", "[Jaz] JustaZoo"],
+  ["06:30", "聖凱撒", "[APX] Predator"],
+  ["07:00", "Chris2026", "[BRO] Brotherhood"],
+  ["07:30", "千萬haoyun", "[BRO] Brotherhood"],
+  ["08:00", "Bran", "[APX] Predator"],
+  ["08:30", "Silene", "[APX] Predator"],
+  ["09:00", "Febby", "[APX] Predator"],
+  ["09:30", "Onetondildo", "[APX] Predator"],
+  ["10:00", "Slayer", "[Jaz] JustaZoo"],
+  ["10:30", "PrincessMellos", "[BRO] Brotherhood"],
+  ["11:00", "AKP", "[BRO] Brotherhood"],
+  ["11:30", "KingC", "[BRO] Brotherhood"],
+  ["12:00", "MICHI MICHI", "[bra] BroAcademy"],
+  ["12:30", "Flash", "[THC] TheHighCouncil"],
+  ["13:00", "Kura_kura", "[APX] Predator"],
+  ["13:30", "MARU MARU", "[BRO] Brotherhood"],
+  ["14:00", "中华英雄", "[APX] Predator"],
+  ["14:30", "MUTO MUTO", "[bra] BroAcademy"],
+  ["15:00", "Cwazy", "[THC] TheHighCouncil"],
+  ["15:30", "Kayano", "[APX] Predator"],
+  ["16:00", "吉村櫻櫻", "[APX] Predator"],
+  ["16:30", "gezginci", "[APX] Predator"],
+  ["17:00", "dream city", "[APX] Predator"],
+  ["17:30", "PrincessHelmchen", "[BRO] Brotherhood"],
+  ["18:00", "ᮘίᏦ廾ίㄥ", "[BRO] Brotherhood"],
+  ["18:30", "Sylv", "[BRO] Brotherhood"],
+  ["19:00", "konsumi", "[APX] Predator"],
+  ["19:30", "Boltu", "[Jaz] JustaZoo"],
+  ["20:00", "Control", "[APX] Predator"],
+  ["20:30", "Lafago", "[APX] Predator"],
+  ["21:00", "Lokil", "[APX] Predator"],
+  ["21:30", "NaiSirk", "[BRO] Brotherhood"],
+  ["22:00", "Ghost 999", "[BRO] Brotherhood"],
+  ["22:30", "mine", "[Jaz] JustaZoo"],
+  ["23:00", "Jordan", "[BRO] Brotherhood"],
+  ["23:30", "Jamestheazn", "[APX] Predator"]
+];
+function renderScheduleInto(tbodyId, data) {
+  const tb = document.getElementById(tbodyId);
   if (!tb) return;
   const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const off = -new Date().getTimezoneOffset(); // viewer's device offset, DST included
   const fm = m => { m = ((m % 1440) + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); };
-  tb.innerHTML = CM_SCHEDULE.map(r => {
+  tb.innerHTML = data.map((r, i) => {
     const p = r[0].split(":");
     const s = (+p[0]) * 60 + (+p[1]), e = s + 30;
-    return "<tr><td>" + fm(s) + "-" + fm(e) + "</td><td>" + fm(s + off) + "-" + fm(e + off) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>";
+    return "<tr><td>" + (i + 1) + "</td><td>" + fm(s) + "-" + fm(e) + "</td><td>" + fm(s + off) + "-" + fm(e + off) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>";
   }).join("");
+}
+function renderSchedule() {
+  renderScheduleInto("naSchedBody", NA_SCHEDULE);
+  renderScheduleInto("schedBody", CM_SCHEDULE);
 }
 
 /* ---------------- view tabs: submit form vs title roster ---------------- */
 function applyView(v, scroll) {
+  if (!FORM_OPEN) v = "roster"; // form is closed — the roster is the only view
   const roster = v === "roster";
   const formView = document.getElementById("viewForm"), rosterView = document.getElementById("cmSchedule");
   if (!formView || !rosterView) return;
@@ -847,7 +907,9 @@ function applyView(v, scroll) {
     const on = b.dataset.view === v;
     b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false");
   });
-  try { history.replaceState(null, "", roster ? "#roster" : location.pathname + location.search); } catch (e) {}
+  if (FORM_OPEN) {
+    try { history.replaceState(null, "", roster ? "#roster" : location.pathname + location.search); } catch (e) {}
+  }
   if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -878,6 +940,12 @@ restoreDraft();
 renderSchedule();
 document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => applyView(b.dataset.view, true)));
 window.addEventListener("hashchange", () => applyView(location.hash === "#roster" ? "roster" : "form", true));
+if (!FORM_OPEN) {
+  const tabs = document.querySelector(".view-tabs");
+  if (tabs) tabs.style.display = "none";
+  const closedNote = document.getElementById("formsClosedNote");
+  if (closedNote) closedNote.style.display = "";
+}
 applyView(location.hash === "#roster" ? "roster" : "form");
 document.getElementById("speedupForm").addEventListener("input", saveDraft);
 document.getElementById("speedupForm").addEventListener("change", saveDraft);

@@ -876,3 +876,28 @@ th: {
   };
   Object.keys(B).forEach(k => { if (I18N[k]) I18N[k].closedBadge = B[k]; });
 })();
+
+/* Roster-only mode. Order: formsClosed, naSchedHead */
+(function () {
+  const R = {
+    id: ["Pendaftaran sudah ditutup — jadwal di bawah.", "Penasihat Kerajaan — Jadwal Hari 4"],
+    de: ["Bewerbungen sind geschlossen — Pläne unten.", "Nobler Berater — Plan für Tag 4"],
+    fr: ["Les candidatures sont closes — plannings ci-dessous.", "Noble Conseiller — Planning du Jour 4"],
+    it: ["Le candidature sono chiuse — programmi qui sotto.", "Consulente Nobile — Programma Giorno 4"],
+    es: ["Las solicitudes están cerradas — horarios abajo.", "Noble asesor — Horario del Día 4"],
+    pt: ["As inscrições encerraram — agendas abaixo.", "Conselheiro Nobre — Agenda do Dia 4"],
+    pl: ["Zgłoszenia są zamknięte — harmonogramy poniżej.", "Szlachetny Doradca — Harmonogram Dnia 4"],
+    tr: ["Başvurular kapandı — programlar aşağıda.", "Asil Danışman — 4. Gün Programı"],
+    ar: ["أُغلقت الطلبات — الجداول أدناه.", "مستشار نبيل — جدول اليوم 4"],
+    ko: ["신청이 마감되었습니다 — 아래 일정을 확인하세요.", "참모장 — 4일차 일정"],
+    ja: ["申請は締め切りました — スケジュールは以下。", "参謀長 — 4日目スケジュール"],
+    zh: ["申请已截止 — 日程见下方。", "参谋长 — 第4天日程"],
+    "zh-tw": ["申請已截止 — 日程見下方。", "參謀長 — 第4天日程"],
+    th: ["ปิดรับสมัครแล้ว — ดูตารางด้านล่าง", "ขุนนางที่ปรึกษา — ตารางวันที่ 4"]
+  };
+  Object.keys(R).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].formsClosed = R[k][0];
+    I18N[k].naSchedHead = R[k][1];
+  });
+})();
