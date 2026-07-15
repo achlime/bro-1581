@@ -829,7 +829,7 @@ const CM_SCHEDULE = [
 ];
 /* Noble Advisor Day 4 slots — same shape: UTC start, governor, alliance. */
 const NA_SCHEDULE = [
-  ["00:00", "Achlime", "[BRO] Brotherhood"],
+  ["00:00", "Onetondildo", "[APX] Predator"],
   ["00:30", "Kayano", "[APX] Predator"],
   ["01:00", "Abby", "[BRO] Brotherhood"],
   ["01:30", "Zero Hour", "[bro] BROacademy"],
@@ -848,7 +848,7 @@ const NA_SCHEDULE = [
   ["08:00", "Bran", "[APX] Predator"],
   ["08:30", "Silene", "[APX] Predator"],
   ["09:00", "Febby", "[APX] Predator"],
-  ["09:30", "Onetondildo", "[APX] Predator"],
+  ["09:30", "Achlime", "[BRO] Brotherhood"],
   ["10:00", "BoredLunaticOne", "[BRO] Brotherhood"],
   ["10:30", "~BoredRedZora~", "[BRO] Brotherhood"],
   ["11:00", "AKP", "[BRO] Brotherhood"],
