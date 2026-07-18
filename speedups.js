@@ -3,9 +3,12 @@
 ===================================================================== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyubRVe35_FV1C3Gc3q75uVTUJOwd7Hj9A4Y9mbuqhVM4tCP6ShbzfeIZ3EncSloiO3/exec";
 
-/* Applications are closed — the roster is the only view. Set true to bring
-   the form (and the view tabs) back for the next KvK. */
+/* Page mode flags — flip these for the next KvK:
+   FORM_OPEN=true            → application form + view tabs are back
+   FORM_OPEN=false, ROSTERS_OPEN=true  → roster-only view
+   both false                → event over: thank-you message only */
 const FORM_OPEN = false;
+const ROSTERS_OPEN = false;
 
 /* ---------------- the four speedup types (game order) ---------------- */
 const TYPES = [
@@ -909,10 +912,17 @@ function applyRoster(v) {
 
 /* ---------------- view tabs: submit form vs title roster ---------------- */
 function applyView(v, scroll) {
-  if (!FORM_OPEN) v = "roster"; // form is closed — the roster is the only view
-  const roster = v === "roster";
   const formView = document.getElementById("viewForm"), rosterView = document.getElementById("cmSchedule");
   if (!formView || !rosterView) return;
+  if (!FORM_OPEN && !ROSTERS_OPEN) { // event over — thank-you message only
+    formView.style.display = "none";
+    rosterView.style.display = "none";
+    const tb = document.getElementById("thanksBox");
+    if (tb) tb.style.display = "";
+    return;
+  }
+  if (!FORM_OPEN) v = "roster"; // form is closed — the roster is the only view
+  const roster = v === "roster";
   formView.style.display = roster ? "none" : "";
   rosterView.style.display = roster ? "" : "none";
   document.querySelectorAll("[data-view]").forEach(b => {

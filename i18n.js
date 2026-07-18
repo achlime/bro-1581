@@ -926,3 +926,28 @@ th: {
     I18N[k].tabCm = D[k][1];
   });
 })();
+
+/* Event-over thank-you. Order: thanksTitle, thanksBody */
+(function () {
+  const K = {
+    id: ["Terima kasih sudah berpartisipasi!", "Semua gelar kini terbuka — tanpa jadwal atau pendaftaran. Sampai jumpa di KvK berikutnya!"],
+    de: ["Danke fürs Mitmachen!", "Alle Titel sind jetzt offen — kein Plan, keine Bewerbung nötig. Bis zum nächsten KvK!"],
+    fr: ["Merci d'avoir participé !", "Tous les titres sont désormais ouverts — sans planning ni candidature. À la prochaine KvK !"],
+    it: ["Grazie per aver partecipato!", "Tutti i titoli sono ora aperti — senza programma né candidatura. Al prossimo KvK!"],
+    es: ["¡Gracias por participar!", "Todos los títulos están ahora abiertos — sin horario ni solicitud. ¡Hasta el próximo KvK!"],
+    pt: ["Obrigado por participar!", "Todos os títulos estão abertos — sem agenda nem inscrição. Até o próximo KvK!"],
+    pl: ["Dzięki za udział!", "Wszystkie tytuły są teraz otwarte — bez harmonogramu i zgłoszeń. Do zobaczenia w następnym KvK!"],
+    tr: ["Katıldığın için teşekkürler!", "Artık tüm unvanlar herkese açık — program ya da başvuru yok. Bir sonraki KvK'da görüşürüz!"],
+    ar: ["شكرًا لمشاركتكم!", "جميع الألقاب متاحة الآن للجميع — دون جدول أو طلب. نراكم في KvK القادم!"],
+    ko: ["참여해 주셔서 감사합니다!", "이제 모든 칭호가 개방되었습니다 — 일정도 신청도 필요 없습니다. 다음 KvK에서 만나요!"],
+    ja: ["ご参加ありがとうございました！", "すべての称号が開放されました — スケジュールも申請も不要です。次のKvKでお会いしましょう！"],
+    zh: ["感谢参与！", "所有称号现已开放 — 无需日程或申请。下届KvK见！"],
+    "zh-tw": ["感謝參與！", "所有稱號現已開放 — 無需日程或申請。下屆KvK見！"],
+    th: ["ขอบคุณที่เข้าร่วม!", "ตอนนี้ตำแหน่งทั้งหมดเปิดให้ทุกคนแล้ว — ไม่ต้องมีตารางหรือสมัคร แล้วพบกัน KvK หน้า!"]
+  };
+  Object.keys(K).forEach(k => {
+    if (!I18N[k]) return;
+    I18N[k].thanksTitle = K[k][0];
+    I18N[k].thanksBody = K[k][1];
+  });
+})();

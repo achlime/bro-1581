@@ -53,6 +53,17 @@
     <button type="button" data-view="roster" role="tab" aria-selected="false" data-i18n="tabRoster">Title roster</button>
   </div>
 
+  <!-- Shown when the KvK title event is over (FORM_OPEN and ROSTERS_OPEN both false) -->
+  <div id="thanksBox" style="display:none">
+    <div class="form-success show" style="margin-top:0">
+      <i class="fa-solid fa-circle-check"></i>
+      <div style="flex:1">
+        <strong style="font-family:var(--display);color:var(--ink)" data-i18n="thanksTitle">Thanks for participating!</strong>
+        <div style="font-size:1rem;color:var(--muted);margin-top:2px" data-i18n="thanksBody">All titles are now open — no schedule or application needed. See you next KvK!</div>
+      </div>
+    </div>
+  </div>
+
   <div id="viewForm">
 
   <div class="callout info" id="setupNotice" style="display:none">
